@@ -520,6 +520,9 @@ function createSoupCard(item, turtleSoup) {
       answerButton.disabled = true;
       answerButton.textContent =
         turtleSoup?.answerButtonSuccessLabel || "정답 공개됨";
+      if (panel.classList.contains("is-open")) {
+        panel.style.maxHeight = `${panel.scrollHeight}px`;
+      }
       return;
     }
     window.alert(
