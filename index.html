@@ -28,32 +28,118 @@
           </a>
         </div>
       </header>
-      <section class="ranking" aria-label="정답자 랭킹">
-        <div class="ranking-header">
-          <div>
-            <h2 class="ranking-title">정답자 랭킹</h2>
-            <p class="ranking-subtitle">가장 많이 푼 사람</p>
+      <nav class="tab-bar" role="tablist" aria-label="콘텐츠 탭">
+        <button
+          id="tab-problems-button"
+          class="tab-button is-active"
+          type="button"
+          role="tab"
+          aria-selected="true"
+          aria-controls="tab-problems"
+          data-tab-target="tab-problems"
+        >
+          문제 · 랭킹
+        </button>
+        <button
+          id="tab-soup-button"
+          class="tab-button"
+          type="button"
+          role="tab"
+          aria-selected="false"
+          aria-controls="tab-soup"
+          data-tab-target="tab-soup"
+        >
+          바다거북스프
+        </button>
+        <button
+          id="tab-boardgame-button"
+          class="tab-button"
+          type="button"
+          role="tab"
+          aria-selected="false"
+          aria-controls="tab-boardgame"
+          data-tab-target="tab-boardgame"
+        >
+          추천 보드게임
+        </button>
+      </nav>
+      <section
+        id="tab-problems"
+        class="tab-panel is-active"
+        role="tabpanel"
+        aria-labelledby="tab-problems-button"
+      >
+        <section class="ranking" aria-label="정답자 랭킹">
+          <div class="ranking-header">
+            <div>
+              <h2 class="ranking-title">정답자 랭킹</h2>
+              <p class="ranking-subtitle">가장 많이 푼 사람</p>
+            </div>
+            <div class="ranking-actions">
+              <span id="ranking-total" class="ranking-total"></span>
+              <button
+                id="ranking-toggle"
+                class="button button-secondary ranking-toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="ranking-panel"
+              >
+                랭킹 펼치기
+              </button>
+            </div>
           </div>
-          <div class="ranking-actions">
-            <span id="ranking-total" class="ranking-total"></span>
-            <button
-              id="ranking-toggle"
-              class="button button-secondary ranking-toggle"
-              type="button"
-              aria-expanded="false"
-              aria-controls="ranking-panel"
-            >
-              랭킹 펼치기
-            </button>
+          <div id="ranking-panel" class="ranking-panel" aria-hidden="true">
+            <div class="ranking-panel-inner">
+              <div id="ranking-list" class="ranking-list"></div>
+            </div>
           </div>
-        </div>
-        <div id="ranking-panel" class="ranking-panel" aria-hidden="true">
-          <div class="ranking-panel-inner">
-            <div id="ranking-list" class="ranking-list"></div>
-          </div>
-        </div>
+        </section>
+        <section
+          id="problem-list"
+          class="problem-list"
+          aria-live="polite"
+        ></section>
       </section>
-      <section id="problem-list" class="problem-list" aria-live="polite"></section>
+      <section
+        id="tab-soup"
+        class="tab-panel"
+        role="tabpanel"
+        aria-labelledby="tab-soup-button"
+        hidden
+        aria-hidden="true"
+      >
+        <div class="section-header">
+          <h2 class="section-title">바다거북스프 문제</h2>
+          <p class="section-subtitle">
+            버튼을 눌러 문제를 펼친 뒤, 비밀번호 입력으로 정답을 확인합니다.
+          </p>
+        </div>
+        <section
+          id="soup-list"
+          class="problem-list soup-list"
+          aria-live="polite"
+        ></section>
+      </section>
+      <section
+        id="tab-boardgame"
+        class="tab-panel"
+        role="tabpanel"
+        aria-labelledby="tab-boardgame-button"
+        hidden
+        aria-hidden="true"
+      >
+        <div class="section-header">
+          <h2 class="section-title">웨이트 · 인원별 추천</h2>
+          <p class="section-subtitle">
+            추후 제공되는 데이터를 기반으로 보드게임을 분류해 보여줍니다.
+          </p>
+        </div>
+        <section
+          id="boardgame-list"
+          class="boardgame-list"
+          aria-live="polite"
+        ></section>
+      </section>
     </main>
   </body>
 </html>

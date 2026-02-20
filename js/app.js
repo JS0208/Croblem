@@ -4,14 +4,18 @@ const OPEN_PROFILE_URL = "https://open.kakao.com/o/sxsinFuf";
 document.addEventListener("DOMContentLoaded", () => {
   setOpenProfileLink();
   setRankingToggle();
+  setTabs();
   loadProblems();
 });
 
 async function loadProblems() {
   try {
-    const problems = await fetchProblems();
-    renderProblems(problems);
-    renderRanking(problems);
+    const data = await fetchProblems();
+    const normalized = normalizeProblemData(data);
+    renderProblems(normalized.problems);
+    renderRanking(normalized.problems);
+    renderTurtleSoup(normalized.turtleSoup);
+    renderBoardGame(normalized.boardGame);
   } catch (error) {
     renderError(error);
   }
@@ -60,10 +64,59 @@ function tryLoadWithXhr(url) {
 
 function renderProblems(problems) {
   const list = document.getElementById("problem-list");
+  if (!list) {
+    return;
+  }
   list.innerHTML = "";
 
   problems.forEach((problem) => {
     const card = createProblemCard(problem);
+    list.appendChild(card);
+  });
+}
+
+function renderTurtleSoup(turtleSoup) {
+  const list = document.getElementById("soup-list");
+  if (!list) {
+    return;
+  }
+  list.innerHTML = "";
+
+  const items = Array.isArray(turtleSoup?.items) ? turtleSoup.items : [];
+  if (items.length === 0) {
+    const empty = document.createElement("p");
+    empty.className = "problem-text";
+    empty.textContent =
+      turtleSoup?.emptyMessage || "바다거북스프 문제 데이터가 준비 중입니다.";
+    list.appendChild(empty);
+    return;
+  }
+
+  items.forEach((item) => {
+    const card = createSoupCard(item, turtleSoup);
+    list.appendChild(card);
+  });
+}
+
+function renderBoardGame(boardGame) {
+  const list = document.getElementById("boardgame-list");
+  if (!list) {
+    return;
+  }
+  list.innerHTML = "";
+
+  const weights = Array.isArray(boardGame?.weights) ? boardGame.weights : [];
+  if (weights.length === 0) {
+    const empty = document.createElement("p");
+    empty.className = "problem-text";
+    empty.textContent =
+      boardGame?.emptyMessage || "추천 보드게임 데이터가 준비 중입니다.";
+    list.appendChild(empty);
+    return;
+  }
+
+  weights.forEach((weightInfo) => {
+    const card = createBoardGameCard(weightInfo, boardGame);
     list.appendChild(card);
   });
 }
@@ -150,6 +203,9 @@ function renderRanking(problems) {
 
 function renderError(error) {
   const list = document.getElementById("problem-list");
+  if (!list) {
+    return;
+  }
   list.innerHTML = "";
   const title = document.createElement("p");
   title.className = "problem-text";
@@ -206,6 +262,37 @@ function setRankingToggle() {
   button.addEventListener("click", () => {
     // 랭킹 목록을 펼치거나 접는다.
     toggleAccordion(panel, button, "랭킹 펼치기", "랭킹 접기");
+  });
+}
+
+function setTabs() {
+  const tabButtons = Array.from(document.querySelectorAll("[data-tab-target]"));
+  const panels = Array.from(document.querySelectorAll(".tab-panel"));
+  if (tabButtons.length === 0 || panels.length === 0) {
+    return;
+  }
+
+  tabButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const targetId = button.getAttribute("data-tab-target");
+      if (!targetId) {
+        return;
+      }
+
+      // 탭 전환 시 노출 영역과 접근성 상태를 동기화한다.
+      panels.forEach((panel) => {
+        const isActive = panel.id === targetId;
+        panel.classList.toggle("is-active", isActive);
+        panel.hidden = !isActive;
+        panel.setAttribute("aria-hidden", String(!isActive));
+      });
+
+      tabButtons.forEach((tab) => {
+        const isActive = tab === button;
+        tab.classList.toggle("is-active", isActive);
+        tab.setAttribute("aria-selected", String(isActive));
+      });
+    });
   });
 }
 
@@ -333,6 +420,128 @@ function createProblemCard(problem) {
   return card;
 }
 
+function createSoupCard(item, turtleSoup) {
+  const card = document.createElement("article");
+  card.className = "problem-card";
+  card.dataset.soupId = String(item.id);
+
+  const header = document.createElement("div");
+  header.className = "problem-header";
+
+  const metaRow = document.createElement("div");
+  metaRow.className = "problem-meta-row";
+
+  const label = document.createElement("span");
+  label.className = "problem-id";
+  label.textContent = item.label || `바다거북스프 ${item.id}`;
+  metaRow.appendChild(label);
+
+  const titleRow = document.createElement("div");
+  titleRow.className = "problem-title-row";
+
+  const title = document.createElement("h2");
+  title.className = "problem-title";
+  title.textContent = item.title;
+
+  const toggleButton = document.createElement("button");
+  toggleButton.type = "button";
+  toggleButton.className = "button button-secondary problem-toggle";
+  toggleButton.textContent = "문제 펼치기";
+
+  const panelId = `soup-panel-${item.id}`;
+  toggleButton.setAttribute("aria-expanded", "false");
+  toggleButton.setAttribute("aria-controls", panelId);
+
+  titleRow.appendChild(title);
+  titleRow.appendChild(toggleButton);
+
+  header.appendChild(metaRow);
+  header.appendChild(titleRow);
+
+  const panel = document.createElement("div");
+  panel.className = "problem-panel";
+  panel.id = panelId;
+  panel.setAttribute("aria-hidden", "true");
+
+  const panelInner = document.createElement("div");
+  panelInner.className = "problem-panel-inner";
+
+  const content = document.createElement("div");
+  content.className = "problem-content";
+  content.appendChild(createContentFragment(item.content));
+
+  panelInner.appendChild(content);
+
+  if (Array.isArray(item.conditions) && item.conditions.length > 0) {
+    const conditions = document.createElement("ul");
+    conditions.className = "problem-conditions";
+    item.conditions.forEach((condition) => {
+      const conditionItem = document.createElement("li");
+      conditionItem.className = "problem-condition";
+      conditionItem.textContent = condition;
+      conditions.appendChild(conditionItem);
+    });
+    panelInner.appendChild(conditions);
+  }
+
+  const answerSection = document.createElement("div");
+  answerSection.className = "soup-answer";
+
+  const answerTitle = document.createElement("p");
+  answerTitle.className = "soup-answer-title";
+  answerTitle.textContent = turtleSoup?.answerTitle || "정답";
+
+  const answerText = document.createElement("p");
+  answerText.className = "problem-text";
+  answerText.textContent = item.answer;
+
+  answerSection.appendChild(answerTitle);
+  answerSection.appendChild(answerText);
+
+  const answerButton = document.createElement("button");
+  answerButton.type = "button";
+  answerButton.className = "button button-secondary soup-answer-button";
+  answerButton.textContent = turtleSoup?.answerButtonLabel || "정답 보기";
+
+  answerButton.addEventListener("click", () => {
+    if (answerSection.classList.contains("is-open")) {
+      return;
+    }
+    // 정답 보기 버튼은 비밀번호 검증 후에만 정답 영역을 노출한다.
+    const promptText =
+      turtleSoup?.passwordPrompt || "비밀번호를 입력하세요.";
+    const input = window.prompt(promptText);
+    if (input === null) {
+      return;
+    }
+    const password = String(turtleSoup?.password || "");
+    if (String(input).trim() === password && password.length > 0) {
+      answerSection.classList.add("is-open");
+      answerButton.disabled = true;
+      answerButton.textContent =
+        turtleSoup?.answerButtonSuccessLabel || "정답 공개됨";
+      return;
+    }
+    window.alert(
+      turtleSoup?.passwordFailMessage || "비밀번호가 일치하지 않습니다."
+    );
+  });
+
+  panelInner.appendChild(answerButton);
+  panelInner.appendChild(answerSection);
+  panel.appendChild(panelInner);
+
+  toggleButton.addEventListener("click", () => {
+    // 바다거북스프 문제를 펼치거나 접는다.
+    toggleAccordion(panel, toggleButton);
+  });
+
+  card.appendChild(header);
+  card.appendChild(panel);
+
+  return card;
+}
+
 function createContentFragment(contentText) {
   const fragment = document.createDocumentFragment();
   const lines = String(contentText).split("\n").filter(Boolean);
@@ -432,4 +641,82 @@ function getDifficultyClass(solverCount) {
     return "is-medium";
   }
   return "is-easy";
+}
+
+function createBoardGameCard(weightInfo, boardGame) {
+  const card = document.createElement("article");
+  card.className = "boardgame-card";
+
+  const title = document.createElement("h3");
+  title.className = "boardgame-card-title";
+  title.textContent = weightInfo.weight;
+
+  const description = document.createElement("p");
+  description.className = "boardgame-card-description";
+  description.textContent = weightInfo.description || "";
+
+  card.appendChild(title);
+  if (description.textContent) {
+    card.appendChild(description);
+  }
+
+  const groups = Array.isArray(weightInfo.groups) ? weightInfo.groups : [];
+  if (groups.length === 0) {
+    const empty = document.createElement("p");
+    empty.className = "problem-text";
+    empty.textContent =
+      weightInfo.emptyMessage ||
+      boardGame?.groupEmptyMessage ||
+      "추천 데이터가 아직 없습니다.";
+    card.appendChild(empty);
+    return card;
+  }
+
+  groups.forEach((group) => {
+    const groupWrap = document.createElement("div");
+    groupWrap.className = "boardgame-group";
+
+    const groupTitle = document.createElement("span");
+    groupTitle.className = "boardgame-group-title";
+    groupTitle.textContent = group.players;
+    groupWrap.appendChild(groupTitle);
+
+    const gameList = document.createElement("ul");
+    gameList.className = "boardgame-game-list";
+
+    const games = Array.isArray(group.games) ? group.games : [];
+    if (games.length > 0) {
+      games.forEach((game) => {
+        const gameItem = document.createElement("li");
+        gameItem.className = "boardgame-game";
+        gameItem.textContent = game;
+        gameList.appendChild(gameItem);
+      });
+    } else if (group.note) {
+      const gameItem = document.createElement("li");
+      gameItem.className = "boardgame-game";
+      gameItem.textContent = group.note;
+      gameList.appendChild(gameItem);
+    }
+
+    groupWrap.appendChild(gameList);
+    card.appendChild(groupWrap);
+  });
+
+  return card;
+}
+
+function normalizeProblemData(data) {
+  if (Array.isArray(data)) {
+    return {
+      problems: data,
+      turtleSoup: null,
+      boardGame: null,
+    };
+  }
+  return {
+    problems: Array.isArray(data?.problems) ? data.problems : [],
+    turtleSoup: data?.turtleSoup || null,
+    boardGame: data?.boardGame || null,
+  };
 }

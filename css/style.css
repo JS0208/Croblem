@@ -71,6 +71,60 @@ textarea {
   gap: 16px;
 }
 
+.tab-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 6px;
+  border-radius: 999px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+  margin-bottom: 28px;
+}
+
+.tab-button {
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.tab-button.is-active {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.is-active {
+  display: block;
+}
+
+.section-header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+
+.section-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.section-subtitle {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
 .page-title {
   font-size: 32px;
   margin: 0 0 10px;
@@ -205,6 +259,11 @@ textarea {
   gap: 24px;
 }
 
+.boardgame-list {
+  display: grid;
+  gap: 24px;
+}
+
 .problem-card {
   background: var(--card);
   border-radius: var(--radius);
@@ -290,6 +349,23 @@ textarea {
 
 .problem-toggle {
   white-space: nowrap;
+}
+
+.soup-answer {
+  display: none;
+  background: #f5f5f7;
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+
+.soup-answer.is-open {
+  display: block;
+}
+
+.soup-answer-title {
+  margin: 0 0 8px;
+  font-size: 14px;
+  color: var(--muted);
 }
 
 .problem-content {
@@ -400,6 +476,56 @@ textarea {
 }
 
 .solver-item {
+  font-size: 14px;
+  color: var(--text);
+  background: #f5f5f7;
+  padding: 6px 10px;
+  border-radius: 999px;
+}
+
+.boardgame-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.boardgame-card-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.boardgame-card-description {
+  margin: 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.boardgame-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.boardgame-group-title {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.boardgame-game-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.boardgame-game {
   font-size: 14px;
   color: var(--text);
   background: #f5f5f7;
