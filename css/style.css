@@ -83,93 +83,98 @@ body::after {
 }
 
 body.theme-bg-common {
-  --bg: #f5f5f7;
+  --bg: #f2f6ff;
   --card: #ffffff;
-  --text: #1d1d1f;
-  --muted: #86868b;
-  --accent: #0071e3;
-  --accent-strong: #0066cc;
-  --accent-soft: #dbe8ff;
-  --surface: #f0f0f2;
-  --surface-hover: #e6e6ea;
-  --surface-border: #e6e6e9;
-  --panel: #f5f5f7;
-  --pill-bg: #f5f5f7;
-  --pill-text: #1d1d1f;
-  --segment-bg: #e7e7eb;
-  --dot-bg: #d2d2d7;
+  --text: #1a1f2e;
+  --muted: #6d7585;
+  --accent: #2d7dff;
+  --accent-strong: #1f62d6;
+  --accent-soft: #d6e6ff;
+  --surface: #e8eff9;
+  --surface-hover: #dde7f4;
+  --surface-border: #d3dced;
+  --panel: #edf2fb;
+  --pill-bg: #e8eff9;
+  --pill-text: #1a1f2e;
+  --segment-bg: #dbe4f2;
+  --dot-bg: #c5cfde;
+  --shadow: 0 20px 60px rgba(45, 125, 255, 0.12);
 }
 
 body.theme-bg-advanced {
-  --bg: #f2f6ff;
-  --card: #ffffff;
-  --text: #16233b;
-  --muted: #5f6b7a;
-  --accent: #2b6bff;
-  --accent-strong: #2158d6;
-  --accent-soft: #dbe6ff;
-  --surface: #e8eef9;
-  --surface-hover: #dde6f4;
-  --surface-border: #d5ddea;
-  --panel: #edf2fb;
-  --pill-bg: #e8eef9;
-  --pill-text: #16233b;
-  --segment-bg: #dbe4f2;
-  --dot-bg: #c1cadd;
+  --bg: #ecfbf7;
+  --card: #f9fffd;
+  --text: #0f2b26;
+  --muted: #4d6b64;
+  --accent: #1f9d8f;
+  --accent-strong: #167f73;
+  --accent-soft: #cef3ec;
+  --surface: #def4ef;
+  --surface-hover: #cfeee7;
+  --surface-border: #bfe3da;
+  --panel: #e6f7f3;
+  --pill-bg: #def4ef;
+  --pill-text: #0f2b26;
+  --segment-bg: #cce9e1;
+  --dot-bg: #b1d8ce;
+  --shadow: 0 20px 60px rgba(31, 157, 143, 0.16);
 }
 
 body.theme-bg-rare {
-  --bg: #f6f2ff;
-  --card: #ffffff;
-  --text: #2a1b3d;
-  --muted: #6f6283;
-  --accent: #7a4cff;
-  --accent-strong: #6438e6;
-  --accent-soft: #e7dcff;
-  --surface: #efe9fb;
-  --surface-hover: #e5def5;
-  --surface-border: #dcd3f0;
-  --panel: #f2edfb;
-  --pill-bg: #efe9fb;
-  --pill-text: #2a1b3d;
-  --segment-bg: #e1d7f2;
-  --dot-bg: #cbbfe1;
+  --bg: #f5edff;
+  --card: #fbf7ff;
+  --text: #2c193f;
+  --muted: #6b5c86;
+  --accent: #7b3cff;
+  --accent-strong: #5b2dd6;
+  --accent-soft: #eadbff;
+  --surface: #efe5ff;
+  --surface-hover: #e4d6ff;
+  --surface-border: #d7c6f3;
+  --panel: #f2eaff;
+  --pill-bg: #efe5ff;
+  --pill-text: #2c193f;
+  --segment-bg: #dfcff4;
+  --dot-bg: #c5b2e0;
+  --shadow: 0 20px 60px rgba(123, 60, 255, 0.18);
 }
 
 body.theme-bg-hero {
-  --bg: #fff6ed;
-  --card: #ffffff;
-  --text: #3d2410;
-  --muted: #7a5c44;
-  --accent: #ff8a3d;
-  --accent-strong: #e77025;
-  --accent-soft: #ffd9bd;
-  --surface: #ffeede;
-  --surface-hover: #ffe2ca;
-  --surface-border: #f1d3b6;
-  --panel: #fff1e4;
-  --pill-bg: #ffeede;
-  --pill-text: #3d2410;
-  --segment-bg: #efd8c2;
-  --dot-bg: #d9bea5;
+  --bg: #fff1e6;
+  --card: #fff8f2;
+  --text: #3b1f0b;
+  --muted: #7a5a42;
+  --accent: #ff7a29;
+  --accent-strong: #e4631d;
+  --accent-soft: #ffd9c2;
+  --surface: #ffe4d1;
+  --surface-hover: #ffd6bb;
+  --surface-border: #f0c6a6;
+  --panel: #ffeadc;
+  --pill-bg: #ffe4d1;
+  --pill-text: #3b1f0b;
+  --segment-bg: #f1d0b7;
+  --dot-bg: #d8b89d;
+  --shadow: 0 20px 60px rgba(255, 122, 41, 0.2);
 }
 
 body.theme-bg-legend {
-  --bg: #fff7e3;
-  --card: #ffffff;
-  --text: #3a2a06;
-  --muted: #7a5f1e;
-  --accent: #f2a400;
-  --accent-strong: #d18a00;
+  --bg: #fff7d6;
+  --card: #fffbef;
+  --text: #3a2600;
+  --muted: #7a5b1d;
+  --accent: #f1b000;
+  --accent-strong: #c98600;
   --accent-soft: #ffe2a6;
-  --surface: #fff0c7;
-  --surface-hover: #ffe3a5;
-  --surface-border: #e7cf8f;
-  --panel: #fff3d6;
-  --pill-bg: #fff0c7;
-  --pill-text: #3a2a06;
-  --segment-bg: #eed8a4;
-  --dot-bg: #d9c187;
+  --surface: #ffe4ad;
+  --surface-hover: #ffd693;
+  --surface-border: #e8c67e;
+  --panel: #ffecc0;
+  --pill-bg: #ffe4ad;
+  --pill-text: #3a2600;
+  --segment-bg: #ebcf93;
+  --dot-bg: #d5b67a;
+  --shadow: 0 20px 60px rgba(241, 176, 0, 0.2);
 }
 
 body.is-slot-spinning::before,
@@ -212,6 +217,7 @@ textarea {
   background: var(--card);
   box-shadow: var(--shadow);
   margin-bottom: 28px;
+  max-width: 100%;
 }
 
 .tab-button {
@@ -223,6 +229,14 @@ textarea {
   border-radius: 999px;
   cursor: pointer;
   transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 100%;
+  white-space: normal;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  text-align: center;
+  line-height: 1.25;
 }
 
 .tab-button.is-active {
@@ -443,50 +457,50 @@ textarea {
 
 body.theme-bg-common::before {
   opacity: 0.35;
-  background: radial-gradient(circle at 20% 20%, #f0f4ff 0%, transparent 60%),
-    radial-gradient(circle at 80% 30%, #f7f5ff 0%, transparent 55%);
+  background: radial-gradient(circle at 20% 20%, #dfe9ff 0%, transparent 60%),
+    radial-gradient(circle at 80% 30%, #eef4ff 0%, transparent 55%);
   animation: themeFloat 16s ease-in-out infinite;
 }
 
 body.theme-bg-advanced::before {
   opacity: 0.45;
-  background: radial-gradient(circle at 20% 20%, #dce9ff 0%, transparent 60%),
-    radial-gradient(circle at 80% 30%, #e8f1ff 0%, transparent 55%);
+  background: radial-gradient(circle at 20% 20%, #c9f3ea 0%, transparent 60%),
+    radial-gradient(circle at 80% 30%, #e2fbf6 0%, transparent 55%);
   animation: themeFloat 14s ease-in-out infinite;
 }
 
 body.theme-bg-rare::before {
   opacity: 0.6;
-  background: radial-gradient(circle at 20% 30%, #e5d8ff 0%, transparent 60%),
-    radial-gradient(circle at 75% 20%, #f4eaff 0%, transparent 55%);
+  background: radial-gradient(circle at 20% 30%, #d9c2ff 0%, transparent 60%),
+    radial-gradient(circle at 75% 20%, #f0e6ff 0%, transparent 55%);
   animation: themeFloat 12s ease-in-out infinite;
 }
 
 body.theme-bg-hero::before {
   opacity: 0.7;
-  background: radial-gradient(circle at 25% 20%, #ffe4c2 0%, transparent 60%),
-    radial-gradient(circle at 75% 30%, #ffeacb 0%, transparent 55%);
+  background: radial-gradient(circle at 25% 20%, #ffd8b5 0%, transparent 60%),
+    radial-gradient(circle at 75% 30%, #ffe7d3 0%, transparent 55%);
   animation: themeFloat 10s ease-in-out infinite;
 }
 
 body.theme-bg-hero::after {
   opacity: 0.45;
-  background: radial-gradient(circle at 20% 70%, #ffd6a6 0%, transparent 55%),
-    radial-gradient(circle at 80% 65%, #fff2d8 0%, transparent 50%);
+  background: radial-gradient(circle at 20% 70%, #ffcf9b 0%, transparent 55%),
+    radial-gradient(circle at 80% 65%, #fff0df 0%, transparent 50%);
   animation: themeDrift 18s ease-in-out infinite;
 }
 
 body.theme-bg-legend::before {
   opacity: 0.85;
-  background: radial-gradient(circle at 20% 25%, #ffe7a6 0%, transparent 60%),
-    radial-gradient(circle at 80% 20%, #fff4c7 0%, transparent 55%);
+  background: radial-gradient(circle at 20% 25%, #ffe39c 0%, transparent 60%),
+    radial-gradient(circle at 80% 20%, #fff0c5 0%, transparent 55%);
   animation: themeFloat 9s ease-in-out infinite;
 }
 
 body.theme-bg-legend::after {
   opacity: 0.6;
-  background: radial-gradient(circle at 20% 70%, #ffd86b 0%, transparent 55%),
-    radial-gradient(circle at 80% 65%, #fff0b0 0%, transparent 50%);
+  background: radial-gradient(circle at 20% 70%, #ffd574 0%, transparent 55%),
+    radial-gradient(circle at 80% 65%, #fff3c1 0%, transparent 50%);
   animation: themeDrift 14s ease-in-out infinite;
 }
 
