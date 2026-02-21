@@ -557,6 +557,68 @@ function setSlotMachine() {
     return acc;
   }, {});
 
+  const themeVarKeys = [
+    "--bg",
+    "--card",
+    "--text",
+    "--muted",
+    "--accent",
+    "--accent-strong",
+    "--accent-soft",
+    "--surface",
+    "--surface-hover",
+    "--surface-border",
+    "--panel",
+    "--pill-bg",
+    "--pill-text",
+    "--segment-bg",
+    "--dot-bg",
+    "--shadow",
+  ];
+
+  const variantProfiles = {
+    common: {
+      sat: [8, 18],
+      bgLight: [95, 97],
+      accentSat: [22, 34],
+      accentLight: [43, 50],
+      textLight: [16, 20],
+      shadowAlpha: 0.12,
+    },
+    advanced: {
+      sat: [18, 34],
+      bgLight: [93, 96],
+      accentSat: [45, 58],
+      accentLight: [42, 48],
+      textLight: [15, 19],
+      shadowAlpha: 0.16,
+    },
+    rare: {
+      sat: [38, 56],
+      bgLight: [92, 95],
+      accentSat: [62, 78],
+      accentLight: [46, 54],
+      textLight: [14, 18],
+      shadowAlpha: 0.22,
+    },
+    hero: {
+      sat: [52, 68],
+      bgLight: [91, 94],
+      accentSat: [78, 90],
+      accentLight: [47, 55],
+      textLight: [13, 17],
+      shadowAlpha: 0.28,
+    },
+    legend: {
+      sat: [60, 76],
+      bgLight: [90, 94],
+      accentSat: [84, 98],
+      accentLight: [48, 56],
+      textLight: [12, 16],
+      shadowAlpha: 0.34,
+    },
+  };
+
   let isSpinning = false;
   let lastSpinIndex = -1;
 
@@ -620,12 +682,91 @@ function setSlotMachine() {
     return candidates[index];
   };
 
-  const applyThemeBackground = (gradeKey) => {
+  const hashSeed = (value) => {
+    const source = String(value || "");
+    let hash = 2166136261;
+    for (let i = 0; i < source.length; i += 1) {
+      hash ^= source.charCodeAt(i);
+      hash = Math.imul(hash, 16777619);
+    }
+    return hash >>> 0;
+  };
+
+  const pickInRange = (seed, min, max, salt) => {
+    const mixed = hashSeed(`${seed}-${salt}`) / 4294967295;
+    return min + (max - min) * mixed;
+  };
+
+  const hsl = (h, sValue, lValue) => {
+    const hue = Math.round((h % 360 + 360) % 360);
+    const sat = Math.max(0, Math.min(100, Math.round(sValue)));
+    const light = Math.max(0, Math.min(100, Math.round(lValue)));
+    return `hsl(${hue} ${sat}% ${light}%)`;
+  };
+
+  const buildThemeVariant = (theme) => {
+    const profile = variantProfiles[theme.gradeKey] || variantProfiles.common;
+    const seed = hashSeed(theme.id || theme.name || theme.gradeKey);
+    const hue = pickInRange(seed, 0, 360, "h");
+    const sat = pickInRange(seed, profile.sat[0], profile.sat[1], "s");
+    const bgLight = pickInRange(seed, profile.bgLight[0], profile.bgLight[1], "b");
+    const accentSat = pickInRange(
+      seed,
+      profile.accentSat[0],
+      profile.accentSat[1],
+      "as"
+    );
+    const accentLight = pickInRange(
+      seed,
+      profile.accentLight[0],
+      profile.accentLight[1],
+      "al"
+    );
+    const textLight = pickInRange(seed, profile.textLight[0], profile.textLight[1], "t");
+
+    return {
+      "--bg": hsl(hue, sat * 0.38, bgLight),
+      "--card": hsl(hue + 6, Math.max(6, sat * 0.2), 99),
+      "--text": hsl(hue + 4, Math.max(22, sat * 0.58), textLight),
+      "--muted": hsl(hue + 4, Math.max(18, sat * 0.5), textLight + 28),
+      "--accent": hsl(hue, accentSat, accentLight),
+      "--accent-strong": hsl(hue - 6, accentSat + 2, accentLight - 12),
+      "--accent-soft": hsl(hue + 8, Math.max(20, accentSat * 0.42), 88),
+      "--surface": hsl(hue + 6, Math.max(10, sat * 0.3), 92),
+      "--surface-hover": hsl(hue + 6, Math.max(12, sat * 0.34), 88),
+      "--surface-border": hsl(hue + 5, Math.max(12, sat * 0.3), 82),
+      "--panel": hsl(hue + 5, Math.max(10, sat * 0.26), 94),
+      "--pill-bg": hsl(hue + 6, Math.max(10, sat * 0.3), 92),
+      "--pill-text": hsl(hue + 3, Math.max(22, sat * 0.58), textLight),
+      "--segment-bg": hsl(hue + 4, Math.max(10, sat * 0.24), 85),
+      "--dot-bg": hsl(hue + 2, Math.max(10, sat * 0.22), 76),
+      "--shadow": `0 24px 66px hsl(${Math.round(hue)} ${Math.round(
+        Math.max(20, accentSat * 0.8)
+      )}% ${Math.round(Math.max(30, accentLight - 16))}% / ${profile.shadowAlpha})`,
+    };
+  };
+
+  const clearThemeVariant = () => {
+    themeVarKeys.forEach((key) => document.body.style.removeProperty(key));
+  };
+
+  const applyThemeBackground = (theme) => {
+    const gradeKey = theme?.gradeKey || "common";
     document.body.classList.remove(...themeClassList);
     const className = gradeClassMap[gradeKey];
     if (className) {
       document.body.classList.add(className);
     }
+
+    if (!theme?.id) {
+      clearThemeVariant();
+      return;
+    }
+
+    const variant = buildThemeVariant(theme);
+    Object.entries(variant).forEach(([key, value]) => {
+      document.body.style.setProperty(key, value);
+    });
   };
 
   updateDisplay({
@@ -633,7 +774,7 @@ function setSlotMachine() {
     gradeLabel: "일반",
     name: "테마 대기",
   });
-  applyThemeBackground("common");
+  applyThemeBackground({ gradeKey: "common" });
 
   button.addEventListener("click", () => {
     if (isSpinning) {
@@ -668,7 +809,7 @@ function setSlotMachine() {
 
       const finalTheme = pickFinalTheme();
       updateDisplay(finalTheme);
-      applyThemeBackground(finalTheme.gradeKey);
+      applyThemeBackground(finalTheme);
       display.classList.remove("is-spinning");
       display.classList.add("is-final");
       button.classList.remove("is-spinning");
