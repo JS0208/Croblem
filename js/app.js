@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setOpenProfileLink();
   setRankingToggle();
   setTabs();
+  setSlotMachine();
   loadProblems();
 });
 
@@ -404,6 +405,222 @@ function setTabs() {
         tab.setAttribute("aria-selected", String(isActive));
       });
     });
+  });
+}
+
+function setSlotMachine() {
+  const display = document.getElementById("slot-display");
+  const button = document.getElementById("slot-spin-button");
+  if (!display || !button) {
+    return;
+  }
+
+  const gradeConfigs = [
+    {
+      key: "common",
+      label: "일반",
+      probability: 0.55,
+      count: 33,
+      bgClass: "theme-bg-common",
+    },
+    {
+      key: "advanced",
+      label: "고급",
+      probability: 0.33,
+      count: 20,
+      bgClass: "theme-bg-advanced",
+    },
+    {
+      key: "rare",
+      label: "희귀",
+      probability: 0.066,
+      count: 4,
+      bgClass: "theme-bg-rare",
+    },
+    {
+      key: "hero",
+      label: "영웅",
+      probability: 0.033,
+      count: 2,
+      bgClass: "theme-bg-hero",
+    },
+    {
+      key: "legend",
+      label: "전설",
+      probability: 0.021,
+      count: 1,
+      bgClass: "theme-bg-legend",
+    },
+  ];
+
+  const themeNames = {
+    common: Array.from({ length: 33 }, (_, index) => {
+      return `코어 UX ${String(index + 1).padStart(2, "0")}`;
+    }),
+    advanced: Array.from({ length: 20 }, (_, index) => {
+      return `프리미엄 UX ${String(index + 1).padStart(2, "0")}`;
+    }),
+    rare: ["오로라 UX", "딥포커스 UX", "노바 UX", "프리즘 UX"],
+    hero: ["시그니처 UX", "네뷸라 UX"],
+    legend: ["에테르 UX"],
+  };
+
+  const buildThemeCatalog = (configs, namesByGrade) => {
+    const allThemes = [];
+    const themesByGrade = {};
+
+    configs.forEach((config) => {
+      const names = Array.isArray(namesByGrade[config.key])
+        ? [...namesByGrade[config.key]]
+        : [];
+      if (names.length < config.count) {
+        for (let i = names.length; i < config.count; i += 1) {
+          names.push(`${config.label} 테마 ${String(i + 1).padStart(2, "0")}`);
+        }
+      }
+      const trimmed = names.slice(0, config.count);
+      const gradeThemes = trimmed.map((name, index) => {
+        return {
+          id: `${config.key}-${String(index + 1).padStart(2, "0")}`,
+          gradeKey: config.key,
+          gradeLabel: config.label,
+          name,
+        };
+      });
+
+      themesByGrade[config.key] = gradeThemes;
+      allThemes.push(...gradeThemes);
+    });
+
+    return { allThemes, themesByGrade };
+  };
+
+  const { allThemes, themesByGrade } = buildThemeCatalog(
+    gradeConfigs,
+    themeNames
+  );
+
+  const themeClassList = gradeConfigs.map((config) => config.bgClass);
+  const gradeClassMap = gradeConfigs.reduce((acc, config) => {
+    acc[config.key] = config.bgClass;
+    return acc;
+  }, {});
+
+  let isSpinning = false;
+  let lastSpinIndex = -1;
+
+  const updateDisplay = (theme) => {
+    display.innerHTML = "";
+    display.dataset.grade = theme.gradeKey || "common";
+
+    const gradeSpan = document.createElement("span");
+    gradeSpan.className = "slot-grade";
+    gradeSpan.textContent = theme.gradeLabel || "일반";
+
+    const nameSpan = document.createElement("span");
+    nameSpan.className = "slot-name";
+    nameSpan.textContent = theme.name || "테마 대기";
+
+    display.appendChild(gradeSpan);
+    display.appendChild(nameSpan);
+  };
+
+  const pickSpinTheme = () => {
+    if (allThemes.length <= 1) {
+      return (
+        allThemes[0] || {
+          gradeKey: "common",
+          gradeLabel: "일반",
+          name: "테마 대기",
+        }
+      );
+    }
+    let nextIndex = 0;
+    do {
+      nextIndex = Math.floor(Math.random() * allThemes.length);
+    } while (nextIndex === lastSpinIndex);
+    lastSpinIndex = nextIndex;
+    return allThemes[nextIndex];
+  };
+
+  const pickWeightedGrade = () => {
+    const total = gradeConfigs.reduce(
+      (sum, config) => sum + config.probability,
+      0
+    );
+    const roll = Math.random() * total;
+    let acc = 0;
+    for (const config of gradeConfigs) {
+      acc += config.probability;
+      if (roll <= acc) {
+        return config;
+      }
+    }
+    return gradeConfigs[gradeConfigs.length - 1];
+  };
+
+  const pickFinalTheme = () => {
+    const grade = pickWeightedGrade();
+    const candidates = themesByGrade[grade.key] || allThemes;
+    if (candidates.length === 0) {
+      return pickSpinTheme();
+    }
+    const index = Math.floor(Math.random() * candidates.length);
+    return candidates[index];
+  };
+
+  const applyThemeBackground = (gradeKey) => {
+    document.body.classList.remove(...themeClassList);
+    const className = gradeClassMap[gradeKey];
+    if (className) {
+      document.body.classList.add(className);
+    }
+  };
+
+  updateDisplay({
+    gradeKey: "common",
+    gradeLabel: "일반",
+    name: "테마 대기",
+  });
+
+  button.addEventListener("click", () => {
+    if (isSpinning) {
+      return;
+    }
+    isSpinning = true;
+    button.disabled = true;
+    button.textContent = "테마 결정 중...";
+    display.classList.remove("is-final");
+    display.classList.add("is-spinning");
+
+    const totalSteps = 30;
+    let currentStep = 0;
+    let delay = 60;
+
+    const spin = () => {
+      currentStep += 1;
+      updateDisplay(pickSpinTheme());
+
+      if (currentStep < totalSteps) {
+        delay = Math.min(460, Math.round(delay * 1.13 + 8));
+        window.setTimeout(spin, delay);
+        return;
+      }
+
+      const finalTheme = pickFinalTheme();
+      updateDisplay(finalTheme);
+      applyThemeBackground(finalTheme.gradeKey);
+      display.classList.remove("is-spinning");
+      display.classList.add("is-final");
+      window.setTimeout(() => {
+        display.classList.remove("is-final");
+      }, 900);
+      button.disabled = false;
+      button.textContent = "슬롯 돌리기";
+      isSpinning = false;
+    };
+
+    window.setTimeout(spin, delay);
   });
 }
 

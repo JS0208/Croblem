@@ -50,6 +50,26 @@ body {
   color: var(--text);
   line-height: 1.7;
   letter-spacing: -0.02em;
+  position: relative;
+  z-index: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: -25%;
+  z-index: -1;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+  filter: blur(40px);
+}
+
+body::after {
+  filter: blur(80px);
 }
 
 button,
@@ -135,6 +155,175 @@ textarea {
   margin: 0;
   color: var(--muted);
   font-size: 15px;
+}
+
+.slot-machine {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.slot-display {
+  min-width: 200px;
+  padding: 8px 14px;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid #e6e6e9;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  box-shadow: inset 0 0 0 1px #f1f1f4;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+}
+
+.slot-display.is-spinning {
+  color: var(--accent);
+  border-color: #cfe0ff;
+  box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.12);
+  animation: slotPulse 0.4s ease-in-out infinite;
+}
+
+.slot-display.is-final {
+  animation: slotPop 0.7s ease-out;
+}
+
+.slot-grade {
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  background: #eef0f3;
+  color: #5f6368;
+}
+
+.slot-name {
+  font-size: 14px;
+  color: var(--text);
+}
+
+.slot-display[data-grade="advanced"] .slot-grade {
+  background: #e3efff;
+  color: #1f5fbf;
+}
+
+.slot-display[data-grade="rare"] .slot-grade {
+  background: #efe8ff;
+  color: #6b4dd6;
+}
+
+.slot-display[data-grade="hero"] .slot-grade {
+  background: #fff0db;
+  color: #c46a0c;
+}
+
+.slot-display[data-grade="legend"] .slot-grade {
+  background: #fff4d1;
+  color: #b28100;
+}
+
+.slot-button {
+  padding: 8px 16px;
+}
+
+@keyframes slotPulse {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-1px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slotPop {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.04);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes themeFloat {
+  0% {
+    transform: translate3d(-2%, -1%, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(2%, 2%, 0) scale(1.03);
+  }
+  100% {
+    transform: translate3d(-2%, -1%, 0) scale(1);
+  }
+}
+
+@keyframes themeDrift {
+  0% {
+    transform: translate3d(3%, -2%, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(-3%, 2%, 0) rotate(2deg);
+  }
+  100% {
+    transform: translate3d(3%, -2%, 0) rotate(0deg);
+  }
+}
+
+body.theme-bg-common::before {
+  opacity: 0.35;
+  background: radial-gradient(circle at 20% 20%, #f0f4ff 0%, transparent 60%),
+    radial-gradient(circle at 80% 30%, #f7f5ff 0%, transparent 55%);
+  animation: themeFloat 16s ease-in-out infinite;
+}
+
+body.theme-bg-advanced::before {
+  opacity: 0.45;
+  background: radial-gradient(circle at 20% 20%, #dce9ff 0%, transparent 60%),
+    radial-gradient(circle at 80% 30%, #e8f1ff 0%, transparent 55%);
+  animation: themeFloat 14s ease-in-out infinite;
+}
+
+body.theme-bg-rare::before {
+  opacity: 0.6;
+  background: radial-gradient(circle at 20% 30%, #e5d8ff 0%, transparent 60%),
+    radial-gradient(circle at 75% 20%, #f4eaff 0%, transparent 55%);
+  animation: themeFloat 12s ease-in-out infinite;
+}
+
+body.theme-bg-hero::before {
+  opacity: 0.7;
+  background: radial-gradient(circle at 25% 20%, #ffe4c2 0%, transparent 60%),
+    radial-gradient(circle at 75% 30%, #ffeacb 0%, transparent 55%);
+  animation: themeFloat 10s ease-in-out infinite;
+}
+
+body.theme-bg-hero::after {
+  opacity: 0.45;
+  background: radial-gradient(circle at 20% 70%, #ffd6a6 0%, transparent 55%),
+    radial-gradient(circle at 80% 65%, #fff2d8 0%, transparent 50%);
+  animation: themeDrift 18s ease-in-out infinite;
+}
+
+body.theme-bg-legend::before {
+  opacity: 0.85;
+  background: radial-gradient(circle at 20% 25%, #ffe7a6 0%, transparent 60%),
+    radial-gradient(circle at 80% 20%, #fff4c7 0%, transparent 55%);
+  animation: themeFloat 9s ease-in-out infinite;
+}
+
+body.theme-bg-legend::after {
+  opacity: 0.6;
+  background: radial-gradient(circle at 20% 70%, #ffd86b 0%, transparent 55%),
+    radial-gradient(circle at 80% 65%, #fff0b0 0%, transparent 50%);
+  animation: themeDrift 14s ease-in-out infinite;
 }
 
 .page-note {
