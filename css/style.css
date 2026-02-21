@@ -83,98 +83,98 @@ body::after {
 }
 
 body.theme-bg-common {
-  --bg: #f2f6ff;
+  --bg: #edf4ff;
   --card: #ffffff;
-  --text: #1a1f2e;
-  --muted: #6d7585;
-  --accent: #2d7dff;
-  --accent-strong: #1f62d6;
-  --accent-soft: #d6e6ff;
-  --surface: #e8eff9;
-  --surface-hover: #dde7f4;
-  --surface-border: #d3dced;
-  --panel: #edf2fb;
-  --pill-bg: #e8eff9;
-  --pill-text: #1a1f2e;
-  --segment-bg: #dbe4f2;
-  --dot-bg: #c5cfde;
-  --shadow: 0 20px 60px rgba(45, 125, 255, 0.12);
+  --text: #122447;
+  --muted: #54658c;
+  --accent: #2c6cff;
+  --accent-strong: #1f51c6;
+  --accent-soft: #d7e5ff;
+  --surface: #e3ebfb;
+  --surface-hover: #d6e2fa;
+  --surface-border: #c8d8f6;
+  --panel: #eaf1fe;
+  --pill-bg: #e3ebfb;
+  --pill-text: #122447;
+  --segment-bg: #d1ddf5;
+  --dot-bg: #b6c7e7;
+  --shadow: 0 20px 60px rgba(44, 108, 255, 0.14);
 }
 
 body.theme-bg-advanced {
-  --bg: #ecfbf7;
-  --card: #f9fffd;
-  --text: #0f2b26;
-  --muted: #4d6b64;
-  --accent: #1f9d8f;
-  --accent-strong: #167f73;
-  --accent-soft: #cef3ec;
-  --surface: #def4ef;
-  --surface-hover: #cfeee7;
-  --surface-border: #bfe3da;
-  --panel: #e6f7f3;
-  --pill-bg: #def4ef;
-  --pill-text: #0f2b26;
-  --segment-bg: #cce9e1;
-  --dot-bg: #b1d8ce;
-  --shadow: 0 20px 60px rgba(31, 157, 143, 0.16);
+  --bg: #e6fff6;
+  --card: #f9fffc;
+  --text: #063b33;
+  --muted: #32746e;
+  --accent: #00a98f;
+  --accent-strong: #007c69;
+  --accent-soft: #b9f6ea;
+  --surface: #d4f7ef;
+  --surface-hover: #c3f2e8;
+  --surface-border: #9de4d6;
+  --panel: #ddfbf3;
+  --pill-bg: #d4f7ef;
+  --pill-text: #063b33;
+  --segment-bg: #b9e9df;
+  --dot-bg: #8fd2c4;
+  --shadow: 0 20px 60px rgba(0, 169, 143, 0.2);
 }
 
 body.theme-bg-rare {
-  --bg: #f5edff;
-  --card: #fbf7ff;
-  --text: #2c193f;
-  --muted: #6b5c86;
-  --accent: #7b3cff;
-  --accent-strong: #5b2dd6;
-  --accent-soft: #eadbff;
-  --surface: #efe5ff;
-  --surface-hover: #e4d6ff;
-  --surface-border: #d7c6f3;
-  --panel: #f2eaff;
-  --pill-bg: #efe5ff;
-  --pill-text: #2c193f;
-  --segment-bg: #dfcff4;
-  --dot-bg: #c5b2e0;
-  --shadow: 0 20px 60px rgba(123, 60, 255, 0.18);
+  --bg: #f6ecff;
+  --card: #fdf8ff;
+  --text: #32104f;
+  --muted: #71558f;
+  --accent: #8a2dff;
+  --accent-strong: #631aca;
+  --accent-soft: #efdcff;
+  --surface: #f0e2ff;
+  --surface-hover: #e8d5ff;
+  --surface-border: #d8bcf6;
+  --panel: #f4e8ff;
+  --pill-bg: #f0e2ff;
+  --pill-text: #32104f;
+  --segment-bg: #e2cbf5;
+  --dot-bg: #c7a7e2;
+  --shadow: 0 20px 60px rgba(138, 45, 255, 0.2);
 }
 
 body.theme-bg-hero {
-  --bg: #fff1e6;
-  --card: #fff8f2;
-  --text: #3b1f0b;
-  --muted: #7a5a42;
-  --accent: #ff7a29;
-  --accent-strong: #e4631d;
-  --accent-soft: #ffd9c2;
-  --surface: #ffe4d1;
-  --surface-hover: #ffd6bb;
-  --surface-border: #f0c6a6;
-  --panel: #ffeadc;
-  --pill-bg: #ffe4d1;
-  --pill-text: #3b1f0b;
-  --segment-bg: #f1d0b7;
-  --dot-bg: #d8b89d;
-  --shadow: 0 20px 60px rgba(255, 122, 41, 0.2);
+  --bg: #fff0e4;
+  --card: #fff8f0;
+  --text: #472004;
+  --muted: #8d5a2e;
+  --accent: #ff6f00;
+  --accent-strong: #cb4f00;
+  --accent-soft: #ffd7b5;
+  --surface: #ffe2c8;
+  --surface-hover: #ffd3af;
+  --surface-border: #f2bc8e;
+  --panel: #ffe8d3;
+  --pill-bg: #ffe2c8;
+  --pill-text: #472004;
+  --segment-bg: #f4cdab;
+  --dot-bg: #dbaf89;
+  --shadow: 0 20px 60px rgba(255, 111, 0, 0.22);
 }
 
 body.theme-bg-legend {
-  --bg: #fff7d6;
-  --card: #fffbef;
-  --text: #3a2600;
-  --muted: #7a5b1d;
-  --accent: #f1b000;
-  --accent-strong: #c98600;
-  --accent-soft: #ffe2a6;
-  --surface: #ffe4ad;
-  --surface-hover: #ffd693;
-  --surface-border: #e8c67e;
-  --panel: #ffecc0;
-  --pill-bg: #ffe4ad;
-  --pill-text: #3a2600;
-  --segment-bg: #ebcf93;
-  --dot-bg: #d5b67a;
-  --shadow: 0 20px 60px rgba(241, 176, 0, 0.2);
+  --bg: #fff7d8;
+  --card: #fffdf2;
+  --text: #3f2700;
+  --muted: #7f5f15;
+  --accent: #efb100;
+  --accent-strong: #b57f00;
+  --accent-soft: #ffe6a1;
+  --surface: #ffe7b0;
+  --surface-hover: #ffda8f;
+  --surface-border: #e9c36b;
+  --panel: #ffedbf;
+  --pill-bg: #ffe7b0;
+  --pill-text: #3f2700;
+  --segment-bg: #f0cf89;
+  --dot-bg: #daad60;
+  --shadow: 0 20px 60px rgba(239, 177, 0, 0.24);
 }
 
 body.is-slot-spinning::before,
@@ -210,7 +210,7 @@ textarea {
 
 .tab-bar {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 8px;
   padding: 6px;
   border-radius: 999px;
@@ -218,23 +218,27 @@ textarea {
   box-shadow: var(--shadow);
   margin-bottom: 28px;
   max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.tab-bar::-webkit-scrollbar {
+  display: none;
 }
 
 .tab-button {
   border: none;
   background: transparent;
   color: var(--muted);
-  padding: 8px 16px;
-  font-size: 14px;
+  padding: 8px 14px;
+  font-size: 13px;
   border-radius: 999px;
   cursor: pointer;
   transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
-  flex: 1 1 auto;
-  min-width: 0;
-  max-width: 100%;
-  white-space: normal;
-  word-break: keep-all;
-  overflow-wrap: anywhere;
+  flex: 0 0 auto;
+  min-width: max(112px, 24%);
+  white-space: nowrap;
   text-align: center;
   line-height: 1.25;
 }
@@ -457,29 +461,29 @@ textarea {
 
 body.theme-bg-common::before {
   opacity: 0.35;
-  background: radial-gradient(circle at 20% 20%, #dfe9ff 0%, transparent 60%),
-    radial-gradient(circle at 80% 30%, #eef4ff 0%, transparent 55%);
+  background: radial-gradient(circle at 18% 20%, #bfd5ff 0%, transparent 58%),
+    radial-gradient(circle at 78% 28%, #eef4ff 0%, transparent 52%);
   animation: themeFloat 16s ease-in-out infinite;
 }
 
 body.theme-bg-advanced::before {
   opacity: 0.45;
-  background: radial-gradient(circle at 20% 20%, #c9f3ea 0%, transparent 60%),
-    radial-gradient(circle at 80% 30%, #e2fbf6 0%, transparent 55%);
+  background: radial-gradient(circle at 22% 18%, #93f2dc 0%, transparent 58%),
+    radial-gradient(circle at 80% 34%, #dbfff6 0%, transparent 50%);
   animation: themeFloat 14s ease-in-out infinite;
 }
 
 body.theme-bg-rare::before {
   opacity: 0.6;
-  background: radial-gradient(circle at 20% 30%, #d9c2ff 0%, transparent 60%),
-    radial-gradient(circle at 75% 20%, #f0e6ff 0%, transparent 55%);
+  background: radial-gradient(circle at 18% 30%, #cb9bff 0%, transparent 57%),
+    radial-gradient(circle at 74% 18%, #f2e1ff 0%, transparent 52%);
   animation: themeFloat 12s ease-in-out infinite;
 }
 
 body.theme-bg-hero::before {
   opacity: 0.7;
-  background: radial-gradient(circle at 25% 20%, #ffd8b5 0%, transparent 60%),
-    radial-gradient(circle at 75% 30%, #ffe7d3 0%, transparent 55%);
+  background: radial-gradient(circle at 24% 18%, #ffbc84 0%, transparent 58%),
+    radial-gradient(circle at 75% 28%, #ffe8d3 0%, transparent 52%);
   animation: themeFloat 10s ease-in-out infinite;
 }
 
@@ -492,8 +496,8 @@ body.theme-bg-hero::after {
 
 body.theme-bg-legend::before {
   opacity: 0.85;
-  background: radial-gradient(circle at 20% 25%, #ffe39c 0%, transparent 60%),
-    radial-gradient(circle at 80% 20%, #fff0c5 0%, transparent 55%);
+  background: radial-gradient(circle at 22% 24%, #ffcf5a 0%, transparent 58%),
+    radial-gradient(circle at 80% 20%, #fff0bd 0%, transparent 52%);
   animation: themeFloat 9s ease-in-out infinite;
 }
 
@@ -1008,5 +1012,16 @@ body.theme-bg-legend::after {
 
   .ranking {
     padding: 20px;
+  }
+
+  .tab-bar {
+    gap: 6px;
+    padding: 5px;
+  }
+
+  .tab-button {
+    min-width: max(98px, 28%);
+    padding: 7px 12px;
+    font-size: 12px;
   }
 }
