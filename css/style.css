@@ -28,6 +28,16 @@
   --text: #1d1d1f;
   --muted: #86868b;
   --accent: #0071e3;
+  --accent-strong: #0066cc;
+  --accent-soft: #dbe8ff;
+  --surface: #f0f0f2;
+  --surface-hover: #e6e6ea;
+  --surface-border: #e6e6e9;
+  --panel: #f5f5f7;
+  --pill-bg: #f5f5f7;
+  --pill-text: #1d1d1f;
+  --segment-bg: #e7e7eb;
+  --dot-bg: #d2d2d7;
   --shadow: 0 20px 60px rgba(0, 0, 0, 0.04);
   --radius: 20px;
   --max-width: 720px;
@@ -70,6 +80,108 @@ body::after {
 
 body::after {
   filter: blur(80px);
+}
+
+body.theme-bg-common {
+  --bg: #f5f5f7;
+  --card: #ffffff;
+  --text: #1d1d1f;
+  --muted: #86868b;
+  --accent: #0071e3;
+  --accent-strong: #0066cc;
+  --accent-soft: #dbe8ff;
+  --surface: #f0f0f2;
+  --surface-hover: #e6e6ea;
+  --surface-border: #e6e6e9;
+  --panel: #f5f5f7;
+  --pill-bg: #f5f5f7;
+  --pill-text: #1d1d1f;
+  --segment-bg: #e7e7eb;
+  --dot-bg: #d2d2d7;
+}
+
+body.theme-bg-advanced {
+  --bg: #f2f6ff;
+  --card: #ffffff;
+  --text: #16233b;
+  --muted: #5f6b7a;
+  --accent: #2b6bff;
+  --accent-strong: #2158d6;
+  --accent-soft: #dbe6ff;
+  --surface: #e8eef9;
+  --surface-hover: #dde6f4;
+  --surface-border: #d5ddea;
+  --panel: #edf2fb;
+  --pill-bg: #e8eef9;
+  --pill-text: #16233b;
+  --segment-bg: #dbe4f2;
+  --dot-bg: #c1cadd;
+}
+
+body.theme-bg-rare {
+  --bg: #f6f2ff;
+  --card: #ffffff;
+  --text: #2a1b3d;
+  --muted: #6f6283;
+  --accent: #7a4cff;
+  --accent-strong: #6438e6;
+  --accent-soft: #e7dcff;
+  --surface: #efe9fb;
+  --surface-hover: #e5def5;
+  --surface-border: #dcd3f0;
+  --panel: #f2edfb;
+  --pill-bg: #efe9fb;
+  --pill-text: #2a1b3d;
+  --segment-bg: #e1d7f2;
+  --dot-bg: #cbbfe1;
+}
+
+body.theme-bg-hero {
+  --bg: #fff6ed;
+  --card: #ffffff;
+  --text: #3d2410;
+  --muted: #7a5c44;
+  --accent: #ff8a3d;
+  --accent-strong: #e77025;
+  --accent-soft: #ffd9bd;
+  --surface: #ffeede;
+  --surface-hover: #ffe2ca;
+  --surface-border: #f1d3b6;
+  --panel: #fff1e4;
+  --pill-bg: #ffeede;
+  --pill-text: #3d2410;
+  --segment-bg: #efd8c2;
+  --dot-bg: #d9bea5;
+}
+
+body.theme-bg-legend {
+  --bg: #fff7e3;
+  --card: #ffffff;
+  --text: #3a2a06;
+  --muted: #7a5f1e;
+  --accent: #f2a400;
+  --accent-strong: #d18a00;
+  --accent-soft: #ffe2a6;
+  --surface: #fff0c7;
+  --surface-hover: #ffe3a5;
+  --surface-border: #e7cf8f;
+  --panel: #fff3d6;
+  --pill-bg: #fff0c7;
+  --pill-text: #3a2a06;
+  --segment-bg: #eed8a4;
+  --dot-bg: #d9c187;
+}
+
+body.is-slot-spinning::before,
+body.is-slot-spinning::after {
+  opacity: 0.6;
+  animation-duration: 8s;
+}
+
+body.is-slot-result::before,
+body.is-slot-result::after {
+  opacity: 0.85;
+  animation-duration: 14s;
 }
 
 button,
@@ -168,22 +280,24 @@ textarea {
   min-width: 200px;
   padding: 8px 14px;
   border-radius: 12px;
-  background: #ffffff;
-  border: 1px solid #e6e6e9;
+  background: var(--card);
+  border: 1px solid var(--surface-border);
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 0.02em;
-  box-shadow: inset 0 0 0 1px #f1f1f4;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.03);
   display: inline-flex;
   align-items: center;
   gap: 10px;
   white-space: nowrap;
+  position: relative;
+  overflow: hidden;
 }
 
 .slot-display.is-spinning {
   color: var(--accent);
-  border-color: #cfe0ff;
-  box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.12);
+  border-color: var(--accent-soft);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08);
   animation: slotPulse 0.4s ease-in-out infinite;
 }
 
@@ -191,13 +305,46 @@ textarea {
   animation: slotPop 0.7s ease-out;
 }
 
+.slot-display::before {
+  content: "";
+  position: absolute;
+  inset: -40% 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.75) 50%,
+    transparent 100%
+  );
+  transform: translateX(-120%);
+  opacity: 0;
+}
+
+.slot-display.is-spinning::before {
+  opacity: 0.7;
+  animation: slotShine 0.6s linear infinite;
+}
+
+.slot-display::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.slot-display.is-spinning::after {
+  opacity: 0.7;
+}
+
 .slot-grade {
   padding: 2px 8px;
   border-radius: 999px;
   font-size: 12px;
   font-weight: 700;
-  background: #eef0f3;
-  color: #5f6368;
+  background: var(--surface);
+  color: var(--muted);
 }
 
 .slot-name {
@@ -206,27 +353,35 @@ textarea {
 }
 
 .slot-display[data-grade="advanced"] .slot-grade {
-  background: #e3efff;
-  color: #1f5fbf;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
 }
 
 .slot-display[data-grade="rare"] .slot-grade {
-  background: #efe8ff;
-  color: #6b4dd6;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
 }
 
 .slot-display[data-grade="hero"] .slot-grade {
-  background: #fff0db;
-  color: #c46a0c;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
 }
 
 .slot-display[data-grade="legend"] .slot-grade {
-  background: #fff4d1;
-  color: #b28100;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
 }
 
 .slot-button {
   padding: 8px 16px;
+  position: relative;
+}
+
+.slot-button.is-spinning {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
 }
 
 @keyframes slotPulse {
@@ -250,6 +405,15 @@ textarea {
   }
   100% {
     transform: scale(1);
+  }
+}
+
+@keyframes slotShine {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(120%);
   }
 }
 
@@ -343,6 +507,7 @@ body.theme-bg-legend::after {
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   padding: 24px;
+  margin-top: 16px;
   margin-bottom: 28px;
   display: flex;
   flex-direction: column;
@@ -435,7 +600,7 @@ body.theme-bg-legend::after {
 .ranking-segment {
   height: 6px;
   border-radius: 999px;
-  background: #e7e7eb;
+  background: var(--segment-bg);
 }
 
 .ranking-segment.is-active {
@@ -466,8 +631,8 @@ body.theme-bg-legend::after {
 }
 
 .glossary-filter-button {
-  border: 1px solid #e6e6e9;
-  background: #f0f0f2;
+  border: 1px solid var(--surface-border);
+  background: var(--surface);
   color: var(--text);
   border-radius: 999px;
   padding: 8px 14px;
@@ -478,7 +643,7 @@ body.theme-bg-legend::after {
 }
 
 .glossary-filter-button:hover {
-  background: #e6e6ea;
+  background: var(--surface-hover);
 }
 
 .glossary-filter-button.is-active {
@@ -554,7 +719,7 @@ body.theme-bg-legend::after {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #d2d2d7;
+  background: var(--dot-bg);
   opacity: 0.7;
 }
 
@@ -576,7 +741,7 @@ body.theme-bg-legend::after {
 
 .soup-answer {
   display: none;
-  background: #f5f5f7;
+  background: var(--panel);
   border-radius: 12px;
   padding: 12px 14px;
 }
@@ -646,13 +811,13 @@ body.theme-bg-legend::after {
 }
 
 .button-secondary {
-  background: #f0f0f2;
+  background: var(--surface);
   color: var(--text);
-  border-color: #e6e6e9;
+  border-color: var(--surface-border);
 }
 
 .button-secondary:hover {
-  background: #e6e6ea;
+  background: var(--surface-hover);
 }
 
 .button-primary {
@@ -661,7 +826,7 @@ body.theme-bg-legend::after {
 }
 
 .button-primary:hover {
-  background: #0066cc;
+  background: var(--accent-strong);
 }
 
 .problem-panel {
@@ -700,8 +865,8 @@ body.theme-bg-legend::after {
 
 .solver-item {
   font-size: 14px;
-  color: var(--text);
-  background: #f5f5f7;
+  color: var(--pill-text);
+  background: var(--pill-bg);
   padding: 6px 10px;
   border-radius: 999px;
 }
@@ -760,8 +925,8 @@ body.theme-bg-legend::after {
 
 .glossary-tag {
   font-size: 13px;
-  color: var(--text);
-  background: #f5f5f7;
+  color: var(--pill-text);
+  background: var(--pill-bg);
   padding: 6px 10px;
   border-radius: 999px;
 }
@@ -800,8 +965,8 @@ body.theme-bg-legend::after {
 
 .boardgame-game {
   font-size: 14px;
-  color: var(--text);
-  background: #f5f5f7;
+  color: var(--pill-text);
+  background: var(--pill-bg);
   padding: 6px 10px;
   border-radius: 999px;
 }

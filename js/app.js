@@ -454,15 +454,66 @@ function setSlotMachine() {
   ];
 
   const themeNames = {
-    common: Array.from({ length: 33 }, (_, index) => {
-      return `코어 UX ${String(index + 1).padStart(2, "0")}`;
-    }),
-    advanced: Array.from({ length: 20 }, (_, index) => {
-      return `프리미엄 UX ${String(index + 1).padStart(2, "0")}`;
-    }),
-    rare: ["오로라 UX", "딥포커스 UX", "노바 UX", "프리즘 UX"],
-    hero: ["시그니처 UX", "네뷸라 UX"],
-    legend: ["에테르 UX"],
+    common: [
+      "미니멀 라이트",
+      "클린 그리드",
+      "소프트 스택",
+      "차분한 스크롤",
+      "심플 카드",
+      "프레시 여백",
+      "밝은 모듈",
+      "클라우드 폰트",
+      "라이트 루프",
+      "가벼운 체크",
+      "베이직 리듬",
+      "스무스 탭",
+      "라이트 뱃지",
+      "여백 중심",
+      "클린 리스트",
+      "바닐라 버튼",
+      "노이즈 프리",
+      "데일리 플로우",
+      "포근한 패널",
+      "라이트 스냅",
+      "플랫 라이트",
+      "정돈된 행간",
+      "맑은 알림",
+      "심플 네비",
+      "젤리 카운트",
+      "스위트 토글",
+      "클린 텍스트",
+      "라이트 포커스",
+      "기본 밸런스",
+      "클린 큐",
+      "화이트 모드",
+      "라이트 바운스",
+      "스무스 레이아웃",
+    ],
+    advanced: [
+      "실키 모션",
+      "프리미엄 레이어",
+      "딥화이트",
+      "미드나잇 블루",
+      "글래스 플로팅",
+      "차콜 미스트",
+      "에코 라이트",
+      "네온 라인",
+      "소프트 스테이지",
+      "리치 패널",
+      "스컬프트 카드",
+      "포커스 링",
+      "스파클 탭",
+      "루미너스 리스트",
+      "다이아 버튼",
+      "프리즘 라이트",
+      "오브제 그리드",
+      "블룸 필드",
+      "라이트 모노",
+      "클래식 프리미엄",
+    ],
+    rare: ["오로라 플로우", "딥포커스 리추얼", "노바 스펙트럼", "프리즘 스플래시"],
+    hero: ["시그니처 오라", "네뷸라 크라운"],
+    legend: ["에테르 오리진"],
   };
 
   const buildThemeCatalog = (configs, namesByGrade) => {
@@ -582,6 +633,7 @@ function setSlotMachine() {
     gradeLabel: "일반",
     name: "테마 대기",
   });
+  applyThemeBackground("common");
 
   button.addEventListener("click", () => {
     if (isSpinning) {
@@ -590,20 +642,27 @@ function setSlotMachine() {
     isSpinning = true;
     button.disabled = true;
     button.textContent = "테마 결정 중...";
+    button.classList.add("is-spinning");
     display.classList.remove("is-final");
     display.classList.add("is-spinning");
+    document.body.classList.add("is-slot-spinning");
+    document.body.classList.remove("is-slot-result");
 
-    const totalSteps = 30;
-    let currentStep = 0;
-    let delay = 60;
+    const spinDuration = 2400;
+    const minInterval = 45;
+    const maxInterval = 220;
+    const startTime = performance.now();
 
     const spin = () => {
-      currentStep += 1;
       updateDisplay(pickSpinTheme());
-
-      if (currentStep < totalSteps) {
-        delay = Math.min(460, Math.round(delay * 1.13 + 8));
-        window.setTimeout(spin, delay);
+      const elapsed = performance.now() - startTime;
+      if (elapsed < spinDuration) {
+        const progress = Math.min(elapsed / spinDuration, 1);
+        const eased = progress * progress;
+        const interval = Math.round(
+          minInterval + (maxInterval - minInterval) * eased
+        );
+        window.setTimeout(spin, interval);
         return;
       }
 
@@ -612,15 +671,19 @@ function setSlotMachine() {
       applyThemeBackground(finalTheme.gradeKey);
       display.classList.remove("is-spinning");
       display.classList.add("is-final");
+      button.classList.remove("is-spinning");
+      document.body.classList.remove("is-slot-spinning");
+      document.body.classList.add("is-slot-result");
       window.setTimeout(() => {
         display.classList.remove("is-final");
+        document.body.classList.remove("is-slot-result");
       }, 900);
       button.disabled = false;
       button.textContent = "슬롯 돌리기";
       isSpinning = false;
     };
 
-    window.setTimeout(spin, delay);
+    window.setTimeout(spin, minInterval);
   });
 }
 
