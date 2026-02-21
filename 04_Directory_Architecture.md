@@ -11,7 +11,10 @@
  ┣ 📂 js
  ┃ ┗ 📜 app.js            (렌더링 로직: JSON 데이터를 불러와 HTML에 뿌려주는 바닐라 자바스크립트)
  ┣ 📂 data
- ┃ ┗ 📜 problems.json     (데이터베이스 역할: 03_Data_Structure.md를 따르는 문제 데이터)
+ ┃ ┣ 📜 problems.json        (문제 목록 데이터)
+ ┃ ┣ 📜 turtle-soup.json     (바다거북스프 데이터)
+ ┃ ┣ 📜 boardgame.json       (추천 보드게임 데이터)
+ ┃ ┗ 📜 boardgame-terms.json (보드게임 용어 데이터)
  ┗ 📂 assets
    ┣ 📂 icons             (UI에 사용될 SVG 아이콘 등)
    ┗ 📂 images            (문제에 필요한 참고 이미지가 있을 경우 저장하는 곳)
@@ -19,5 +22,5 @@
 ## 2. 파일별 역할 및 제한 사항
 - **`index.html`:** 본문 내에 하드코딩된 문제 데이터가 없어야 한다. 오직 빈 컨테이너(`<div id="problem-list"></div>` 등)만 존재하며, 스크립트(`app.js`)를 로드하는 역할만 수행한다.
 - **`style.css`:** 모든 시각적 요소는 이 파일 하나에서 통제한다. 유지보수를 위해 변수(`:root`)를 활용하여 컬러 팔레트와 폰트를 최상단에 정의해 두어라.
-- **`app.js`:** 페이지가 로드되면 `fetch()` API를 통해 `data/problems.json`을 읽어온 뒤, 각 문제 카드의 HTML 요소를 동적으로 생성(DOM Manipulation)하여 `index.html`에 삽입한다.
-- **`problems.json`:** 순수한 데이터 포맷만을 유지하며, 관리자가 텍스트 에디터로 쉽게 수정할 수 있도록 정렬된(formatted) 상태를 유지해라.
+- **`app.js`:** 페이지가 로드되면 `fetch()` API를 통해 분리된 JSON 파일들을 읽어온 뒤, 각 섹션의 HTML 요소를 동적으로 생성(DOM Manipulation)하여 `index.html`에 삽입한다.
+- **`data/*.json`:** 순수한 데이터 포맷만을 유지하며, 관리자가 텍스트 에디터로 쉽게 수정할 수 있도록 정렬된(formatted) 상태를 유지해라.

@@ -1,4 +1,7 @@
 const PROBLEMS_URL = "data/problems.json";
+const TURTLE_SOUP_URL = "data/turtle-soup.json";
+const BOARDGAME_URL = "data/boardgame.json";
+const BOARDGAME_TERMS_URL = "data/boardgame-terms.json";
 const OPEN_PROFILE_URL = "https://open.kakao.com/o/sxsinFuf";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -9,30 +12,75 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 async function loadProblems() {
-  try {
-    const data = await fetchProblems();
-    const normalized = normalizeProblemData(data);
-    renderProblems(normalized.problems);
-    renderRanking(normalized.problems);
-    renderTurtleSoup(normalized.turtleSoup);
-    renderBoardGame(normalized.boardGame);
-  } catch (error) {
-    renderError(error);
+  // 분리된 JSON 데이터를 동시에 요청하고, 섹션별로 안전하게 렌더링한다.
+  const results = await Promise.allSettled([
+    fetchJson(PROBLEMS_URL),
+    fetchJson(TURTLE_SOUP_URL),
+    fetchJson(BOARDGAME_URL),
+    fetchJson(BOARDGAME_TERMS_URL),
+  ]);
+
+  const [problemsResult, soupResult, boardGameResult, termsResult] = results;
+
+  if (problemsResult.status === "fulfilled") {
+    const problems = normalizeProblems(problemsResult.value);
+    renderProblems(problems);
+    renderRanking(problems);
+  } else {
+    renderProblems([]);
+    renderRanking([]);
+    renderSectionError("problem-list", problemsResult.reason, "문제 데이터를 불러오지 못했습니다.");
+  }
+
+  if (soupResult.status === "fulfilled") {
+    const turtleSoup = normalizeSectionData(soupResult.value, "turtleSoup");
+    renderTurtleSoup(turtleSoup);
+  } else {
+    renderSectionError(
+      "soup-list",
+      soupResult.reason,
+      "바다거북스프 데이터를 불러오지 못했습니다."
+    );
+  }
+
+  if (boardGameResult.status === "fulfilled") {
+    const boardGame = normalizeSectionData(boardGameResult.value, "boardGame");
+    renderBoardGame(boardGame);
+  } else {
+    renderSectionError(
+      "boardgame-list",
+      boardGameResult.reason,
+      "추천 보드게임 데이터를 불러오지 못했습니다."
+    );
+  }
+
+  if (termsResult.status === "fulfilled") {
+    const boardGameTerms = normalizeSectionData(
+      termsResult.value,
+      "boardGameTerms"
+    );
+    renderBoardGameTerms(boardGameTerms);
+  } else {
+    renderSectionError(
+      "boardgame-terms-list",
+      termsResult.reason,
+      "보드게임 용어 데이터를 불러오지 못했습니다."
+    );
   }
 }
 
-async function fetchProblems() {
+async function fetchJson(url) {
   try {
-    // 문제 데이터를 JSON에서 불러와 화면에 렌더링한다.
-    const response = await fetch(PROBLEMS_URL, { cache: "no-store" });
+    // JSON 파일을 fetch로 읽고, 실패 시 XHR로 재시도한다.
+    const response = await fetch(url, { cache: "no-store" });
     if (!response.ok) {
-      throw new Error("문제 데이터를 불러오지 못했습니다.");
+      throw new Error("데이터를 불러오지 못했습니다.");
     }
     return await response.json();
   } catch (error) {
     if (window.location.protocol === "file:") {
       // 로컬 파일 실행 시 일부 브라우저가 fetch를 차단하므로 XHR로 재시도
-      return await tryLoadWithXhr(PROBLEMS_URL);
+      return await tryLoadWithXhr(url);
     }
     throw error;
   }
@@ -121,6 +169,68 @@ function renderBoardGame(boardGame) {
   });
 }
 
+function renderBoardGameTerms(boardGameTerms) {
+  const list = document.getElementById("boardgame-terms-list");
+  const filters = document.getElementById("boardgame-terms-filters");
+  if (!list) {
+    return;
+  }
+  list.innerHTML = "";
+  if (filters) {
+    filters.innerHTML = "";
+  }
+
+  const items = Array.isArray(boardGameTerms?.items)
+    ? boardGameTerms.items
+    : [];
+  if (items.length === 0) {
+    const empty = document.createElement("p");
+    empty.className = "problem-text";
+    empty.textContent =
+      boardGameTerms?.emptyMessage || "보드게임 용어 데이터가 준비 중입니다.";
+    list.appendChild(empty);
+    return;
+  }
+
+  // 태그 필터 UI를 만들고, 선택된 태그(AND)로 용어를 필터링한다.
+  const selectedTags = new Set();
+  const allTags = collectGlossaryTags(items);
+  if (filters && allTags.length > 0) {
+    const allButton = createGlossaryFilterButton("전체", true);
+    filters.appendChild(allButton);
+
+    allTags.forEach((tag) => {
+      const button = createGlossaryFilterButton(tag, false);
+      filters.appendChild(button);
+    });
+
+    filters.addEventListener("click", (event) => {
+      const target = event.target;
+      if (!(target instanceof HTMLButtonElement)) {
+        return;
+      }
+      const tag = target.dataset.tag || "";
+      if (!tag) {
+        return;
+      }
+
+      if (tag === "전체") {
+        selectedTags.clear();
+      } else if (selectedTags.has(tag)) {
+        selectedTags.delete(tag);
+      } else {
+        selectedTags.add(tag);
+      }
+
+      // 선택된 태그가 없으면 전체가 활성화되도록 동기화한다.
+      updateGlossaryFilterButtons(filters, selectedTags);
+      renderGlossaryItems(list, items, selectedTags, boardGameTerms);
+    });
+  }
+
+  renderGlossaryItems(list, items, selectedTags, boardGameTerms);
+}
+
 function renderRanking(problems) {
   const list = document.getElementById("ranking-list");
   const total = document.getElementById("ranking-total");
@@ -201,8 +311,8 @@ function renderRanking(problems) {
   }
 }
 
-function renderError(error) {
-  const list = document.getElementById("problem-list");
+function renderSectionError(listId, error, fallbackMessage) {
+  const list = document.getElementById(listId);
   if (!list) {
     return;
   }
@@ -223,7 +333,8 @@ function renderError(error) {
   }
 
   title.textContent =
-    error instanceof Error ? error.message : "문제를 불러오지 못했습니다.";
+    fallbackMessage ||
+    (error instanceof Error ? error.message : "데이터를 불러오지 못했습니다.");
   list.appendChild(title);
 }
 
@@ -568,6 +679,20 @@ function createContentFragment(contentText) {
   return fragment;
 }
 
+function createParagraphFragment(contentText, className) {
+  const fragment = document.createDocumentFragment();
+  const lines = String(contentText).split("\n").filter(Boolean);
+
+  lines.forEach((line) => {
+    const paragraph = document.createElement("p");
+    paragraph.className = className;
+    paragraph.textContent = line.trim();
+    fragment.appendChild(paragraph);
+  });
+
+  return fragment;
+}
+
 function toggleAccordion(panel, button, openText, closeText) {
   const isOpen = panel.classList.contains("is-open");
   const openLabel = openText || "문제 펼치기";
@@ -709,17 +834,130 @@ function createBoardGameCard(weightInfo, boardGame) {
   return card;
 }
 
-function normalizeProblemData(data) {
-  if (Array.isArray(data)) {
-    return {
-      problems: data,
-      turtleSoup: null,
-      boardGame: null,
-    };
+function createBoardGameTermCard(item) {
+  const card = document.createElement("article");
+  card.className = "glossary-card";
+
+  const term = document.createElement("h3");
+  term.className = "glossary-term";
+  term.textContent = item.term || "용어";
+
+  const content = document.createElement("div");
+  content.className = "glossary-content";
+  content.appendChild(
+    createParagraphFragment(item.definition || "", "glossary-text")
+  );
+
+  if (item.example) {
+    const example = document.createElement("p");
+    example.className = "glossary-example";
+    example.textContent = `예시: ${item.example}`;
+    content.appendChild(example);
   }
-  return {
-    problems: Array.isArray(data?.problems) ? data.problems : [],
-    turtleSoup: data?.turtleSoup || null,
-    boardGame: data?.boardGame || null,
-  };
+
+  card.appendChild(term);
+  card.appendChild(content);
+
+  if (Array.isArray(item.tags) && item.tags.length > 0) {
+    const tagList = document.createElement("ul");
+    tagList.className = "glossary-tags";
+    item.tags.forEach((tag) => {
+      const tagItem = document.createElement("li");
+      tagItem.className = "glossary-tag";
+      tagItem.textContent = tag;
+      tagList.appendChild(tagItem);
+    });
+    card.appendChild(tagList);
+  }
+
+  return card;
+}
+
+function collectGlossaryTags(items) {
+  const tags = new Set();
+  items.forEach((item) => {
+    if (!Array.isArray(item.tags)) {
+      return;
+    }
+    item.tags.forEach((tag) => {
+      const normalized = String(tag || "").trim();
+      if (normalized) {
+        tags.add(normalized);
+      }
+    });
+  });
+  return Array.from(tags).sort((a, b) => a.localeCompare(b, "ko"));
+}
+
+function createGlossaryFilterButton(tag, isActive) {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "glossary-filter-button";
+  if (isActive) {
+    button.classList.add("is-active");
+  }
+  button.textContent = tag;
+  button.dataset.tag = tag;
+  return button;
+}
+
+function updateGlossaryFilterButtons(container, selectedTags) {
+  const buttons = Array.from(
+    container.querySelectorAll(".glossary-filter-button")
+  );
+  buttons.forEach((button) => {
+    const tag = button.dataset.tag || "";
+    if (tag === "전체") {
+      button.classList.toggle("is-active", selectedTags.size === 0);
+      return;
+    }
+    button.classList.toggle("is-active", selectedTags.has(tag));
+  });
+}
+
+function renderGlossaryItems(list, items, selectedTags, boardGameTerms) {
+  list.innerHTML = "";
+
+  // 선택된 태그를 모두 포함하는(AND) 용어만 노출한다.
+  const filtered = items.filter((item) => {
+    if (selectedTags.size === 0) {
+      return true;
+    }
+    if (!Array.isArray(item.tags)) {
+      return false;
+    }
+    return Array.from(selectedTags).every((tag) => item.tags.includes(tag));
+  });
+
+  if (filtered.length === 0) {
+    const empty = document.createElement("p");
+    empty.className = "problem-text";
+    empty.textContent =
+      boardGameTerms?.filterEmptyMessage ||
+      "해당 태그에 해당하는 용어가 없습니다.";
+    list.appendChild(empty);
+    return;
+  }
+
+  filtered.forEach((item) => {
+    const card = createBoardGameTermCard(item);
+    list.appendChild(card);
+  });
+}
+
+function normalizeProblems(data) {
+  if (Array.isArray(data)) {
+    return data;
+  }
+  return Array.isArray(data?.problems) ? data.problems : [];
+}
+
+function normalizeSectionData(data, key) {
+  if (!data) {
+    return null;
+  }
+  if (key && data[key]) {
+    return data[key];
+  }
+  return data;
 }
