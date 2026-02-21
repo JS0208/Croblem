@@ -83,98 +83,98 @@ body::after {
 }
 
 body.theme-bg-common {
-  --bg: #edf4ff;
+  --bg: #f4f6fa;
   --card: #ffffff;
-  --text: #122447;
-  --muted: #54658c;
-  --accent: #2c6cff;
-  --accent-strong: #1f51c6;
-  --accent-soft: #d7e5ff;
-  --surface: #e3ebfb;
-  --surface-hover: #d6e2fa;
-  --surface-border: #c8d8f6;
-  --panel: #eaf1fe;
-  --pill-bg: #e3ebfb;
-  --pill-text: #122447;
-  --segment-bg: #d1ddf5;
-  --dot-bg: #b6c7e7;
-  --shadow: 0 20px 60px rgba(44, 108, 255, 0.14);
+  --text: #1c2333;
+  --muted: #697287;
+  --accent: #5b6f98;
+  --accent-strong: #445678;
+  --accent-soft: #e3e9f5;
+  --surface: #edf1f8;
+  --surface-hover: #e3e9f3;
+  --surface-border: #d3dbe9;
+  --panel: #f1f4fa;
+  --pill-bg: #edf1f8;
+  --pill-text: #1c2333;
+  --segment-bg: #dde4f1;
+  --dot-bg: #c1cbdd;
+  --shadow: 0 18px 48px rgba(69, 86, 120, 0.12);
 }
 
 body.theme-bg-advanced {
-  --bg: #e6fff6;
-  --card: #f9fffc;
-  --text: #063b33;
-  --muted: #32746e;
-  --accent: #00a98f;
-  --accent-strong: #007c69;
-  --accent-soft: #b9f6ea;
-  --surface: #d4f7ef;
-  --surface-hover: #c3f2e8;
-  --surface-border: #9de4d6;
-  --panel: #ddfbf3;
-  --pill-bg: #d4f7ef;
-  --pill-text: #063b33;
-  --segment-bg: #b9e9df;
-  --dot-bg: #8fd2c4;
-  --shadow: 0 20px 60px rgba(0, 169, 143, 0.2);
+  --bg: #ecfaf8;
+  --card: #fbfffe;
+  --text: #103833;
+  --muted: #3f6f68;
+  --accent: #1f9f90;
+  --accent-strong: #12776b;
+  --accent-soft: #cff3ed;
+  --surface: #def5f1;
+  --surface-hover: #d0efea;
+  --surface-border: #b7e0d9;
+  --panel: #e6f8f4;
+  --pill-bg: #def5f1;
+  --pill-text: #103833;
+  --segment-bg: #c8e7e1;
+  --dot-bg: #a6d3cb;
+  --shadow: 0 20px 56px rgba(31, 159, 144, 0.16);
 }
 
 body.theme-bg-rare {
-  --bg: #f6ecff;
-  --card: #fdf8ff;
-  --text: #32104f;
-  --muted: #71558f;
-  --accent: #8a2dff;
-  --accent-strong: #631aca;
-  --accent-soft: #efdcff;
-  --surface: #f0e2ff;
-  --surface-hover: #e8d5ff;
-  --surface-border: #d8bcf6;
-  --panel: #f4e8ff;
-  --pill-bg: #f0e2ff;
-  --pill-text: #32104f;
-  --segment-bg: #e2cbf5;
-  --dot-bg: #c7a7e2;
-  --shadow: 0 20px 60px rgba(138, 45, 255, 0.2);
+  --bg: #f8efff;
+  --card: #fffaff;
+  --text: #33124a;
+  --muted: #755690;
+  --accent: #b637ff;
+  --accent-strong: #831dc8;
+  --accent-soft: #edd6ff;
+  --surface: #f2e2ff;
+  --surface-hover: #e9cffd;
+  --surface-border: #d6b7ef;
+  --panel: #f6e9ff;
+  --pill-bg: #f2e2ff;
+  --pill-text: #33124a;
+  --segment-bg: #e3c8f0;
+  --dot-bg: #c9a4e0;
+  --shadow: 0 24px 62px rgba(182, 55, 255, 0.24);
 }
 
 body.theme-bg-hero {
-  --bg: #fff0e4;
-  --card: #fff8f0;
-  --text: #472004;
-  --muted: #8d5a2e;
-  --accent: #ff6f00;
-  --accent-strong: #cb4f00;
-  --accent-soft: #ffd7b5;
-  --surface: #ffe2c8;
-  --surface-hover: #ffd3af;
-  --surface-border: #f2bc8e;
-  --panel: #ffe8d3;
-  --pill-bg: #ffe2c8;
-  --pill-text: #472004;
-  --segment-bg: #f4cdab;
-  --dot-bg: #dbaf89;
-  --shadow: 0 20px 60px rgba(255, 111, 0, 0.22);
+  --bg: #fff0ea;
+  --card: #fff9f7;
+  --text: #4a160d;
+  --muted: #955047;
+  --accent: #ff4b1f;
+  --accent-strong: #c92c06;
+  --accent-soft: #ffd4c8;
+  --surface: #ffe2da;
+  --surface-hover: #ffd2c6;
+  --surface-border: #efb3a1;
+  --panel: #ffe9e3;
+  --pill-bg: #ffe2da;
+  --pill-text: #4a160d;
+  --segment-bg: #f4c2b4;
+  --dot-bg: #dc9a86;
+  --shadow: 0 26px 68px rgba(255, 75, 31, 0.28);
 }
 
 body.theme-bg-legend {
-  --bg: #fff7d8;
-  --card: #fffdf2;
-  --text: #3f2700;
-  --muted: #7f5f15;
-  --accent: #efb100;
-  --accent-strong: #b57f00;
-  --accent-soft: #ffe6a1;
-  --surface: #ffe7b0;
-  --surface-hover: #ffda8f;
-  --surface-border: #e9c36b;
-  --panel: #ffedbf;
-  --pill-bg: #ffe7b0;
-  --pill-text: #3f2700;
-  --segment-bg: #f0cf89;
-  --dot-bg: #daad60;
-  --shadow: 0 20px 60px rgba(239, 177, 0, 0.24);
+  --bg: #f3f0ff;
+  --card: #fefcff;
+  --text: #1c113d;
+  --muted: #5f4a8f;
+  --accent: #6f2bff;
+  --accent-strong: #4718bb;
+  --accent-soft: #dfd2ff;
+  --surface: #e9e1ff;
+  --surface-hover: #dbcffe;
+  --surface-border: #c2b0f1;
+  --panel: #f0eaff;
+  --pill-bg: #e9e1ff;
+  --pill-text: #1c113d;
+  --segment-bg: #d6c7f4;
+  --dot-bg: #b49ce1;
+  --shadow: 0 30px 78px rgba(111, 43, 255, 0.34);
 }
 
 body.is-slot-spinning::before,
@@ -460,52 +460,73 @@ textarea {
 }
 
 body.theme-bg-common::before {
-  opacity: 0.35;
-  background: radial-gradient(circle at 18% 20%, #bfd5ff 0%, transparent 58%),
-    radial-gradient(circle at 78% 28%, #eef4ff 0%, transparent 52%);
-  animation: themeFloat 16s ease-in-out infinite;
+  opacity: 0.22;
+  background: radial-gradient(circle at 16% 20%, #c8d2e6 0%, transparent 58%),
+    radial-gradient(circle at 82% 28%, #eef2f9 0%, transparent 50%);
+  animation: themeFloat 20s ease-in-out infinite;
+}
+
+body.theme-bg-common::after {
+  opacity: 0.14;
+  background: radial-gradient(circle at 24% 72%, #b2bfd8 0%, transparent 52%),
+    radial-gradient(circle at 78% 66%, #dde5f2 0%, transparent 48%);
+  animation: themeDrift 28s ease-in-out infinite;
 }
 
 body.theme-bg-advanced::before {
-  opacity: 0.45;
-  background: radial-gradient(circle at 22% 18%, #93f2dc 0%, transparent 58%),
-    radial-gradient(circle at 80% 34%, #dbfff6 0%, transparent 50%);
-  animation: themeFloat 14s ease-in-out infinite;
+  opacity: 0.34;
+  background: radial-gradient(circle at 20% 20%, #9ee7db 0%, transparent 58%),
+    radial-gradient(circle at 80% 32%, #e3faf6 0%, transparent 50%);
+  animation: themeFloat 16s ease-in-out infinite;
+}
+
+body.theme-bg-advanced::after {
+  opacity: 0.24;
+  background: radial-gradient(circle at 22% 72%, #7dd7c8 0%, transparent 53%),
+    radial-gradient(circle at 78% 68%, #c8f0e9 0%, transparent 48%);
+  animation: themeDrift 22s ease-in-out infinite;
 }
 
 body.theme-bg-rare::before {
-  opacity: 0.6;
-  background: radial-gradient(circle at 18% 30%, #cb9bff 0%, transparent 57%),
-    radial-gradient(circle at 74% 18%, #f2e1ff 0%, transparent 52%);
+  opacity: 0.5;
+  background: radial-gradient(circle at 17% 28%, #d792ff 0%, transparent 56%),
+    radial-gradient(circle at 75% 18%, #f8e8ff 0%, transparent 52%);
   animation: themeFloat 12s ease-in-out infinite;
 }
 
+body.theme-bg-rare::after {
+  opacity: 0.36;
+  background: radial-gradient(circle at 20% 72%, #c862f3 0%, transparent 54%),
+    radial-gradient(circle at 80% 66%, #f0d6ff 0%, transparent 48%);
+  animation: themeDrift 17s ease-in-out infinite;
+}
+
 body.theme-bg-hero::before {
-  opacity: 0.7;
-  background: radial-gradient(circle at 24% 18%, #ffbc84 0%, transparent 58%),
-    radial-gradient(circle at 75% 28%, #ffe8d3 0%, transparent 52%);
-  animation: themeFloat 10s ease-in-out infinite;
-}
-
-body.theme-bg-hero::after {
-  opacity: 0.45;
-  background: radial-gradient(circle at 20% 70%, #ffcf9b 0%, transparent 55%),
-    radial-gradient(circle at 80% 65%, #fff0df 0%, transparent 50%);
-  animation: themeDrift 18s ease-in-out infinite;
-}
-
-body.theme-bg-legend::before {
-  opacity: 0.85;
-  background: radial-gradient(circle at 22% 24%, #ffcf5a 0%, transparent 58%),
-    radial-gradient(circle at 80% 20%, #fff0bd 0%, transparent 52%);
+  opacity: 0.64;
+  background: radial-gradient(circle at 24% 16%, #ff9d81 0%, transparent 58%),
+    radial-gradient(circle at 76% 27%, #ffe8df 0%, transparent 51%);
   animation: themeFloat 9s ease-in-out infinite;
 }
 
+body.theme-bg-hero::after {
+  opacity: 0.48;
+  background: radial-gradient(circle at 18% 72%, #ff7054 0%, transparent 55%),
+    radial-gradient(circle at 82% 66%, #ffcdbf 0%, transparent 49%);
+  animation: themeDrift 13s ease-in-out infinite;
+}
+
+body.theme-bg-legend::before {
+  opacity: 0.82;
+  background: radial-gradient(circle at 21% 22%, #8a4cff 0%, transparent 57%),
+    radial-gradient(circle at 80% 18%, #eee6ff 0%, transparent 51%);
+  animation: themeFloat 7s ease-in-out infinite;
+}
+
 body.theme-bg-legend::after {
-  opacity: 0.6;
-  background: radial-gradient(circle at 20% 70%, #ffd574 0%, transparent 55%),
-    radial-gradient(circle at 80% 65%, #fff3c1 0%, transparent 50%);
-  animation: themeDrift 14s ease-in-out infinite;
+  opacity: 0.68;
+  background: radial-gradient(circle at 18% 72%, #1fffbf 0%, transparent 54%),
+    radial-gradient(circle at 82% 66%, #bcfff0 0%, transparent 48%);
+  animation: themeDrift 10s ease-in-out infinite;
 }
 
 .page-note {
