@@ -453,89 +453,119 @@ function setSlotMachine() {
     },
   ];
 
-  const themeNames = {
-    common: [
-      "미니멀 라이트",
-      "클린 그리드",
-      "소프트 스택",
-      "차분한 스크롤",
-      "심플 카드",
-      "프레시 여백",
-      "밝은 모듈",
-      "클라우드 폰트",
-      "라이트 루프",
-      "가벼운 체크",
-      "베이직 리듬",
-      "스무스 탭",
-      "라이트 뱃지",
-      "여백 중심",
-      "클린 리스트",
-      "바닐라 버튼",
-      "노이즈 프리",
-      "데일리 플로우",
-      "포근한 패널",
-      "라이트 스냅",
-      "플랫 라이트",
-      "정돈된 행간",
-      "맑은 알림",
-      "심플 네비",
-      "젤리 카운트",
-      "스위트 토글",
-      "클린 텍스트",
-      "라이트 포커스",
-      "기본 밸런스",
-      "클린 큐",
-      "화이트 모드",
-      "라이트 바운스",
-      "스무스 레이아웃",
-    ],
-    advanced: [
-      "실키 모션",
-      "프리미엄 레이어",
-      "딥화이트",
-      "미드나잇 블루",
-      "글래스 플로팅",
-      "차콜 미스트",
-      "에코 라이트",
-      "네온 라인",
-      "소프트 스테이지",
-      "리치 패널",
-      "스컬프트 카드",
-      "포커스 링",
-      "스파클 탭",
-      "루미너스 리스트",
-      "다이아 버튼",
-      "프리즘 라이트",
-      "오브제 그리드",
-      "블룸 필드",
-      "라이트 모노",
-      "클래식 프리미엄",
-    ],
-    rare: ["오로라 플로우", "딥포커스 리추얼", "노바 스펙트럼", "프리즘 스플래시"],
-    hero: ["시그니처 오라", "네뷸라 크라운"],
-    legend: ["에테르 오리진"],
+  const themeNameGenerators = {
+    common: {
+      adjectives: [
+        "안개빛",
+        "포근한",
+        "고요한",
+        "잔잔한",
+        "담백한",
+        "스무스",
+        "은은한",
+        "차분한",
+        "부드러운",
+        "맑은",
+        "소프트",
+      ],
+      nouns: [
+        "모노",
+        "페이퍼",
+        "린넨",
+        "데스크",
+        "카드",
+        "브리즈",
+        "노트",
+        "아카이브",
+        "리본",
+        "그리드",
+        "하모니",
+      ],
+      hueBases: [210, 196, 182, 224, 168, 236, 198],
+      chaos: 0.12,
+      modes: ["calm", "airy", "cool"],
+    },
+    advanced: {
+      adjectives: [
+        "벨벳",
+        "글래스",
+        "루미나",
+        "실키",
+        "모던",
+        "프리미엄",
+        "오팔",
+        "새틴",
+        "스펙트럼",
+      ],
+      nouns: [
+        "웨이브",
+        "라운지",
+        "미스트",
+        "레이어",
+        "스튜디오",
+        "플럭스",
+        "패널",
+        "오브제",
+        "시퀀스",
+      ],
+      hueBases: [172, 200, 256, 188, 160, 275, 214],
+      chaos: 0.24,
+      modes: ["balanced", "glow", "cool-pop"],
+    },
+    rare: {
+      adjectives: ["오로라", "프리즘", "노바", "펄스", "크리스탈", "루나"],
+      nouns: ["스파크", "블룸", "리츄얼", "스펙트럼", "스톰", "베일"],
+      hueBases: [286, 320, 42, 178, 226, 12],
+      chaos: 0.45,
+      modes: ["vivid", "neon", "contrast"],
+    },
+    hero: {
+      adjectives: ["볼캐닉", "플라즈마", "코스믹", "크림슨", "아스트라"],
+      nouns: ["임팩트", "퀘이크", "퓨전", "라이즈", "블레이즈"],
+      hueBases: [14, 336, 272, 188, 44],
+      chaos: 0.68,
+      modes: ["neon", "dark-pop", "extreme"],
+    },
+    legend: {
+      adjectives: ["아포칼립스", "인피니트", "카오스", "트랜센던트", "제로포인트"],
+      nouns: ["오버드라이브", "코어", "패러독스", "익스플로전", "레조넌스"],
+      hueBases: [278, 16, 186, 332, 52, 140],
+      chaos: 0.9,
+      modes: ["extreme", "neon", "dark-pop"],
+    },
   };
 
-  const buildThemeCatalog = (configs, namesByGrade) => {
+  const buildThemeName = (generator, index) => {
+    const adjective =
+      generator.adjectives[index % generator.adjectives.length] || "테마";
+    const noun =
+      generator.nouns[
+        Math.floor(index / generator.adjectives.length) % generator.nouns.length
+      ] || "스타일";
+    return `${adjective} ${noun}`;
+  };
+
+  const buildThemeCatalog = (configs, generators) => {
     const allThemes = [];
     const themesByGrade = {};
 
     configs.forEach((config) => {
-      const names = Array.isArray(namesByGrade[config.key])
-        ? [...namesByGrade[config.key]]
-        : [];
-      if (names.length < config.count) {
-        for (let i = names.length; i < config.count; i += 1) {
-          names.push(`${config.label} 테마 ${String(i + 1).padStart(2, "0")}`);
-        }
-      }
-      const trimmed = names.slice(0, config.count);
-      const gradeThemes = trimmed.map((name, index) => {
+      const generator = generators[config.key] || generators.common;
+      const gradeThemes = Array.from({ length: config.count }, (_, index) => {
+        const hueBase = generator.hueBases[index % generator.hueBases.length] || 200;
+        const hueJitter = ((index * 37 + config.count * 11) % 44) - 22;
+        const mode = generator.modes[index % generator.modes.length] || "balanced";
+
         return {
           id: `${config.key}-${String(index + 1).padStart(2, "0")}`,
           gradeKey: config.key,
           gradeLabel: config.label,
-          name,
+          name: buildThemeName(generator, index),
+          style: {
+            hue: (hueBase + hueJitter + 360) % 360,
+            chaos: Math.min(1, generator.chaos + ((index % 5) * 0.06)),
+            mode,
+          },
         };
       });
 
@@ -548,7 +578,7 @@ function setSlotMachine() {
 
   const { allThemes, themesByGrade } = buildThemeCatalog(
     gradeConfigs,
-    themeNames
+    themeNameGenerators
   );
 
   const themeClassList = gradeConfigs.map((config) => config.bgClass);
@@ -707,42 +737,63 @@ function setSlotMachine() {
   const buildThemeVariant = (theme) => {
     const profile = variantProfiles[theme.gradeKey] || variantProfiles.common;
     const seed = hashSeed(theme.id || theme.name || theme.gradeKey);
-    const hue = pickInRange(seed, 0, 360, "h");
-    const sat = pickInRange(seed, profile.sat[0], profile.sat[1], "s");
-    const bgLight = pickInRange(seed, profile.bgLight[0], profile.bgLight[1], "b");
-    const accentSat = pickInRange(
+    const style = theme.style || {};
+    const chaos = Math.max(0, Math.min(1, style.chaos || 0));
+
+    const hue =
+      typeof style.hue === "number"
+        ? style.hue
+        : pickInRange(seed, 0, 360, "h");
+    const satBase = pickInRange(seed, profile.sat[0], profile.sat[1], "s");
+    const sat = satBase + chaos * 18;
+    const bgLight =
+      pickInRange(seed, profile.bgLight[0], profile.bgLight[1], "b") - chaos * 1.4;
+    let accentSat =
+      pickInRange(seed, profile.accentSat[0], profile.accentSat[1], "as") + chaos * 18;
+    let accentLight =
+      pickInRange(seed, profile.accentLight[0], profile.accentLight[1], "al") + chaos * 3;
+    const textLight = pickInRange(
       seed,
-      profile.accentSat[0],
-      profile.accentSat[1],
-      "as"
+      profile.textLight[0],
+      profile.textLight[1],
+      "t"
     );
-    const accentLight = pickInRange(
-      seed,
-      profile.accentLight[0],
-      profile.accentLight[1],
-      "al"
-    );
-    const textLight = pickInRange(seed, profile.textLight[0], profile.textLight[1], "t");
+
+    if (style.mode === "neon") {
+      accentSat += 10;
+      accentLight += 3;
+    } else if (style.mode === "dark-pop") {
+      accentSat += 8;
+      accentLight -= 5;
+    } else if (style.mode === "extreme") {
+      accentSat += 14;
+      accentLight += 1;
+    }
 
     return {
-      "--bg": hsl(hue, sat * 0.38, bgLight),
-      "--card": hsl(hue + 6, Math.max(6, sat * 0.2), 99),
-      "--text": hsl(hue + 4, Math.max(22, sat * 0.58), textLight),
-      "--muted": hsl(hue + 4, Math.max(18, sat * 0.5), textLight + 28),
+      "--bg": hsl(hue, sat * 0.45, bgLight),
+      "--card": hsl(hue + 6, Math.max(8, sat * 0.24), 99 - chaos * 2),
+      "--text": hsl(hue + 4, Math.max(20, sat * 0.62), textLight),
+      "--muted": hsl(hue + 4, Math.max(18, sat * 0.54), textLight + 28 - chaos * 4),
       "--accent": hsl(hue, accentSat, accentLight),
-      "--accent-strong": hsl(hue - 6, accentSat + 2, accentLight - 12),
-      "--accent-soft": hsl(hue + 8, Math.max(20, accentSat * 0.42), 88),
-      "--surface": hsl(hue + 6, Math.max(10, sat * 0.3), 92),
-      "--surface-hover": hsl(hue + 6, Math.max(12, sat * 0.34), 88),
-      "--surface-border": hsl(hue + 5, Math.max(12, sat * 0.3), 82),
-      "--panel": hsl(hue + 5, Math.max(10, sat * 0.26), 94),
-      "--pill-bg": hsl(hue + 6, Math.max(10, sat * 0.3), 92),
-      "--pill-text": hsl(hue + 3, Math.max(22, sat * 0.58), textLight),
-      "--segment-bg": hsl(hue + 4, Math.max(10, sat * 0.24), 85),
-      "--dot-bg": hsl(hue + 2, Math.max(10, sat * 0.22), 76),
-      "--shadow": `0 24px 66px hsl(${Math.round(hue)} ${Math.round(
-        Math.max(20, accentSat * 0.8)
-      )}% ${Math.round(Math.max(30, accentLight - 16))}% / ${profile.shadowAlpha})`,
+      "--accent-strong": hsl(hue - 8, accentSat + 4, accentLight - 14),
+      "--accent-soft": hsl(hue + 10, Math.max(20, accentSat * 0.4), 87 - chaos * 5),
+      "--surface": hsl(hue + 6, Math.max(10, sat * 0.35), 92 - chaos * 3),
+      "--surface-hover": hsl(hue + 6, Math.max(12, sat * 0.4), 88 - chaos * 4),
+      "--surface-border": hsl(hue + 5, Math.max(12, sat * 0.36), 82 - chaos * 5),
+      "--panel": hsl(hue + 5, Math.max(10, sat * 0.3), 94 - chaos * 3),
+      "--pill-bg": hsl(hue + 6, Math.max(10, sat * 0.35), 92 - chaos * 3),
+      "--pill-text": hsl(hue + 3, Math.max(22, sat * 0.6), textLight),
+      "--segment-bg": hsl(hue + 4, Math.max(10, sat * 0.3), 85 - chaos * 5),
+      "--dot-bg": hsl(hue + 2, Math.max(10, sat * 0.26), 76 - chaos * 6),
+      "--shadow": `0 ${Math.round(22 + chaos * 12)}px ${Math.round(
+        62 + chaos * 20
+      )}px hsl(${Math.round(hue)} ${Math.round(
+        Math.max(24, accentSat * 0.84)
+      )}% ${Math.round(Math.max(28, accentLight - 18))}% / ${Math.min(
+        0.42,
+        profile.shadowAlpha + chaos * 0.1
+      )})`,
     };
   };
 
