@@ -1,39 +1,13 @@
 {
-  "emptyMessage": "웨이트/인원별 추천 데이터가 준비되면 표시됩니다.",
-  "groupEmptyMessage": "추천 게임 목록이 비어 있습니다.",
-  "weights": [
+  "emptyMessage": "추천 보드게임 데이터가 준비 중입니다.",
+  "filterEmptyMessage": "선택한 조건에 맞는 게임이 없습니다. 필터를 조금 넓혀보세요.",
+  "games": [
     {
-      "weight": "라이트",
-      "description": "입문용, 규칙이 간단하고 플레이 시간이 짧음",
-      "groups": [
-        {
-          "players": "2~4인",
-          "games": [],
-          "note": "데이터 준비 중"
-        }
-      ]
-    },
-    {
-      "weight": "미들",
-      "description": "적당한 전략성, 60~90분 내외",
-      "groups": [
-        {
-          "players": "3~5인",
-          "games": [],
-          "note": "데이터 준비 중"
-        }
-      ]
-    },
-    {
-      "weight": "헤비",
-      "description": "깊은 전략과 긴 플레이 타임",
-      "groups": [
-        {
-          "players": "2~4인",
-          "games": [],
-          "note": "데이터 준비 중"
-        }
-      ]
+      "name": "가위바위보",
+      "bestPlayers": 2,
+      "playtime": 15,
+      "weight": 1.0,
+      "description": "설명 없이 바로 시작 가능한 초간단 심리전 게임 템플릿"
     }
   ]
 }
