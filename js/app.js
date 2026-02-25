@@ -951,7 +951,7 @@ function setSlotMachine() {
   window.requestAnimationFrame(() => {
     window.setTimeout(() => {
       button.click();
-    }, 1000);
+    }, 500);
   });
 
   button.addEventListener("click", () => {
