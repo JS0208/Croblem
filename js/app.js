@@ -2,6 +2,8 @@ const PROBLEMS_URL = "data/problems.json";
 const TURTLE_SOUP_URL = "data/turtle-soup.json";
 const BOARDGAME_URL = "data/boardgame.json";
 const BOARDGAME_TERMS_URL = "data/boardgame-terms.json";
+const FOOD_URL = "data/food.json";
+const MOVIE_URL = "data/movie.json";
 const OPEN_PROFILE_URL = "https://open.kakao.com/o/sxsinFuf";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -19,9 +21,18 @@ async function loadProblems() {
     fetchJson(TURTLE_SOUP_URL),
     fetchJson(BOARDGAME_URL),
     fetchJson(BOARDGAME_TERMS_URL),
+    fetchJson(FOOD_URL),
+    fetchJson(MOVIE_URL),
   ]);
 
-  const [problemsResult, soupResult, boardGameResult, termsResult] = results;
+  const [
+    problemsResult,
+    soupResult,
+    boardGameResult,
+    termsResult,
+    foodResult,
+    movieResult,
+  ] = results;
 
   if (problemsResult.status === "fulfilled") {
     const problems = normalizeProblems(problemsResult.value);
@@ -67,6 +78,20 @@ async function loadProblems() {
       termsResult.reason,
       "보드게임 용어 데이터를 불러오지 못했습니다."
     );
+  }
+
+  if (foodResult.status === "fulfilled") {
+    const food = normalizeSectionData(foodResult.value, "food");
+    renderFood(food);
+  } else {
+    renderSectionError("food-list", foodResult.reason, "맛집 데이터를 불러오지 못했습니다.");
+  }
+
+  if (movieResult.status === "fulfilled") {
+    const movie = normalizeSectionData(movieResult.value, "movie");
+    renderMovie(movie);
+  } else {
+    renderSectionError("movie-list", movieResult.reason, "영화 데이터를 불러오지 못했습니다.");
   }
 }
 
@@ -169,9 +194,9 @@ function renderBoardGame(boardGame) {
   }
 
   const state = {
-    bestPlayers: null,
-    playtime: null,
-    weight: null,
+    bestPlayers: new Set(),
+    playtime: new Set(),
+    weight: new Set(),
   };
 
   if (filters) {
@@ -243,6 +268,88 @@ function renderBoardGameTerms(boardGameTerms) {
   }
 
   renderGlossaryItems(list, items, selectedTags, boardGameTerms);
+}
+
+function renderFood(food) {
+  const list = document.getElementById("food-list");
+  if (!list) {
+    return;
+  }
+  list.innerHTML = "";
+
+  const items = Array.isArray(food?.items) ? food.items : [];
+  if (items.length === 0) {
+    const empty = document.createElement("p");
+    empty.className = "problem-text";
+    empty.textContent = food?.emptyMessage || "맛집 데이터가 준비 중입니다.";
+    list.appendChild(empty);
+    return;
+  }
+
+  items.forEach((item) => {
+    const card = document.createElement("article");
+    card.className = "problem-card";
+
+    const content = document.createElement("div");
+    content.className = "problem-content";
+
+    const name = document.createElement("p");
+    name.className = "problem-text";
+    name.textContent = `식당이름: ${item.name || "추천 식당"}`;
+
+    const menu = document.createElement("p");
+    menu.className = "problem-text";
+    menu.textContent = `메뉴: ${item.menu || "메뉴 정보 준비 중"}`;
+
+    content.appendChild(name);
+    content.appendChild(menu);
+    card.appendChild(content);
+    list.appendChild(card);
+  });
+}
+
+function renderMovie(movie) {
+  const list = document.getElementById("movie-list");
+  if (!list) {
+    return;
+  }
+  list.innerHTML = "";
+
+  const items = Array.isArray(movie?.items) ? movie.items : [];
+  if (items.length === 0) {
+    const empty = document.createElement("p");
+    empty.className = "problem-text";
+    empty.textContent = movie?.emptyMessage || "영화 데이터가 준비 중입니다.";
+    list.appendChild(empty);
+    return;
+  }
+
+  const card = document.createElement("article");
+  card.className = "problem-card";
+
+  const table = document.createElement("table");
+  table.className = "movie-table";
+  table.setAttribute("aria-label", "개봉 예정 영화 목록");
+
+  const thead = document.createElement("thead");
+  thead.innerHTML = "<tr><th scope=\"col\">월</th><th scope=\"col\">영화</th></tr>";
+
+  const tbody = document.createElement("tbody");
+  items.forEach((item) => {
+    const row = document.createElement("tr");
+    const monthCell = document.createElement("td");
+    monthCell.textContent = item.month || "?월";
+    const titleCell = document.createElement("td");
+    titleCell.textContent = item.title || "미정";
+    row.appendChild(monthCell);
+    row.appendChild(titleCell);
+    tbody.appendChild(row);
+  });
+
+  table.appendChild(thead);
+  table.appendChild(tbody);
+  card.appendChild(table);
+  list.appendChild(card);
 }
 
 function renderRanking(problems) {
@@ -1259,24 +1366,30 @@ function getDifficultyClass(solverCount) {
 function createBoardGameFilters(container, state, onChange) {
   const playerOptions = [1, 2, 3, 4, 5, 6];
   const playtimeOptions = [15, 30, 45, 60, 90, 120, 180, 240];
-  const weightOptions = Array.from({ length: 9 }, (_, index) =>
-    Number((1 + index * 0.5).toFixed(1))
-  );
+  const weightOptions = buildWeightRanges();
 
   const playerGroup = createBoardGameFilterGroup("베스트 인원 수", "players", playerOptions, state, onChange, (value) => `${value}인`);
   const playtimeGroup = createBoardGameFilterGroup("플레이타임", "playtime", playtimeOptions, state, onChange, (value) =>
     value === 240 ? "240+" : `${value}분`
   );
-  const weightGroup = createBoardGameFilterGroup("웨이트", "weight", weightOptions, state, onChange, (value) => value.toFixed(1));
+  const weightGroup = createBoardGameFilterGroup(
+    "웨이트",
+    "weight",
+    weightOptions,
+    state,
+    onChange,
+    (option) => option.label,
+    (option) => option.id
+  );
 
   const resetButton = document.createElement("button");
   resetButton.type = "button";
   resetButton.className = "button button-secondary boardgame-filter-reset";
   resetButton.textContent = "필터 초기화";
   resetButton.addEventListener("click", () => {
-    state.bestPlayers = null;
-    state.playtime = null;
-    state.weight = null;
+    state.bestPlayers.clear();
+    state.playtime.clear();
+    state.weight.clear();
     updateBoardGameFilterButtons(container, state);
     onChange();
   });
@@ -1289,7 +1402,15 @@ function createBoardGameFilters(container, state, onChange) {
   updateBoardGameFilterButtons(container, state);
 }
 
-function createBoardGameFilterGroup(label, key, options, state, onChange, formatLabel) {
+function createBoardGameFilterGroup(
+  label,
+  key,
+  options,
+  state,
+  onChange,
+  formatLabel,
+  getOptionValue
+) {
   const wrap = document.createElement("section");
   wrap.className = "boardgame-filter-group";
 
@@ -1313,7 +1434,8 @@ function createBoardGameFilterGroup(label, key, options, state, onChange, format
     button.type = "button";
     button.className = "boardgame-filter-button";
     button.dataset.filterKey = key;
-    button.dataset.filterValue = String(option);
+    const optionValue = getOptionValue ? getOptionValue(option) : option;
+    button.dataset.filterValue = String(optionValue);
     button.textContent = formatLabel(option);
     chips.appendChild(button);
   });
@@ -1329,13 +1451,17 @@ function createBoardGameFilterGroup(label, key, options, state, onChange, format
       return;
     }
 
-    const value = selectedValue === "all" ? null : Number(selectedValue);
-    if (selectedKey === "players") {
-      state.bestPlayers = value;
-    } else if (selectedKey === "playtime") {
-      state.playtime = value;
-    } else if (selectedKey === "weight") {
-      state.weight = value;
+    const selectedSet = getBoardGameFilterSet(state, selectedKey);
+    if (!selectedSet) {
+      return;
+    }
+
+    if (selectedValue === "all") {
+      selectedSet.clear();
+    } else if (selectedSet.has(selectedValue)) {
+      selectedSet.delete(selectedValue);
+    } else {
+      selectedSet.add(selectedValue);
     }
 
     const root = chips.closest("#boardgame-filters");
@@ -1355,19 +1481,17 @@ function updateBoardGameFilterButtons(container, state) {
   buttons.forEach((button) => {
     const key = button.dataset.filterKey || "";
     const value = button.dataset.filterValue || "all";
+    const selectedSet = getBoardGameFilterSet(state, key);
     let selected = false;
 
-    if (key === "players") {
-      selected =
-        (value === "all" && state.bestPlayers === null) ||
-        Number(value) === state.bestPlayers;
-    } else if (key === "playtime") {
-      selected =
-        (value === "all" && state.playtime === null) ||
-        Number(value) === state.playtime;
-    } else if (key === "weight") {
-      selected =
-        (value === "all" && state.weight === null) || Number(value) === state.weight;
+    if (!selectedSet) {
+      return;
+    }
+
+    if (value === "all") {
+      selected = selectedSet.size === 0;
+    } else {
+      selected = selectedSet.has(value);
     }
 
     button.classList.toggle("is-active", selected);
@@ -1379,25 +1503,34 @@ function renderBoardGameItems(list, games, state, boardGame) {
 
   const filtered = games.filter((game) => {
     if (
-      state.bestPlayers !== null &&
-      Number(game.bestPlayers) !== Number(state.bestPlayers)
+      state.bestPlayers.size > 0 &&
+      !state.bestPlayers.has(String(Number(game.bestPlayers)))
     ) {
       return false;
     }
 
-    if (state.playtime !== null) {
+    if (state.playtime.size > 0) {
       const playtime = Number(game.playtime);
-      if (state.playtime === 240) {
-        if (playtime < 240) {
-          return false;
+      const matchesPlaytime = Array.from(state.playtime).some((selected) => {
+        const selectedPlaytime = Number(selected);
+        if (selectedPlaytime === 240) {
+          return playtime >= 240;
         }
-      } else if (playtime !== state.playtime) {
+        return playtime === selectedPlaytime;
+      });
+      if (!matchesPlaytime) {
         return false;
       }
     }
 
-    if (state.weight !== null && Number(game.weight) !== Number(state.weight)) {
-      return false;
+    if (state.weight.size > 0) {
+      const weight = Number(game.weight);
+      const matchedWeight = Array.from(state.weight).some((rangeId) =>
+        isWeightInRange(weight, rangeId)
+      );
+      if (!matchedWeight) {
+        return false;
+      }
     }
 
     return true;
@@ -1416,6 +1549,42 @@ function renderBoardGameItems(list, games, state, boardGame) {
   filtered.forEach((game) => {
     list.appendChild(createBoardGameCard(game));
   });
+}
+
+function getBoardGameFilterSet(state, key) {
+  if (key === "players") {
+    return state.bestPlayers;
+  }
+  if (key === "playtime") {
+    return state.playtime;
+  }
+  if (key === "weight") {
+    return state.weight;
+  }
+  return null;
+}
+
+const WEIGHT_RANGES = Array.from({ length: 9 }, (_, index) => {
+  const min = Number((1 + index * 0.5).toFixed(1));
+  const max = Number((min + 0.49).toFixed(2));
+  return {
+    id: `${min.toFixed(1)}-${max.toFixed(2)}`,
+    min,
+    max,
+    label: `${min.toFixed(1)}~${max.toFixed(2)}`,
+  };
+});
+
+function buildWeightRanges() {
+  return WEIGHT_RANGES;
+}
+
+function isWeightInRange(weight, rangeId) {
+  const target = WEIGHT_RANGES.find((range) => range.id === rangeId);
+  if (!target) {
+    return false;
+  }
+  return weight >= target.min && weight <= target.max;
 }
 
 function createBoardGameCard(game) {

@@ -86,7 +86,7 @@
           aria-controls="tab-food"
           data-tab-target="tab-food"
         >
-          밥 뭐먹지?
+          밥 뭐 먹지?
         </button>
         <button
           id="tab-movie-button"
@@ -250,14 +250,13 @@
         aria-hidden="true"
       >
         <div class="section-header">
-          <h2 class="section-title">밥 뭐먹지?</h2>
+          <h2 class="section-title">밥 뭐 먹지?</h2>
         </div>
-        <div class="problem-card">
-          <div class="problem-content">
-            <p class="problem-text">식당이름: 추천 식당</p>
-            <p class="problem-text">메뉴: 보내주시면 제가 추가할게요.</p>
-          </div>
-        </div>
+        <section
+          id="food-list"
+          class="problem-list"
+          aria-live="polite"
+        ></section>
       </section>
       <section
         id="tab-movie"
@@ -270,42 +269,11 @@
         <div class="section-header">
           <h2 class="section-title">영화 뭐보지?</h2>
         </div>
-        <div class="problem-card">
-          <table class="movie-table" aria-label="개봉 예정 영화 목록">
-            <thead>
-              <tr>
-                <th scope="col">월</th>
-                <th scope="col">영화</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>3월</td>
-                <td>프로젝트 헤일메리</td>
-              </tr>
-              <tr>
-                <td>4월</td>
-                <td>프라다2</td>
-              </tr>
-              <tr>
-                <td>6월</td>
-                <td>디스클로저 데이</td>
-              </tr>
-              <tr>
-                <td>7월</td>
-                <td>스파이더맨</td>
-              </tr>
-              <tr>
-                <td>12월</td>
-                <td>어벤져스, 듄 3</td>
-              </tr>
-              <tr>
-                <td>?월</td>
-                <td>타짜 4부(완결)</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <section
+          id="movie-list"
+          class="problem-list"
+          aria-live="polite"
+        ></section>
       </section>
     </main>
   </body>
