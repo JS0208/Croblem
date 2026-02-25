@@ -183,9 +183,33 @@
         <div class="section-header">
           <h2 class="section-title">웨이트 · 인원별 추천</h2>
           <p class="section-subtitle">
-            추후 제공되는 데이터를 기반으로 보드게임을 분류해 보여줍니다.
+            조건을 고르면 지금 모임에 맞는 게임만 빠르게 추려볼 수 있습니다.
           </p>
         </div>
+        <article class="boardgame-weight-guide" aria-label="보드게임 웨이트 설명">
+          <h3 class="boardgame-weight-guide-title">웨이트(Weight)란?</h3>
+          <p class="boardgame-weight-guide-text">
+            웨이트는 <strong>게임의 무게</strong>를 뜻하는 점수예요. 실제 상자 무게가 아니라,
+            <strong>규칙을 이해하는 난이도 + 선택할 때 고민해야 하는 정도</strong>를 1.0~5.0으로
+            나타낸 값입니다.
+          </p>
+          <ul class="boardgame-weight-guide-list">
+            <li>
+              <strong>1.0~2.0</strong>: 설명 듣고 바로 시작하기 쉬운 편. 처음 하는 사람에게 좋아요.
+            </li>
+            <li>
+              <strong>2.5~3.5</strong>: 규칙이 조금 더 있고, 전략 고민이 필요한 편이에요.
+            </li>
+            <li>
+              <strong>4.0~5.0</strong>: 룰 숙지와 장기적인 계획이 중요해서 숙련자에게 잘 맞아요.
+            </li>
+          </ul>
+          <p class="boardgame-weight-guide-text">
+            쉽게 말해 <strong>"얼마나 머리를 써야 하는 게임인지"</strong>를 숫자로 보여준 지표라고
+            생각하면 됩니다.
+          </p>
+        </article>
+        <div id="boardgame-filters" class="boardgame-filters" aria-label="추천 보드게임 필터"></div>
         <section
           id="boardgame-list"
           class="boardgame-list"

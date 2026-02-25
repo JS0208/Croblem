@@ -149,13 +149,17 @@ function renderTurtleSoup(turtleSoup) {
 
 function renderBoardGame(boardGame) {
   const list = document.getElementById("boardgame-list");
+  const filters = document.getElementById("boardgame-filters");
   if (!list) {
     return;
   }
   list.innerHTML = "";
+  if (filters) {
+    filters.innerHTML = "";
+  }
 
-  const weights = Array.isArray(boardGame?.weights) ? boardGame.weights : [];
-  if (weights.length === 0) {
+  const games = Array.isArray(boardGame?.games) ? boardGame.games : [];
+  if (games.length === 0) {
     const empty = document.createElement("p");
     empty.className = "problem-text";
     empty.textContent =
@@ -164,10 +168,19 @@ function renderBoardGame(boardGame) {
     return;
   }
 
-  weights.forEach((weightInfo) => {
-    const card = createBoardGameCard(weightInfo, boardGame);
-    list.appendChild(card);
-  });
+  const state = {
+    bestPlayers: null,
+    playtime: null,
+    weight: null,
+  };
+
+  if (filters) {
+    createBoardGameFilters(filters, state, () => {
+      renderBoardGameItems(list, games, state, boardGame);
+    });
+  }
+
+  renderBoardGameItems(list, games, state, boardGame);
 }
 
 function renderBoardGameTerms(boardGameTerms) {
@@ -1243,65 +1256,205 @@ function getDifficultyClass(solverCount) {
   return "is-easy";
 }
 
-function createBoardGameCard(weightInfo, boardGame) {
+function createBoardGameFilters(container, state, onChange) {
+  const playerOptions = [1, 2, 3, 4, 5, 6];
+  const playtimeOptions = [15, 30, 45, 60, 90, 120, 180, 240];
+  const weightOptions = Array.from({ length: 9 }, (_, index) =>
+    Number((1 + index * 0.5).toFixed(1))
+  );
+
+  const playerGroup = createBoardGameFilterGroup("베스트 인원 수", "players", playerOptions, state, onChange, (value) => `${value}인`);
+  const playtimeGroup = createBoardGameFilterGroup("플레이타임", "playtime", playtimeOptions, state, onChange, (value) =>
+    value === 240 ? "240+" : `${value}분`
+  );
+  const weightGroup = createBoardGameFilterGroup("웨이트", "weight", weightOptions, state, onChange, (value) => value.toFixed(1));
+
+  const resetButton = document.createElement("button");
+  resetButton.type = "button";
+  resetButton.className = "button button-secondary boardgame-filter-reset";
+  resetButton.textContent = "필터 초기화";
+  resetButton.addEventListener("click", () => {
+    state.bestPlayers = null;
+    state.playtime = null;
+    state.weight = null;
+    updateBoardGameFilterButtons(container, state);
+    onChange();
+  });
+
+  container.appendChild(playerGroup);
+  container.appendChild(playtimeGroup);
+  container.appendChild(weightGroup);
+  container.appendChild(resetButton);
+
+  updateBoardGameFilterButtons(container, state);
+}
+
+function createBoardGameFilterGroup(label, key, options, state, onChange, formatLabel) {
+  const wrap = document.createElement("section");
+  wrap.className = "boardgame-filter-group";
+
+  const title = document.createElement("h3");
+  title.className = "boardgame-filter-title";
+  title.textContent = label;
+
+  const chips = document.createElement("div");
+  chips.className = "boardgame-filter-chips";
+
+  const allButton = document.createElement("button");
+  allButton.type = "button";
+  allButton.className = "boardgame-filter-button";
+  allButton.dataset.filterKey = key;
+  allButton.dataset.filterValue = "all";
+  allButton.textContent = "전체";
+  chips.appendChild(allButton);
+
+  options.forEach((option) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "boardgame-filter-button";
+    button.dataset.filterKey = key;
+    button.dataset.filterValue = String(option);
+    button.textContent = formatLabel(option);
+    chips.appendChild(button);
+  });
+
+  chips.addEventListener("click", (event) => {
+    const target = event.target;
+    if (!(target instanceof HTMLButtonElement)) {
+      return;
+    }
+    const selectedKey = target.dataset.filterKey || "";
+    const selectedValue = target.dataset.filterValue || "all";
+    if (!selectedKey) {
+      return;
+    }
+
+    const value = selectedValue === "all" ? null : Number(selectedValue);
+    if (selectedKey === "players") {
+      state.bestPlayers = value;
+    } else if (selectedKey === "playtime") {
+      state.playtime = value;
+    } else if (selectedKey === "weight") {
+      state.weight = value;
+    }
+
+    const root = chips.closest("#boardgame-filters");
+    if (root instanceof HTMLElement) {
+      updateBoardGameFilterButtons(root, state);
+    }
+    onChange();
+  });
+
+  wrap.appendChild(title);
+  wrap.appendChild(chips);
+  return wrap;
+}
+
+function updateBoardGameFilterButtons(container, state) {
+  const buttons = container.querySelectorAll(".boardgame-filter-button");
+  buttons.forEach((button) => {
+    const key = button.dataset.filterKey || "";
+    const value = button.dataset.filterValue || "all";
+    let selected = false;
+
+    if (key === "players") {
+      selected =
+        (value === "all" && state.bestPlayers === null) ||
+        Number(value) === state.bestPlayers;
+    } else if (key === "playtime") {
+      selected =
+        (value === "all" && state.playtime === null) ||
+        Number(value) === state.playtime;
+    } else if (key === "weight") {
+      selected =
+        (value === "all" && state.weight === null) || Number(value) === state.weight;
+    }
+
+    button.classList.toggle("is-active", selected);
+  });
+}
+
+function renderBoardGameItems(list, games, state, boardGame) {
+  list.innerHTML = "";
+
+  const filtered = games.filter((game) => {
+    if (
+      state.bestPlayers !== null &&
+      Number(game.bestPlayers) !== Number(state.bestPlayers)
+    ) {
+      return false;
+    }
+
+    if (state.playtime !== null) {
+      const playtime = Number(game.playtime);
+      if (state.playtime === 240) {
+        if (playtime < 240) {
+          return false;
+        }
+      } else if (playtime !== state.playtime) {
+        return false;
+      }
+    }
+
+    if (state.weight !== null && Number(game.weight) !== Number(state.weight)) {
+      return false;
+    }
+
+    return true;
+  });
+
+  if (filtered.length === 0) {
+    const empty = document.createElement("p");
+    empty.className = "problem-text";
+    empty.textContent =
+      boardGame?.filterEmptyMessage ||
+      "선택한 조건에 맞는 게임이 없습니다. 필터를 조금 넓혀보세요.";
+    list.appendChild(empty);
+    return;
+  }
+
+  filtered.forEach((game) => {
+    list.appendChild(createBoardGameCard(game));
+  });
+}
+
+function createBoardGameCard(game) {
   const card = document.createElement("article");
   card.className = "boardgame-card";
 
   const title = document.createElement("h3");
   title.className = "boardgame-card-title";
-  title.textContent = weightInfo.weight;
+  title.textContent = game.name || "이름 미정";
 
   const description = document.createElement("p");
   description.className = "boardgame-card-description";
-  description.textContent = weightInfo.description || "";
+  description.textContent = game.description || "";
+
+  const metaList = document.createElement("ul");
+  metaList.className = "boardgame-game-list";
+
+  const bestPlayers = document.createElement("li");
+  bestPlayers.className = "boardgame-game";
+  bestPlayers.textContent = `베스트 인원: ${Number(game.bestPlayers) || "-"}인`;
+
+  const playtime = document.createElement("li");
+  playtime.className = "boardgame-game";
+  const playtimeValue = Number(game.playtime);
+  playtime.textContent = `플레이타임: ${playtimeValue >= 240 ? "240+" : playtimeValue}분`;
+
+  const weight = document.createElement("li");
+  weight.className = "boardgame-game";
+  weight.textContent = `웨이트: ${Number(game.weight || 0).toFixed(1)}`;
+
+  metaList.appendChild(bestPlayers);
+  metaList.appendChild(playtime);
+  metaList.appendChild(weight);
 
   card.appendChild(title);
   if (description.textContent) {
     card.appendChild(description);
   }
-
-  const groups = Array.isArray(weightInfo.groups) ? weightInfo.groups : [];
-  if (groups.length === 0) {
-    const empty = document.createElement("p");
-    empty.className = "problem-text";
-    empty.textContent =
-      weightInfo.emptyMessage ||
-      boardGame?.groupEmptyMessage ||
-      "추천 데이터가 아직 없습니다.";
-    card.appendChild(empty);
-    return card;
-  }
-
-  groups.forEach((group) => {
-    const groupWrap = document.createElement("div");
-    groupWrap.className = "boardgame-group";
-
-    const groupTitle = document.createElement("span");
-    groupTitle.className = "boardgame-group-title";
-    groupTitle.textContent = group.players;
-    groupWrap.appendChild(groupTitle);
-
-    const gameList = document.createElement("ul");
-    gameList.className = "boardgame-game-list";
-
-    const games = Array.isArray(group.games) ? group.games : [];
-    if (games.length > 0) {
-      games.forEach((game) => {
-        const gameItem = document.createElement("li");
-        gameItem.className = "boardgame-game";
-        gameItem.textContent = game;
-        gameList.appendChild(gameItem);
-      });
-    } else if (group.note) {
-      const gameItem = document.createElement("li");
-      gameItem.className = "boardgame-game";
-      gameItem.textContent = group.note;
-      gameList.appendChild(gameItem);
-    }
-
-    groupWrap.appendChild(gameList);
-    card.appendChild(groupWrap);
-  });
+  card.appendChild(metaList);
 
   return card;
 }

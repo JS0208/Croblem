@@ -657,6 +657,84 @@ body.theme-bg-legend::after {
   gap: 24px;
 }
 
+
+.boardgame-weight-guide {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.boardgame-weight-guide-title {
+  margin: 0 0 10px;
+  font-size: 18px;
+}
+
+.boardgame-weight-guide-text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.boardgame-weight-guide-list {
+  margin: 10px 0;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+}
+
+.boardgame-filters {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.boardgame-filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.boardgame-filter-title {
+  margin: 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.boardgame-filter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.boardgame-filter-button {
+  border: 1px solid var(--surface-border);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.boardgame-filter-button:hover {
+  background: var(--surface-hover);
+}
+
+.boardgame-filter-button.is-active {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: transparent;
+}
+
+.boardgame-filter-reset {
+  align-self: flex-start;
+}
+
 .glossary-list {
   display: grid;
   gap: 24px;
