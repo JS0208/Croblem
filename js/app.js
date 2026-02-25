@@ -1564,9 +1564,9 @@ function getBoardGameFilterSet(state, key) {
   return null;
 }
 
-const WEIGHT_RANGES = Array.from({ length: 9 }, (_, index) => {
+const WEIGHT_RANGES = Array.from({ length: 8 }, (_, index) => {
   const min = Number((1 + index * 0.5).toFixed(1));
-  const max = Number((min + 0.49).toFixed(2));
+  const max = min === 4.5 ? 5.0 : Number((min + 0.49).toFixed(2));
   return {
     id: `${min.toFixed(1)}-${max.toFixed(2)}`,
     min,
