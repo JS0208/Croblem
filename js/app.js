@@ -947,6 +947,13 @@ function setSlotMachine() {
   });
   applyThemeBackground({ gradeKey: "common" });
 
+  // 첫 화면 렌더링이 끝난 뒤 1초 후 슬롯을 한 번 자동 실행한다.
+  window.requestAnimationFrame(() => {
+    window.setTimeout(() => {
+      button.click();
+    }, 1000);
+  });
+
   button.addEventListener("click", () => {
     if (isSpinning) {
       return;
