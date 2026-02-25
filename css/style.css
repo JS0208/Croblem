@@ -802,6 +802,25 @@ body.theme-bg-legend::after {
   white-space: pre-line;
 }
 
+
+.movie-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+.movie-table th,
+.movie-table td {
+  border-bottom: 1px solid var(--surface-border);
+  padding: 10px 8px;
+  text-align: left;
+}
+
+.movie-table thead th {
+  font-size: 13px;
+  color: var(--muted);
+}
+
 .problem-text {
   margin: 0;
   font-size: 16px;
