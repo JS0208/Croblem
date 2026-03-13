@@ -99,6 +99,17 @@
         >
           영화 뭐보지?
         </button>
+        <button
+          id="tab-club-tmi-button"
+          class="tab-button"
+          type="button"
+          role="tab"
+          aria-selected="false"
+          aria-controls="tab-club-tmi"
+          data-tab-target="tab-club-tmi"
+        >
+          동아리 TMI
+        </button>
       </nav>
       <section
         id="tab-problems"
@@ -272,6 +283,26 @@
         <section
           id="movie-list"
           class="problem-list"
+          aria-live="polite"
+        ></section>
+      </section>
+      <section
+        id="tab-club-tmi"
+        class="tab-panel"
+        role="tabpanel"
+        aria-labelledby="tab-club-tmi-button"
+        hidden
+        aria-hidden="true"
+      >
+        <div class="section-header">
+          <h2 class="section-title">동아리 TMI</h2>
+          <p class="section-subtitle">
+            이름, 기수, MBTI와 간단한 자기소개를 표 형태로 정리합니다.
+          </p>
+        </div>
+        <section
+          id="club-tmi-list"
+          class="club-tmi-list"
           aria-live="polite"
         ></section>
       </section>

@@ -740,6 +740,44 @@ body.theme-bg-legend::after {
   gap: 24px;
 }
 
+.club-tmi-list {
+  display: grid;
+}
+
+.club-tmi-table-wrap {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.club-tmi-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.club-tmi-table th,
+.club-tmi-table td {
+  padding: 16px 20px;
+  text-align: left;
+  border-bottom: 1px solid var(--surface-border);
+  font-size: 15px;
+}
+
+.club-tmi-table th {
+  background: var(--surface);
+  color: var(--text);
+  font-weight: 600;
+}
+
+.club-tmi-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.club-tmi-empty {
+  color: var(--muted);
+}
+
 .glossary-filters {
   display: flex;
   flex-wrap: wrap;
@@ -1130,6 +1168,12 @@ body.theme-bg-legend::after {
 
   .ranking {
     padding: 20px;
+  }
+
+  .club-tmi-table th,
+  .club-tmi-table td {
+    padding: 14px 16px;
+    font-size: 14px;
   }
 
   .tab-bar {

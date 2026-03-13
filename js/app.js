@@ -4,6 +4,7 @@ const BOARDGAME_URL = "data/boardgame.json";
 const BOARDGAME_TERMS_URL = "data/boardgame-terms.json";
 const FOOD_URL = "data/food.json";
 const MOVIE_URL = "data/movie.json";
+const CLUB_TMI_URL = "data/club-tmi.json";
 const OPEN_PROFILE_URL = "https://open.kakao.com/o/sxsinFuf";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -23,6 +24,7 @@ async function loadProblems() {
     fetchJson(BOARDGAME_TERMS_URL),
     fetchJson(FOOD_URL),
     fetchJson(MOVIE_URL),
+    fetchJson(CLUB_TMI_URL),
   ]);
 
   const [
@@ -32,6 +34,7 @@ async function loadProblems() {
     termsResult,
     foodResult,
     movieResult,
+    clubTmiResult,
   ] = results;
 
   if (problemsResult.status === "fulfilled") {
@@ -92,6 +95,17 @@ async function loadProblems() {
     renderMovie(movie);
   } else {
     renderSectionError("movie-list", movieResult.reason, "영화 데이터를 불러오지 못했습니다.");
+  }
+
+  if (clubTmiResult.status === "fulfilled") {
+    const clubTmi = normalizeSectionData(clubTmiResult.value, "clubTmi");
+    renderClubTmi(clubTmi);
+  } else {
+    renderSectionError(
+      "club-tmi-list",
+      clubTmiResult.reason,
+      "동아리 TMI 데이터를 불러오지 못했습니다."
+    );
   }
 }
 
@@ -350,6 +364,71 @@ function renderMovie(movie) {
   table.appendChild(tbody);
   card.appendChild(table);
   list.appendChild(card);
+}
+
+function renderClubTmi(clubTmi) {
+  const list = document.getElementById("club-tmi-list");
+  if (!list) {
+    return;
+  }
+  list.innerHTML = "";
+
+  const columns = Array.isArray(clubTmi?.columns) ? clubTmi.columns : [];
+  const items = Array.isArray(clubTmi?.items) ? clubTmi.items : [];
+
+  if (columns.length === 0) {
+    const empty = document.createElement("p");
+    empty.className = "problem-text";
+    empty.textContent =
+      clubTmi?.emptyMessage || "동아리 TMI 데이터가 준비 중입니다.";
+    list.appendChild(empty);
+    return;
+  }
+
+  // 컬럼과 행을 모두 JSON 기준으로 렌더링해 이후 데이터 수정만으로 표를 갱신할 수 있게 한다.
+  const tableWrap = document.createElement("div");
+  tableWrap.className = "club-tmi-table-wrap";
+
+  const table = document.createElement("table");
+  table.className = "club-tmi-table";
+
+  const thead = document.createElement("thead");
+  const headRow = document.createElement("tr");
+  columns.forEach((column) => {
+    const cell = document.createElement("th");
+    cell.scope = "col";
+    cell.textContent = column.label || "";
+    headRow.appendChild(cell);
+  });
+  thead.appendChild(headRow);
+
+  const tbody = document.createElement("tbody");
+  if (items.length === 0) {
+    const emptyRow = document.createElement("tr");
+    const emptyCell = document.createElement("td");
+    emptyCell.colSpan = columns.length;
+    emptyCell.className = "club-tmi-empty";
+    emptyCell.textContent =
+      clubTmi?.emptyMessage || "동아리 TMI 데이터가 준비 중입니다.";
+    emptyRow.appendChild(emptyCell);
+    tbody.appendChild(emptyRow);
+  } else {
+    items.forEach((item) => {
+      const row = document.createElement("tr");
+      columns.forEach((column) => {
+        const cell = document.createElement("td");
+        const value = item?.[column.key];
+        cell.textContent = value ? String(value) : "-";
+        row.appendChild(cell);
+      });
+      tbody.appendChild(row);
+    });
+  }
+
+  table.appendChild(thead);
+  table.appendChild(tbody);
+  tableWrap.appendChild(table);
+  list.appendChild(tableWrap);
 }
 
 function renderRanking(problems) {

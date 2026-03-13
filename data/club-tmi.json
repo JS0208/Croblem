@@ -1,0 +1,14 @@
+{
+  "columns": [
+    {
+      "key": "name",
+      "label": "이름"
+    },
+    {
+      "key": "mbti",
+      "label": "MBTI"
+    }
+  ],
+  "emptyMessage": "동아리 TMI 데이터가 준비 중입니다.",
+  "items": []
+}
