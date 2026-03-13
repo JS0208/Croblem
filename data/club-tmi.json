@@ -5,10 +5,226 @@
       "label": "이름"
     },
     {
+      "key": "generation",
+      "label": "기수"
+    },
+    {
       "key": "mbti",
       "label": "MBTI"
+    },
+    {
+      "key": "otherHobbies",
+      "label": "다른 취미"
+    },
+    {
+      "key": "intro",
+      "label": "한 줄 자기소개"
     }
   ],
   "emptyMessage": "동아리 TMI 데이터가 준비 중입니다.",
-  "items": []
+  "items": [
+    {
+      "name": "박건",
+      "generation": "1기",
+      "mbti": "ESTJ",
+      "otherHobbies": "",
+      "intro": ""
+    },
+    {
+      "name": "이채현",
+      "generation": "1기",
+      "mbti": "ENFP",
+      "otherHobbies": "",
+      "intro": ""
+    },
+    {
+      "name": "권지성",
+      "generation": "1기",
+      "mbti": "ENTJ",
+      "otherHobbies": "",
+      "intro": ""
+    },
+    {
+      "name": "한유신",
+      "generation": "1기",
+      "mbti": "INTP",
+      "otherHobbies": "",
+      "intro": ""
+    },
+    {
+      "name": "이서연",
+      "generation": "1기",
+      "mbti": "ENTP",
+      "otherHobbies": "",
+      "intro": ""
+    },
+    {
+      "name": "이해연",
+      "generation": "1기",
+      "mbti": "ENTP",
+      "otherHobbies": "",
+      "intro": ""
+    },
+    {
+      "name": "최지은",
+      "generation": "1기",
+      "mbti": "INFP",
+      "otherHobbies": "",
+      "intro": ""
+    },
+    {
+      "name": "신명근",
+      "generation": "3기",
+      "mbti": "ISTP",
+      "otherHobbies": "",
+      "intro": ""
+    },
+    {
+      "name": "김가은",
+      "generation": "3기",
+      "mbti": "INTP",
+      "otherHobbies": "",
+      "intro": ""
+    },
+    {
+      "name": "김민준",
+      "generation": "3기",
+      "mbti": "INTJ",
+      "otherHobbies": "",
+      "intro": ""
+    },
+    {
+      "name": "박민지",
+      "generation": "3기",
+      "mbti": "ISTP",
+      "otherHobbies": "",
+      "intro": ""
+    },
+    {
+      "name": "안상욱",
+      "generation": "3기",
+      "mbti": "ISFJ",
+      "otherHobbies": "",
+      "intro": ""
+    },
+    {
+      "name": "이서진",
+      "generation": "3기",
+      "mbti": "ENFP",
+      "otherHobbies": "",
+      "intro": ""
+    },
+    {
+      "name": "전준하",
+      "generation": "3기",
+      "mbti": "ISFP",
+      "otherHobbies": "",
+      "intro": ""
+    },
+    {
+      "name": "정재우",
+      "generation": "3기",
+      "mbti": "ISFP",
+      "otherHobbies": "",
+      "intro": ""
+    },
+    {
+      "name": "최우섭",
+      "generation": "3기",
+      "mbti": "INTP",
+      "otherHobbies": "",
+      "intro": ""
+    },
+    {
+      "name": "조준",
+      "generation": "4기",
+      "mbti": "ENFP",
+      "otherHobbies": "",
+      "intro": ""
+    },
+    {
+      "name": "강현비",
+      "generation": "5기",
+      "mbti": "",
+      "otherHobbies": "",
+      "intro": ""
+    },
+    {
+      "name": "김정민",
+      "generation": "5기",
+      "mbti": "",
+      "otherHobbies": "",
+      "intro": ""
+    },
+    {
+      "name": "박수은",
+      "generation": "5기",
+      "mbti": "",
+      "otherHobbies": "",
+      "intro": ""
+    },
+    {
+      "name": "박하민",
+      "generation": "5기",
+      "mbti": "",
+      "otherHobbies": "",
+      "intro": ""
+    },
+    {
+      "name": "이소희",
+      "generation": "5기",
+      "mbti": "",
+      "otherHobbies": "",
+      "intro": ""
+    },
+    {
+      "name": "신동규",
+      "generation": "5기",
+      "mbti": "",
+      "otherHobbies": "",
+      "intro": ""
+    },
+    {
+      "name": "안지민",
+      "generation": "5기",
+      "mbti": "",
+      "otherHobbies": "",
+      "intro": ""
+    },
+    {
+      "name": "윤승민",
+      "generation": "5기",
+      "mbti": "",
+      "otherHobbies": "",
+      "intro": ""
+    },
+    {
+      "name": "이시형",
+      "generation": "5기",
+      "mbti": "",
+      "otherHobbies": "",
+      "intro": ""
+    },
+    {
+      "name": "정광준",
+      "generation": "5기",
+      "mbti": "",
+      "otherHobbies": "",
+      "intro": ""
+    },
+    {
+      "name": "정지원",
+      "generation": "5기",
+      "mbti": "",
+      "otherHobbies": "",
+      "intro": ""
+    },
+    {
+      "name": "한주현",
+      "generation": "5기",
+      "mbti": "",
+      "otherHobbies": "",
+      "intro": ""
+    }
+  ]
 }
