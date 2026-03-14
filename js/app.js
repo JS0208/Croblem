@@ -1655,6 +1655,14 @@ function renderBoardGameItems(list, games, state, boardGame) {
     return true;
   });
 
+  filtered.sort((a, b) => {
+    const weightDiff = Number(b.weight || 0) - Number(a.weight || 0);
+    if (weightDiff !== 0) {
+      return weightDiff;
+    }
+    return String(a.name || "").localeCompare(String(b.name || ""), "ko");
+  });
+
   if (filtered.length === 0) {
     const empty = document.createElement("p");
     empty.className = "problem-text";
