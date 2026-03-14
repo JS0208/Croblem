@@ -748,20 +748,25 @@ body.theme-bg-legend::after {
   background: var(--card);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .club-tmi-table {
-  width: 100%;
+  width: max(100%, 1120px);
   border-collapse: collapse;
+  table-layout: fixed;
 }
 
 .club-tmi-table th,
 .club-tmi-table td {
-  padding: 16px 20px;
+  padding: 14px 16px;
   text-align: left;
+  vertical-align: top;
   border-bottom: 1px solid var(--surface-border);
-  font-size: 15px;
+  font-size: 13px;
+  line-height: 1.45;
+  word-break: keep-all;
 }
 
 .club-tmi-table th {
@@ -772,6 +777,58 @@ body.theme-bg-legend::after {
 
 .club-tmi-table tbody tr:last-child td {
   border-bottom: none;
+}
+
+.club-tmi-table th.club-tmi-col-generation,
+.club-tmi-table th.club-tmi-col-age,
+.club-tmi-table th.club-tmi-col-department,
+.club-tmi-table th.club-tmi-col-mbti,
+.club-tmi-table td.club-tmi-col-generation,
+.club-tmi-table td.club-tmi-col-age,
+.club-tmi-table td.club-tmi-col-department,
+.club-tmi-table td.club-tmi-col-mbti {
+  font-size: 12px;
+}
+
+.club-tmi-table th.club-tmi-col-name,
+.club-tmi-table td.club-tmi-col-name {
+  width: 10%;
+  white-space: nowrap;
+}
+
+.club-tmi-table th.club-tmi-col-generation,
+.club-tmi-table td.club-tmi-col-generation {
+  width: 6%;
+  white-space: nowrap;
+}
+
+.club-tmi-table th.club-tmi-col-age,
+.club-tmi-table td.club-tmi-col-age {
+  width: 6%;
+  white-space: nowrap;
+}
+
+.club-tmi-table th.club-tmi-col-department,
+.club-tmi-table td.club-tmi-col-department {
+  width: 16%;
+}
+
+.club-tmi-table th.club-tmi-col-mbti,
+.club-tmi-table td.club-tmi-col-mbti {
+  width: 7%;
+  white-space: nowrap;
+}
+
+.club-tmi-table th.club-tmi-col-otherHobbies,
+.club-tmi-table td.club-tmi-col-otherHobbies {
+  width: 17%;
+}
+
+.club-tmi-table th.club-tmi-col-intro,
+.club-tmi-table td.club-tmi-col-intro {
+  width: 38%;
+  font-size: 14px;
+  line-height: 1.6;
 }
 
 .club-tmi-empty {
@@ -1172,8 +1229,7 @@ body.theme-bg-legend::after {
 
   .club-tmi-table th,
   .club-tmi-table td {
-    padding: 14px 16px;
-    font-size: 14px;
+    padding: 12px 14px;
   }
 
   .tab-bar {

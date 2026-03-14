@@ -397,6 +397,7 @@ function renderClubTmi(clubTmi) {
   columns.forEach((column) => {
     const cell = document.createElement("th");
     cell.scope = "col";
+    cell.classList.add(`club-tmi-col-${column.key}`);
     cell.textContent = column.label || "";
     headRow.appendChild(cell);
   });
@@ -417,6 +418,7 @@ function renderClubTmi(clubTmi) {
       const row = document.createElement("tr");
       columns.forEach((column) => {
         const cell = document.createElement("td");
+        cell.classList.add(`club-tmi-col-${column.key}`);
         const value = item?.[column.key];
         cell.textContent = value ? String(value) : "-";
         row.appendChild(cell);
