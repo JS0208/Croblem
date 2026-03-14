@@ -3,14 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>크로로로</title>
+    <title>크로위키</title>
     <link rel="stylesheet" href="css/style.css" />
     <script defer src="js/app.js"></script>
   </head>
   <body>
     <main class="page">
       <header class="page-header">
-        <h1 class="page-title">크로로로</h1>
+        <h1 class="page-title">크로위키</h1>
         <p class="page-subtitle">크로아톤 만능 사전</p>
         <div class="slot-machine" aria-label="랜덤 슬롯">
           <div
@@ -34,33 +34,11 @@
       </header>
       <nav class="tab-bar" role="tablist" aria-label="콘텐츠 탭">
         <button
-          id="tab-problems-button"
+          id="tab-boardgame-button"
           class="tab-button is-active"
           type="button"
           role="tab"
           aria-selected="true"
-          aria-controls="tab-problems"
-          data-tab-target="tab-problems"
-        >
-          문제 · 랭킹
-        </button>
-        <button
-          id="tab-soup-button"
-          class="tab-button"
-          type="button"
-          role="tab"
-          aria-selected="false"
-          aria-controls="tab-soup"
-          data-tab-target="tab-soup"
-        >
-          바다거북스프
-        </button>
-        <button
-          id="tab-boardgame-button"
-          class="tab-button"
-          type="button"
-          role="tab"
-          aria-selected="false"
           aria-controls="tab-boardgame"
           data-tab-target="tab-boardgame"
         >
@@ -76,6 +54,39 @@
           data-tab-target="tab-boardgame-terms"
         >
           보드게임 용어
+        </button>
+        <button
+          id="tab-club-tmi-button"
+          class="tab-button"
+          type="button"
+          role="tab"
+          aria-selected="false"
+          aria-controls="tab-club-tmi"
+          data-tab-target="tab-club-tmi"
+        >
+          동아리 TMI
+        </button>
+        <button
+          id="tab-soup-button"
+          class="tab-button"
+          type="button"
+          role="tab"
+          aria-selected="false"
+          aria-controls="tab-soup"
+          data-tab-target="tab-soup"
+        >
+          바다거북스프
+        </button>
+        <button
+          id="tab-problems-button"
+          class="tab-button"
+          type="button"
+          role="tab"
+          aria-selected="false"
+          aria-controls="tab-problems"
+          data-tab-target="tab-problems"
+        >
+          문제 · 랭킹
         </button>
         <button
           id="tab-food-button"
@@ -97,25 +108,16 @@
           aria-controls="tab-movie"
           data-tab-target="tab-movie"
         >
-          영화 뭐보지?
-        </button>
-        <button
-          id="tab-club-tmi-button"
-          class="tab-button"
-          type="button"
-          role="tab"
-          aria-selected="false"
-          aria-controls="tab-club-tmi"
-          data-tab-target="tab-club-tmi"
-        >
-          동아리 TMI
+          영화 뭐 보지?
         </button>
       </nav>
       <section
         id="tab-problems"
-        class="tab-panel is-active"
+        class="tab-panel"
         role="tabpanel"
         aria-labelledby="tab-problems-button"
+        hidden
+        aria-hidden="true"
       >
         <p class="page-note">
           AI는 활용은 양심적으로 지양해 주시고, 정답 제출은 스스로 풀어낸 흔적과 함께
@@ -185,11 +187,10 @@
       </section>
       <section
         id="tab-boardgame"
-        class="tab-panel"
+        class="tab-panel is-active"
         role="tabpanel"
         aria-labelledby="tab-boardgame-button"
-        hidden
-        aria-hidden="true"
+        aria-hidden="false"
       >
         <div class="section-header">
           <h2 class="section-title">웨이트 · 인원별 추천</h2>

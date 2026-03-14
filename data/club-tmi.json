@@ -37,8 +37,8 @@
       "age": "02",
       "department": "건축학과",
       "mbti": "ESTJ",
-      "otherHobbies": "",
-      "intro": ""
+      "otherHobbies": "밤새기",
+      "intro": "피곤한 사람"
     },
     {
       "name": "이채현",
@@ -55,8 +55,8 @@
       "age": "02",
       "department": "AI소프트웨어학부&금융학부",
       "mbti": "ENTJ",
-      "otherHobbies": "",
-      "intro": ""
+      "otherHobbies": "블로그 쓰기",
+      "intro": "정상인 담당"
     },
     {
       "name": "한유신",
@@ -153,9 +153,9 @@
       "generation": "3기",
       "age": "02",
       "department": "전자공학과",
-      "mbti": "ISFP",
-      "otherHobbies": "",
-      "intro": ""
+      "mbti": "ISTP",
+      "otherHobbies": "OTT보기",
+      "intro": "좀만생각해보고"
     },
     {
       "name": "정재우",
@@ -221,15 +221,6 @@
       "intro": ""
     },
     {
-      "name": "이소희",
-      "generation": "5기",
-      "age": "",
-      "department": "",
-      "mbti": "",
-      "otherHobbies": "",
-      "intro": ""
-    },
-    {
       "name": "신동규",
       "generation": "5기",
       "age": "03",
@@ -249,6 +240,15 @@
     },
     {
       "name": "윤승민",
+      "generation": "5기",
+      "age": "",
+      "department": "",
+      "mbti": "",
+      "otherHobbies": "",
+      "intro": ""
+    },
+    {
+      "name": "이소희",
       "generation": "5기",
       "age": "",
       "department": "",
