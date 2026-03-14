@@ -1,13 +1,1188 @@
 {
-  "emptyMessage": "추천 보드게임 데이터가 준비 중입니다.",
-  "filterEmptyMessage": "선택한 조건에 맞는 게임이 없습니다. 필터를 조금 넓혀보세요.",
-  "games": [
-    {
-      "name": "가위바위보",
-      "bestPlayers": 2,
-      "playtime": 15,
-      "weight": 1.0,
-      "description": "설명 없이 바로 시작 가능한 초간단 심리전 게임 템플릿"
-    }
-  ]
+    "emptyMessage":  "추천 보드게임 데이터가 준비 중입니다.",
+    "filterEmptyMessage":  "선택한 조건에 맞는 게임이 없습니다. 필터를 조금 넓혀보세요.",
+    "searchPlaceholder":  "보드게임 이름으로 검색",
+    "games":  [
+                  {
+                      "name":  "온 마스",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          3
+                                      ],
+                      "bestPlayersText":  "3인",
+                      "playtime":  {
+                                       "min":  90,
+                                       "max":  150
+                                   },
+                      "playtimeText":  "90-150분",
+                      "weight":  4.63
+                  },
+                  {
+                      "name":  "리스보아",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          3
+                                      ],
+                      "bestPlayersText":  "3인",
+                      "playtime":  {
+                                       "min":  60,
+                                       "max":  120
+                                   },
+                      "playtimeText":  "60-120분",
+                      "weight":  4.57
+                  },
+                  {
+                      "name":  "보이드폴",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          1
+                                      ],
+                      "bestPlayersText":  "1인",
+                      "playtime":  {
+                                       "min":  90,
+                                       "max":  240
+                                   },
+                      "playtimeText":  "90-240분",
+                      "weight":  4.6
+                  },
+                  {
+                      "name":  "정령섬",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          2
+                                      ],
+                      "bestPlayersText":  "2인",
+                      "playtime":  {
+                                       "min":  90,
+                                       "max":  120
+                                   },
+                      "playtimeText":  "90-120분",
+                      "weight":  4.08
+                  },
+                  {
+                      "name":  "가이아 프로젝트",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          3,
+                                          4
+                                      ],
+                      "bestPlayersText":  "3인, 4인",
+                      "playtime":  {
+                                       "min":  60,
+                                       "max":  150
+                                   },
+                      "playtimeText":  "60-150분",
+                      "weight":  4.4
+                  },
+                  {
+                      "name":  "쓰루 디 에이지스: 문명에 관한 새로운 이야기",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          3
+                                      ],
+                      "bestPlayersText":  "3인",
+                      "playtime":  {
+                                       "min":  120,
+                                       "max":  120
+                                   },
+                      "playtimeText":  "120분",
+                      "weight":  4.44
+                  },
+                  {
+                      "name":  "프로스트헤이븐",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          3
+                                      ],
+                      "bestPlayersText":  "3인",
+                      "playtime":  {
+                                       "min":  90,
+                                       "max":  180
+                                   },
+                      "playtimeText":  "90-180분",
+                      "weight":  4.42
+                  },
+                  {
+                      "name":  "버라지",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          4
+                                      ],
+                      "bestPlayersText":  "4인",
+                      "playtime":  {
+                                       "min":  90,
+                                       "max":  180
+                                   },
+                      "playtimeText":  "90-180분",
+                      "weight":  4.11
+                  },
+                  {
+                      "name":  "메이지 나이트",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          1,
+                                          2
+                                      ],
+                      "bestPlayersText":  "1인, 2인",
+                      "playtime":  {
+                                       "min":  60,
+                                       "max":  240
+                                   },
+                      "playtimeText":  "60-240분",
+                      "weight":  4.38
+                  },
+                  {
+                      "name":  "헤게모니: 당신의 사회 계층을 승리로 이끄세요",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          4
+                                      ],
+                      "bestPlayersText":  "4인",
+                      "playtime":  {
+                                       "min":  90,
+                                       "max":  180
+                                   },
+                      "playtimeText":  "90-180분",
+                      "weight":  4.26
+                  },
+                  {
+                      "name":  "칸반 EV",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          3
+                                      ],
+                      "bestPlayersText":  "3인",
+                      "playtime":  {
+                                       "min":  60,
+                                       "max":  180
+                                   },
+                      "playtimeText":  "60-180분",
+                      "weight":  4.3
+                  },
+                  {
+                      "name":  "푸드 체인 거물",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          3,
+                                          4
+                                      ],
+                      "bestPlayersText":  "3인, 4인",
+                      "playtime":  {
+                                       "min":  120,
+                                       "max":  240
+                                   },
+                      "playtimeText":  "120-240분",
+                      "weight":  4.19
+                  },
+                  {
+                      "name":  "혁신의 시대",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          4
+                                      ],
+                      "bestPlayersText":  "4인",
+                      "playtime":  {
+                                       "min":  40,
+                                       "max":  200
+                                   },
+                      "playtimeText":  "40-200분",
+                      "weight":  4.27
+                  },
+                  {
+                      "name":  "아나크로니",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          3
+                                      ],
+                      "bestPlayersText":  "3인",
+                      "playtime":  {
+                                       "min":  30,
+                                       "max":  120
+                                   },
+                      "playtimeText":  "30-120분",
+                      "weight":  4
+                  },
+                  {
+                      "name":  "그레이트 웨스턴 트레일: 뉴질랜드",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          3
+                                      ],
+                      "bestPlayersText":  "3인",
+                      "playtime":  {
+                                       "min":  75,
+                                       "max":  150
+                                   },
+                      "playtimeText":  "75-150분",
+                      "weight":  4.01
+                  },
+                  {
+                      "name":  "더 갤러리스트",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          3,
+                                          4
+                                      ],
+                      "bestPlayersText":  "3인, 4인",
+                      "playtime":  {
+                                       "min":  60,
+                                       "max":  150
+                                   },
+                      "playtimeText":  "60-150분",
+                      "weight":  4.21
+                  },
+                  {
+                      "name":  "도미넌트 스피시즈",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          4
+                                      ],
+                      "bestPlayersText":  "4인",
+                      "playtime":  {
+                                       "min":  120,
+                                       "max":  240
+                                   },
+                      "playtimeText":  "120-240분",
+                      "weight":  4.04
+                  },
+                  {
+                      "name":  "쓰루 디 에이지스: 인류 문명 발전 대서사시",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          3
+                                      ],
+                      "bestPlayersText":  "3인",
+                      "playtime":  {
+                                       "min":  120,
+                                       "max":  120
+                                   },
+                      "playtimeText":  "120분",
+                      "weight":  4.18
+                  },
+                  {
+                      "name":  "트릭케리언: 환상의 전설",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          4
+                                      ],
+                      "bestPlayersText":  "4인",
+                      "playtime":  {
+                                       "min":  60,
+                                       "max":  180
+                                   },
+                      "playtimeText":  "60-180분",
+                      "weight":  4.26
+                  },
+                  {
+                      "name":  "뉴클레움",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          3
+                                      ],
+                      "bestPlayersText":  "3인",
+                      "playtime":  {
+                                       "min":  60,
+                                       "max":  150
+                                   },
+                      "playtimeText":  "60-150분",
+                      "weight":  4.18
+                  },
+                  {
+                      "name":  "투 매니 본즈: 언더토우",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          2
+                                      ],
+                      "bestPlayersText":  "2인",
+                      "playtime":  {
+                                       "min":  60,
+                                       "max":  180
+                                   },
+                      "playtimeText":  "60-180분",
+                      "weight":  4.03
+                  },
+                  {
+                      "name":  "씨볼루션",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          2,
+                                          3
+                                      ],
+                      "bestPlayersText":  "2인, 3인",
+                      "playtime":  {
+                                       "min":  90,
+                                       "max":  180
+                                   },
+                      "playtimeText":  "90-180분",
+                      "weight":  4.24
+                  },
+                  {
+                      "name":  "그레이트 웨스턴 트레일: 아르헨티나",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          3
+                                      ],
+                      "bestPlayersText":  "3인",
+                      "playtime":  {
+                                       "min":  75,
+                                       "max":  150
+                                   },
+                      "playtimeText":  "75-150분",
+                      "weight":  3.91
+                  },
+                  {
+                      "name":  "비뉴스: 디럭스 에디션",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          4
+                                      ],
+                      "bestPlayersText":  "4인",
+                      "playtime":  {
+                                       "min":  90,
+                                       "max":  180
+                                   },
+                      "playtimeText":  "90-180분",
+                      "weight":  3.99
+                  },
+                  {
+                      "name":  "에이지 오브 스팀",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          4
+                                      ],
+                      "bestPlayersText":  "4인",
+                      "playtime":  {
+                                       "min":  120,
+                                       "max":  120
+                                   },
+                      "playtimeText":  "120분",
+                      "weight":  3.86
+                  },
+                  {
+                      "name":  "케일러스",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          3
+                                      ],
+                      "bestPlayersText":  "3인",
+                      "playtime":  {
+                                       "min":  60,
+                                       "max":  150
+                                   },
+                      "playtimeText":  "60-150분",
+                      "weight":  3.79
+                  },
+                  {
+                      "name":  "갤럭틱 크루즈",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          3
+                                      ],
+                      "bestPlayersText":  "3인",
+                      "playtime":  {
+                                       "min":  90,
+                                       "max":  150
+                                   },
+                      "playtimeText":  "90-150분",
+                      "weight":  3.97
+                  },
+                  {
+                      "name":  "네메시스: 락다운",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          4
+                                      ],
+                      "bestPlayersText":  "4인",
+                      "playtime":  {
+                                       "min":  90,
+                                       "max":  180
+                                   },
+                      "playtimeText":  "90-180분",
+                      "weight":  3.9
+                  },
+                  {
+                      "name":  "카네기",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          4
+                                      ],
+                      "bestPlayersText":  "4인",
+                      "playtime":  {
+                                       "min":  90,
+                                       "max":  120
+                                   },
+                      "playtimeText":  "90-120분",
+                      "weight":  3.81
+                  },
+                  {
+                      "name":  "아컴호러: 카드게임 (개정판)",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          2
+                                      ],
+                      "bestPlayersText":  "2인",
+                      "playtime":  {
+                                       "min":  45,
+                                       "max":  180
+                                   },
+                      "playtimeText":  "45-180분",
+                      "weight":  3.75
+                  },
+                  {
+                      "name":  "테오티우아칸: 신들의 도시",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          4
+                                      ],
+                      "bestPlayersText":  "4인",
+                      "playtime":  {
+                                       "min":  90,
+                                       "max":  120
+                                   },
+                      "playtimeText":  "90-120분",
+                      "weight":  3.78
+                  },
+                  {
+                      "name":  "이클립스: 은하의 새로운 여명",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          4,
+                                          6
+                                      ],
+                      "bestPlayersText":  "4인, 6인",
+                      "playtime":  {
+                                       "min":  60,
+                                       "max":  180
+                                   },
+                      "playtimeText":  "60-180분",
+                      "weight":  3.71
+                  },
+                  {
+                      "name":  "아를의 평원",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          2
+                                      ],
+                      "bestPlayersText":  "2인",
+                      "playtime":  {
+                                       "min":  60,
+                                       "max":  120
+                                   },
+                      "playtimeText":  "60-120분",
+                      "weight":  3.85
+                  },
+                  {
+                      "name":  "다윈의 여정",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          3
+                                      ],
+                      "bestPlayersText":  "3인",
+                      "playtime":  {
+                                       "min":  60,
+                                       "max":  120
+                                   },
+                      "playtimeText":  "60-120분",
+                      "weight":  3.9
+                  },
+                  {
+                      "name":  "마라카이보",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          3
+                                      ],
+                      "bestPlayersText":  "3인",
+                      "playtime":  {
+                                       "min":  30,
+                                       "max":  120
+                                   },
+                      "playtimeText":  "30-120분",
+                      "weight":  3.92
+                  },
+                  {
+                      "name":  "르아브르",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          3
+                                      ],
+                      "bestPlayersText":  "3인",
+                      "playtime":  {
+                                       "min":  30,
+                                       "max":  150
+                                   },
+                      "playtimeText":  "30-150분",
+                      "weight":  3.71
+                  },
+                  {
+                      "name":  "서쪽 왕국의 성기사",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          2
+                                      ],
+                      "bestPlayersText":  "2인",
+                      "playtime":  {
+                                       "min":  90,
+                                       "max":  120
+                                   },
+                      "playtimeText":  "90-120분",
+                      "weight":  3.71
+                  },
+                  {
+                      "name":  "촐킨: 마야의 달력",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          4
+                                      ],
+                      "bestPlayersText":  "4인",
+                      "playtime":  {
+                                       "min":  90,
+                                       "max":  90
+                                   },
+                      "playtimeText":  "90분",
+                      "weight":  3.66
+                  },
+                  {
+                      "name":  "아그리콜라",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          3,
+                                          4
+                                      ],
+                      "bestPlayersText":  "3인, 4인",
+                      "playtime":  {
+                                       "min":  30,
+                                       "max":  150
+                                   },
+                      "playtimeText":  "30-150분",
+                      "weight":  3.64
+                  },
+                  {
+                      "name":  "카베르나: 동굴 속 농부들",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          4
+                                      ],
+                      "bestPlayersText":  "4인",
+                      "playtime":  {
+                                       "min":  30,
+                                       "max":  210
+                                   },
+                      "playtimeText":  "30-210분",
+                      "weight":  3.78
+                  },
+                  {
+                      "name":  "팍스 파미르 2판",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          4
+                                      ],
+                      "bestPlayersText":  "4인",
+                      "playtime":  {
+                                       "min":  45,
+                                       "max":  120
+                                   },
+                      "playtimeText":  "45-120분",
+                      "weight":  3
+                  },
+                  {
+                      "name":  "언더워터 시티즈",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          2
+                                      ],
+                      "bestPlayersText":  "2인",
+                      "playtime":  {
+                                       "min":  80,
+                                       "max":  150
+                                   },
+                      "playtimeText":  "80-150분",
+                      "weight":  3.59
+                  },
+                  {
+                      "name":  "투 매니 본즈",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          2
+                                      ],
+                      "bestPlayersText":  "2인",
+                      "playtime":  {
+                                       "min":  60,
+                                       "max":  120
+                                   },
+                      "playtimeText":  "60-120분",
+                      "weight":  3.87
+                  },
+                  {
+                      "name":  "테라 미스티카",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          4
+                                      ],
+                      "bestPlayersText":  "4인",
+                      "playtime":  {
+                                       "min":  60,
+                                       "max":  150
+                                   },
+                      "playtimeText":  "60-150분",
+                      "weight":  3.97
+                  },
+                  {
+                      "name":  "루트",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          2,
+                                          4
+                                      ],
+                      "bestPlayersText":  "2인, 4인",
+                      "playtime":  {
+                                       "min":  60,
+                                       "max":  90
+                                   },
+                      "playtimeText":  "60-90분",
+                      "weight":  3.84
+                  },
+                  {
+                      "name":  "아컴호러: 카드게임",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          2
+                                      ],
+                      "bestPlayersText":  "2인",
+                      "playtime":  {
+                                       "min":  60,
+                                       "max":  120
+                                   },
+                      "playtimeText":  "60-120분",
+                      "weight":  3.56
+                  },
+                  {
+                      "name":  "그레이트 웨스턴 트레일: 2판",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          3
+                                      ],
+                      "bestPlayersText":  "3인",
+                      "playtime":  {
+                                       "min":  75,
+                                       "max":  150
+                                   },
+                      "playtimeText":  "75-150분",
+                      "weight":  3.7
+                  },
+                  {
+                      "name":  "오딘을 위하여",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          3
+                                      ],
+                      "bestPlayersText":  "3인",
+                      "playtime":  {
+                                       "min":  30,
+                                       "max":  120
+                                   },
+                      "playtimeText":  "30-120분",
+                      "weight":  3.87
+                  },
+                  {
+                      "name":  "브라스: 랭커셔",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          4
+                                      ],
+                      "bestPlayersText":  "4인",
+                      "playtime":  {
+                                       "min":  60,
+                                       "max":  120
+                                   },
+                      "playtimeText":  "60-120분",
+                      "weight":  3.85
+                  },
+                  {
+                      "name":  "이클립스: 두번째 여명",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          4,
+                                          6
+                                      ],
+                      "bestPlayersText":  "4인, 6인",
+                      "playtime":  {
+                                       "min":  60,
+                                       "max":  200
+                                   },
+                      "playtimeText":  "60-200분",
+                      "weight":  3.67
+                  },
+                  {
+                      "name":  "그레이트 웨스턴 트레일",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          3
+                                      ],
+                      "bestPlayersText":  "3인",
+                      "playtime":  {
+                                       "min":  75,
+                                       "max":  150
+                                   },
+                      "playtimeText":  "75-150분",
+                      "weight":  3.69
+                  },
+                  {
+                      "name":  "세티: 외계 지성체를 찾아서",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          3
+                                      ],
+                      "bestPlayersText":  "3인",
+                      "playtime":  {
+                                       "min":  40,
+                                       "max":  160
+                                   },
+                      "playtimeText":  "40-160분",
+                      "weight":  3.83
+                  },
+                  {
+                      "name":  "황혼의 투쟁",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          2
+                                      ],
+                      "bestPlayersText":  "2인",
+                      "playtime":  {
+                                       "min":  120,
+                                       "max":  180
+                                   },
+                      "playtimeText":  "120-180분",
+                      "weight":  3.61
+                  },
+                  {
+                      "name":  "글룸 헤이븐: 사자의 턱",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          2
+                                      ],
+                      "bestPlayersText":  "2인",
+                      "playtime":  {
+                                       "min":  30,
+                                       "max":  120
+                                   },
+                      "playtimeText":  "30-120분",
+                      "weight":  3.64
+                  },
+                  {
+                      "name":  "듄 임페리움: 봉기",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          4
+                                      ],
+                      "bestPlayersText":  "4인",
+                      "playtime":  {
+                                       "min":  60,
+                                       "max":  120
+                                   },
+                      "playtimeText":  "60-120분",
+                      "weight":  3.53
+                  },
+                  {
+                      "name":  "글룸헤이븐",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          3
+                                      ],
+                      "bestPlayersText":  "3인",
+                      "playtime":  {
+                                       "min":  60,
+                                       "max":  120
+                                   },
+                      "playtimeText":  "60-120분",
+                      "weight":  3.92
+                  },
+                  {
+                      "name":  "아크 노바",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          2
+                                      ],
+                      "bestPlayersText":  "2인",
+                      "playtime":  {
+                                       "min":  90,
+                                       "max":  150
+                                   },
+                      "playtimeText":  "90-150분",
+                      "weight":  3.8
+                  },
+                  {
+                      "name":  "브라스: 버밍엄",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          3,
+                                          4
+                                      ],
+                      "bestPlayersText":  "3인, 4인",
+                      "playtime":  {
+                                       "min":  60,
+                                       "max":  120
+                                   },
+                      "playtimeText":  "60-120분",
+                      "weight":  3.86
+                  },
+                  {
+                      "name":  "파워 그리드 디럭스: 유럽/북미",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          3,
+                                          4
+                                      ],
+                      "bestPlayersText":  "3인, 4인",
+                      "playtime":  {
+                                       "min":  60,
+                                       "max":  120
+                                   },
+                      "playtimeText":  "60-120분",
+                      "weight":  3.86
+                  },
+                  {
+                      "name":  "익스페디션",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          3
+                                      ],
+                      "bestPlayersText":  "3인",
+                      "playtime":  {
+                                       "min":  60,
+                                       "max":  90
+                                   },
+                      "playtimeText":  "60-90분",
+                      "weight":  3.06
+                  },
+                  {
+                      "name":  "아컴호러 3판",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          3
+                                      ],
+                      "bestPlayersText":  "3인",
+                      "playtime":  {
+                                       "min":  120,
+                                       "max":  180
+                                   },
+                      "playtimeText":  "120-180분",
+                      "weight":  3.37
+                  },
+                  {
+                      "name":  "펄서 2849",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          4
+                                      ],
+                      "bestPlayersText":  "4인",
+                      "playtime":  {
+                                       "min":  60,
+                                       "max":  90
+                                   },
+                      "playtimeText":  "60-90분",
+                      "weight":  3.34
+                  },
+                  {
+                      "name":  "원드러스 크리쳐스",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          2,
+                                          3
+                                      ],
+                      "bestPlayersText":  "2인, 3인",
+                      "playtime":  {
+                                       "min":  40,
+                                       "max":  80
+                                   },
+                      "playtimeText":  "40-80분",
+                      "weight":  3.05
+                  },
+                  {
+                      "name":  "매직: 더 개더링",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          2
+                                      ],
+                      "bestPlayersText":  "2인",
+                      "playtime":  {
+                                       "min":  20,
+                                       "max":  20
+                                   },
+                      "playtimeText":  "20분",
+                      "weight":  3.28
+                  },
+                  {
+                      "name":  "요코하마",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          3
+                                      ],
+                      "bestPlayersText":  "3인",
+                      "playtime":  {
+                                       "min":  90,
+                                       "max":  90
+                                   },
+                      "playtimeText":  "90분",
+                      "weight":  3.28
+                  },
+                  {
+                      "name":  "엘드리치 호러",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          4
+                                      ],
+                      "bestPlayersText":  "4인",
+                      "playtime":  {
+                                       "min":  120,
+                                       "max":  240
+                                   },
+                      "playtimeText":  "120-240분",
+                      "weight":  3.32
+                  },
+                  {
+                      "name":  "원더랜드 워",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          4
+                                      ],
+                      "bestPlayersText":  "4인",
+                      "playtime":  {
+                                       "min":  45,
+                                       "max":  125
+                                   },
+                      "playtimeText":  "45-125분",
+                      "weight":  3.86
+                  },
+                  {
+                      "name":  "반지의 제왕: 원정대의 운명",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          3
+                                      ],
+                      "bestPlayersText":  "3인",
+                      "playtime":  {
+                                       "min":  60,
+                                       "max":  150
+                                   },
+                      "playtimeText":  "60-150분",
+                      "weight":  3.08
+                  },
+                  {
+                      "name":  "리바이브",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          3
+                                      ],
+                      "bestPlayersText":  "3인",
+                      "playtime":  {
+                                       "min":  90,
+                                       "max":  120
+                                   },
+                      "playtimeText":  "90-120분",
+                      "weight":  3.46
+                  },
+                  {
+                      "name":  "아그리콜라 (개정판)",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          3,
+                                          4
+                                      ],
+                      "bestPlayersText":  "3인, 4인",
+                      "playtime":  {
+                                       "min":  30,
+                                       "max":  120
+                                   },
+                      "playtimeText":  "30-120분",
+                      "weight":  3.44
+                  },
+                  {
+                      "name":  "클랜 오브 칼레도니아",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          4
+                                      ],
+                      "bestPlayersText":  "4인",
+                      "playtime":  {
+                                       "min":  30,
+                                       "max":  120
+                                   },
+                      "playtimeText":  "30-120분",
+                      "weight":  3.47
+                  },
+                  {
+                      "name":  "파워 그리드",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          4,
+                                          5
+                                      ],
+                      "bestPlayersText":  "4인, 5인",
+                      "playtime":  {
+                                       "min":  60,
+                                       "max":  120
+                                   },
+                      "playtimeText":  "60-120분",
+                      "weight":  3.25
+                  },
+                  {
+                      "name":  "팬데믹 레거시: 시즌 2",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          4
+                                      ],
+                      "bestPlayersText":  "4인",
+                      "playtime":  {
+                                       "min":  60,
+                                       "max":  60
+                                   },
+                      "playtimeText":  "60분",
+                      "weight":  3.24
+                  },
+                  {
+                      "name":  "시계탑에 흐른 피",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          9,
+                                          10,
+                                          11,
+                                          12
+                                      ],
+                      "bestPlayersText":  "9인, 10인, 11인, 12인",
+                      "playtime":  {
+                                       "min":  30,
+                                       "max":  120
+                                   },
+                      "playtimeText":  "30-120분",
+                      "weight":  3.04
+                  },
+                  {
+                      "name":  "업세션",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          2
+                                      ],
+                      "bestPlayersText":  "2인",
+                      "playtime":  {
+                                       "min":  30,
+                                       "max":  90
+                                   },
+                      "playtimeText":  "30-90분",
+                      "weight":  3.11
+                  },
+                  {
+                      "name":  "팬데믹 레거시: 시즌 0",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          4
+                                      ],
+                      "bestPlayersText":  "4인",
+                      "playtime":  {
+                                       "min":  45,
+                                       "max":  60
+                                   },
+                      "playtimeText":  "45-60분",
+                      "weight":  3.18
+                  },
+                  {
+                      "name":  "푸에르토리코",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          4
+                                      ],
+                      "bestPlayersText":  "4인",
+                      "playtime":  {
+                                       "min":  90,
+                                       "max":  150
+                                   },
+                      "playtimeText":  "90-150분",
+                      "weight":  3.27
+                  },
+                  {
+                      "name":  "오를레앙",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          4
+                                      ],
+                      "bestPlayersText":  "4인",
+                      "playtime":  {
+                                       "min":  90,
+                                       "max":  90
+                                   },
+                      "playtimeText":  "90분",
+                      "weight":  3.01
+                  },
+                  {
+                      "name":  "사이드",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          4
+                                      ],
+                      "bestPlayersText":  "4인",
+                      "playtime":  {
+                                       "min":  115,
+                                       "max":  115
+                                   },
+                      "playtimeText":  "115분",
+                      "weight":  3.45
+                  },
+                  {
+                      "name":  "네메시스",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          4,
+                                          5
+                                      ],
+                      "bestPlayersText":  "4인, 5인",
+                      "playtime":  {
+                                       "min":  90,
+                                       "max":  180
+                                   },
+                      "playtimeText":  "90-180분",
+                      "weight":  3.49
+                  },
+                  {
+                      "name":  "테라포밍 마스",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          3
+                                      ],
+                      "bestPlayersText":  "3인",
+                      "playtime":  {
+                                       "min":  120,
+                                       "max":  120
+                                   },
+                      "playtimeText":  "120분",
+                      "weight":  3.27
+                  },
+                  {
+                      "name":  "듄: 임페리움",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          3,
+                                          4
+                                      ],
+                      "bestPlayersText":  "3인, 4인",
+                      "playtime":  {
+                                       "min":  60,
+                                       "max":  120
+                                   },
+                      "playtimeText":  "60-120분",
+                      "weight":  3.08
+                  },
+                  {
+                      "name":  "바둑",
+                      "description":  "",
+                      "bestPlayers":  [
+                                          2
+                                      ],
+                      "bestPlayersText":  "2인",
+                      "playtime":  {
+                                       "min":  30,
+                                       "max":  180
+                                   },
+                      "playtimeText":  "30-180분",
+                      "weight":  3.91
+                  }
+              ]
 }

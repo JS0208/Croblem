@@ -208,13 +208,14 @@ function renderBoardGame(boardGame) {
   }
 
   const state = {
+    query: "",
     bestPlayers: new Set(),
     playtime: new Set(),
     weight: new Set(),
   };
 
   if (filters) {
-    createBoardGameFilters(filters, state, () => {
+    createBoardGameFilters(filters, state, boardGame, games, () => {
       renderBoardGameItems(list, games, state, boardGame);
     });
   }
@@ -1451,10 +1452,31 @@ function getDifficultyClass(solverCount) {
   return "is-easy";
 }
 
-function createBoardGameFilters(container, state, onChange) {
-  const playerOptions = [1, 2, 3, 4, 5, 6];
-  const playtimeOptions = [15, 30, 45, 60, 90, 120, 180, 240];
+function createBoardGameFilters(container, state, boardGame, games, onChange) {
+  const playerOptions = collectBoardGamePlayers(games);
+  const playtimeOptions = [15, 30, 45, 60, 90, 120, 150, 180, 240];
   const weightOptions = buildWeightRanges();
+  const searchWrap = document.createElement("section");
+  searchWrap.className = "boardgame-filter-group";
+
+  const searchTitle = document.createElement("h3");
+  searchTitle.className = "boardgame-filter-title";
+  searchTitle.textContent = "이름 검색";
+
+  const searchInput = document.createElement("input");
+  searchInput.type = "search";
+  searchInput.className = "boardgame-search-input";
+  searchInput.placeholder =
+    boardGame?.searchPlaceholder || "보드게임 이름으로 검색";
+  searchInput.setAttribute("aria-label", "보드게임 이름 검색");
+  searchInput.autocomplete = "off";
+  searchInput.addEventListener("input", () => {
+    state.query = searchInput.value.trim();
+    onChange();
+  });
+
+  searchWrap.appendChild(searchTitle);
+  searchWrap.appendChild(searchInput);
 
   const playerGroup = createBoardGameFilterGroup("베스트 인원 수", "players", playerOptions, state, onChange, (value) => `${value}인`);
   const playtimeGroup = createBoardGameFilterGroup("플레이타임", "playtime", playtimeOptions, state, onChange, (value) =>
@@ -1475,13 +1497,16 @@ function createBoardGameFilters(container, state, onChange) {
   resetButton.className = "button button-secondary boardgame-filter-reset";
   resetButton.textContent = "필터 초기화";
   resetButton.addEventListener("click", () => {
+    state.query = "";
     state.bestPlayers.clear();
     state.playtime.clear();
     state.weight.clear();
+    searchInput.value = "";
     updateBoardGameFilterButtons(container, state);
     onChange();
   });
 
+  container.appendChild(searchWrap);
   container.appendChild(playerGroup);
   container.appendChild(playtimeGroup);
   container.appendChild(weightGroup);
@@ -1590,21 +1615,27 @@ function renderBoardGameItems(list, games, state, boardGame) {
   list.innerHTML = "";
 
   const filtered = games.filter((game) => {
+    if (!matchesBoardGameQuery(game, state.query)) {
+      return false;
+    }
+
     if (
       state.bestPlayers.size > 0 &&
-      !state.bestPlayers.has(String(Number(game.bestPlayers)))
+      !getGameBestPlayers(game).some((player) =>
+        state.bestPlayers.has(String(player))
+      )
     ) {
       return false;
     }
 
     if (state.playtime.size > 0) {
-      const playtime = Number(game.playtime);
+      const playtime = getGamePlaytimeRange(game);
       const matchesPlaytime = Array.from(state.playtime).some((selected) => {
         const selectedPlaytime = Number(selected);
         if (selectedPlaytime === 240) {
-          return playtime >= 240;
+          return playtime.max >= 240;
         }
-        return playtime === selectedPlaytime;
+        return playtime.min <= selectedPlaytime && playtime.max >= selectedPlaytime;
       });
       if (!matchesPlaytime) {
         return false;
@@ -1652,6 +1683,74 @@ function getBoardGameFilterSet(state, key) {
   return null;
 }
 
+function collectBoardGamePlayers(games) {
+  const players = new Set();
+  games.forEach((game) => {
+    getGameBestPlayers(game).forEach((player) => {
+      players.add(player);
+    });
+  });
+  return Array.from(players).sort((a, b) => a - b);
+}
+
+function getGameBestPlayers(game) {
+  if (Array.isArray(game?.bestPlayers)) {
+    return game.bestPlayers
+      .map((player) => Number(player))
+      .filter((player) => Number.isFinite(player) && player > 0);
+  }
+
+  const bestPlayers = Number(game?.bestPlayers);
+  return Number.isFinite(bestPlayers) && bestPlayers > 0 ? [bestPlayers] : [];
+}
+
+function getGamePlaytimeRange(game) {
+  const min = Number(game?.playtime?.min ?? game?.playtime);
+  const max = Number(game?.playtime?.max ?? game?.playtime);
+  if (!Number.isFinite(min) && !Number.isFinite(max)) {
+    return { min: 0, max: 0 };
+  }
+  if (!Number.isFinite(max)) {
+    return { min, max: min };
+  }
+  if (!Number.isFinite(min)) {
+    return { min: max, max };
+  }
+  return { min, max };
+}
+
+function matchesBoardGameQuery(game, query) {
+  const normalizedQuery = String(query || "").trim().toLowerCase();
+  if (!normalizedQuery) {
+    return true;
+  }
+
+  return String(game?.name || "").toLowerCase().includes(normalizedQuery);
+}
+
+function formatBoardGamePlayers(game) {
+  if (game?.bestPlayersText) {
+    return game.bestPlayersText;
+  }
+
+  const bestPlayers = getGameBestPlayers(game);
+  return bestPlayers.length > 0
+    ? bestPlayers.map((player) => `${player}인`).join(", ")
+    : "-";
+}
+
+function formatBoardGamePlaytime(game) {
+  if (game?.playtimeText) {
+    return game.playtimeText;
+  }
+
+  const { min, max } = getGamePlaytimeRange(game);
+  if (min === 0 && max === 0) {
+    return "-";
+  }
+  return min === max ? `${min}분` : `${min}-${max}분`;
+}
+
 const WEIGHT_RANGES = Array.from({ length: 8 }, (_, index) => {
   const min = Number((1 + index * 0.5).toFixed(1));
   const max = min === 4.5 ? 5.0 : Number((min + 0.49).toFixed(2));
@@ -1692,12 +1791,11 @@ function createBoardGameCard(game) {
 
   const bestPlayers = document.createElement("li");
   bestPlayers.className = "boardgame-game";
-  bestPlayers.textContent = `베스트 인원: ${Number(game.bestPlayers) || "-"}인`;
+  bestPlayers.textContent = `베스트 인원: ${formatBoardGamePlayers(game)}`;
 
   const playtime = document.createElement("li");
   playtime.className = "boardgame-game";
-  const playtimeValue = Number(game.playtime);
-  playtime.textContent = `플레이타임: ${playtimeValue >= 240 ? "240+" : playtimeValue}분`;
+  playtime.textContent = `플레이타임: ${formatBoardGamePlaytime(game)}`;
 
   const weight = document.createElement("li");
   weight.className = "boardgame-game";

@@ -699,6 +699,26 @@ body.theme-bg-legend::after {
   gap: 8px;
 }
 
+.boardgame-search-input {
+  width: min(100%, 360px);
+  border: 1px solid var(--surface-border);
+  background: var(--card);
+  color: var(--text);
+  border-radius: 14px;
+  padding: 10px 14px;
+  font-size: 14px;
+  outline: none;
+}
+
+.boardgame-search-input::placeholder {
+  color: var(--muted);
+}
+
+.boardgame-search-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
 .boardgame-filter-title {
   margin: 0;
   font-size: 14px;
