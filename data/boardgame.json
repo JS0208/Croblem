@@ -2908,16 +2908,15 @@
             "name": "포 세일",
             "description": "",
             "bestPlayers": [
-                7,
-                8
+                5
             ],
-            "bestPlayersText": "7인, 8인",
+            "bestPlayersText": "5인",
             "playtime": {
                 "min": 30,
                 "max": 30
             },
             "playtimeText": "30분",
-            "weight": 1.74
+            "weight": 1.25
         },
         {
             "name": "딕싯: 오디세이",
@@ -2994,16 +2993,15 @@
             "name": "자이푸르",
             "description": "",
             "bestPlayers": [
-                7,
-                8
+                2
             ],
-            "bestPlayersText": "7인, 8인",
+            "bestPlayersText": "2인",
             "playtime": {
                 "min": 30,
                 "max": 30
             },
             "playtimeText": "30분",
-            "weight": 1.74
+            "weight": 1.46
         },
         {
             "name": "저스트 원",
