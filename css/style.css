@@ -853,6 +853,7 @@ body.theme-bg-legend::after {
   background: var(--surface);
   color: var(--text);
   font-weight: 600;
+  white-space: normal;
 }
 
 .club-tmi-table tbody tr:last-child td {
@@ -909,6 +910,11 @@ body.theme-bg-legend::after {
   width: 38%;
   font-size: 14px;
   line-height: 1.6;
+}
+
+.club-tmi-table th.club-tmi-col-intro {
+  font-size: 12px;
+  line-height: 1.5;
 }
 
 .club-tmi-empty {

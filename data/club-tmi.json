@@ -26,7 +26,7 @@
     },
     {
       "key": "intro",
-      "label": "타인이 지어주는 특징"
+      "label": "특징(다른 사람 특징도 수정 가능)"
     }
   ],
   "emptyMessage": "동아리 TMI 데이터가 준비 중입니다.",
@@ -46,7 +46,7 @@
       "age": "04",
       "department": "경영학과",
       "mbti": "ENFP",
-      "otherHobbies": "",
+      "otherHobbies": "교통정리",
       "intro": ""
     },
     {
@@ -83,7 +83,7 @@
       "department": "간호학과",
       "mbti": "ENTP",
       "otherHobbies": "",
-      "intro": ""
+      "intro": "진짜 위험한 사람"
     },
     {
       "name": "최지은",
@@ -161,10 +161,10 @@
       "name": "정재우",
       "generation": "3기",
       "age": "02",
-      "department": "홀덤학과",
+      "department": "영어영문학과",
       "mbti": "ISFP",
-      "otherHobbies": "",
-      "intro": ""
+      "otherHobbies": "홀덤",
+      "intro": "홀덤학과로 전과준비 중"
     },
     {
       "name": "최우섭",
@@ -181,14 +181,14 @@
       "age": "03",
       "department": "건축학과",
       "mbti": "ENFP",
-      "otherHobbies": "",
+      "otherHobbies": "광기들리기",
       "intro": ""
     },
     {
       "name": "강현비",
       "generation": "5기",
-      "age": "",
-      "department": "",
+      "age": "03",
+      "department": "생물학과",
       "mbti": "",
       "otherHobbies": "",
       "intro": ""
@@ -197,16 +197,16 @@
       "name": "김정민",
       "generation": "5기",
       "age": "01",
-      "department": "",
-      "mbti": "",
+      "department": "컴퓨터공학과",
+      "mbti": "INTP",
       "otherHobbies": "",
       "intro": ""
     },
     {
       "name": "박수은",
       "generation": "5기",
-      "age": "",
-      "department": "",
+      "age": "06",
+      "department": "약학과",
       "mbti": "",
       "otherHobbies": "",
       "intro": ""
@@ -214,9 +214,9 @@
     {
       "name": "박하민",
       "generation": "5기",
-      "age": "",
-      "department": "",
-      "mbti": "",
+      "age": "03",
+      "department": "경영학과",
+      "mbti": "ISTP",
       "otherHobbies": "",
       "intro": ""
     },
@@ -224,35 +224,35 @@
       "name": "신동규",
       "generation": "5기",
       "age": "03",
-      "department": "",
-      "mbti": "",
+      "department": "게임학과",
+      "mbti": "ISFP",
       "otherHobbies": "",
       "intro": ""
     },
     {
       "name": "안지민",
       "generation": "5기",
-      "age": "",
-      "department": "",
-      "mbti": "",
+      "age": "02",
+      "department": "전산학과",
+      "mbti": "INTP",
       "otherHobbies": "",
       "intro": ""
     },
     {
       "name": "윤승민",
       "generation": "5기",
-      "age": "",
-      "department": "",
-      "mbti": "",
+      "age": "03",
+      "department": "행정학과",
+      "mbti": "ISFP",
       "otherHobbies": "",
       "intro": ""
     },
     {
       "name": "이소희",
       "generation": "5기",
-      "age": "",
-      "department": "",
-      "mbti": "",
+      "age": "03",
+      "department": "사회복지학과",
+      "mbti": "ISTP",
       "otherHobbies": "",
       "intro": ""
     },
@@ -260,17 +260,17 @@
       "name": "이시형",
       "generation": "5기",
       "age": "04",
-      "department": "",
-      "mbti": "",
+      "department": "AI전자공학과",
+      "mbti": "ISFP",
       "otherHobbies": "",
       "intro": ""
     },
     {
       "name": "정광준",
       "generation": "5기",
-      "age": "",
-      "department": "",
-      "mbti": "",
+      "age": "01",
+      "department": "전기공학과",
+      "mbti": "ESFJ",
       "otherHobbies": "",
       "intro": ""
     },
@@ -278,16 +278,16 @@
       "name": "정지원",
       "generation": "5기",
       "age": "07",
-      "department": "",
-      "mbti": "",
+      "department": "사학과",
+      "mbti": "INTJ",
       "otherHobbies": "",
       "intro": ""
     },
     {
       "name": "한주현",
       "generation": "5기",
-      "age": "",
-      "department": "",
+      "age": "04",
+      "department": "경영학과",
       "mbti": "",
       "otherHobbies": "",
       "intro": ""
