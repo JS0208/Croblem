@@ -652,6 +652,66 @@ body.theme-bg-legend::after {
   gap: 24px;
 }
 
+.food-card {
+  background: linear-gradient(180deg, var(--card) 0%, var(--panel) 100%);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.food-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.food-card-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.food-card-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.food-card-category {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.food-card-description {
+  margin: 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.food-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.food-card-link {
+  align-self: flex-start;
+}
+
 .boardgame-list {
   display: grid;
   gap: 24px;
@@ -1249,6 +1309,14 @@ body.theme-bg-legend::after {
 @media (max-width: 640px) {
   .page {
     padding: 40px 18px 64px;
+  }
+
+  .food-card {
+    padding: 20px;
+  }
+
+  .food-card-title {
+    font-size: 20px;
   }
 
   .problem-card {

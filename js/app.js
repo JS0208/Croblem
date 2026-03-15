@@ -2,7 +2,7 @@ const PROBLEMS_URL = "data/problems.json";
 const TURTLE_SOUP_URL = "data/turtle-soup.json";
 const BOARDGAME_URL = "data/boardgame.json";
 const BOARDGAME_TERMS_URL = "data/boardgame-terms.json";
-const FOOD_URL = "data/food.json";
+const FOOD_URL = "data/restaurant.txt";
 const MOVIE_URL = "data/movie.json";
 const CLUB_TMI_URL = "data/club-tmi.json";
 const OPEN_PROFILE_URL = "https://open.kakao.com/o/sxsinFuf";
@@ -22,7 +22,7 @@ async function loadProblems() {
     fetchJson(TURTLE_SOUP_URL),
     fetchJson(BOARDGAME_URL),
     fetchJson(BOARDGAME_TERMS_URL),
-    fetchJson(FOOD_URL),
+    fetchText(FOOD_URL),
     fetchJson(MOVIE_URL),
     fetchJson(CLUB_TMI_URL),
   ]);
@@ -84,7 +84,7 @@ async function loadProblems() {
   }
 
   if (foodResult.status === "fulfilled") {
-    const food = normalizeSectionData(foodResult.value, "food");
+    const food = parseRestaurantText(foodResult.value);
     renderFood(food);
   } else {
     renderSectionError("food-list", foodResult.reason, "맛집 데이터를 불러오지 못했습니다.");
@@ -126,6 +126,22 @@ async function fetchJson(url) {
   }
 }
 
+async function fetchText(url) {
+  try {
+    const response = await fetch(url, { cache: "no-store" });
+    if (!response.ok) {
+      throw new Error("데이터를 불러오지 못했습니다.");
+    }
+    return await response.text();
+  } catch (error) {
+    if (window.location.protocol === "file:") {
+      // 로컬 파일 실행 시 텍스트 파일도 XHR로 재시도한다.
+      return await tryLoadTextWithXhr(url);
+    }
+    throw error;
+  }
+}
+
 function tryLoadWithXhr(url) {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
@@ -145,6 +161,26 @@ function tryLoadWithXhr(url) {
     };
     xhr.onerror = () => {
       reject(new Error("문제 데이터를 불러오지 못했습니다."));
+    };
+    xhr.send();
+  });
+}
+
+function tryLoadTextWithXhr(url) {
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", url, true);
+    xhr.overrideMimeType("text/plain; charset=utf-8");
+    xhr.onload = () => {
+      const ok = xhr.status === 0 || (xhr.status >= 200 && xhr.status < 300);
+      if (!ok) {
+        reject(new Error("데이터를 불러오지 못했습니다."));
+        return;
+      }
+      resolve(xhr.responseText || "");
+    };
+    xhr.onerror = () => {
+      reject(new Error("데이터를 불러오지 못했습니다."));
     };
     xhr.send();
   });
@@ -277,25 +313,99 @@ function renderFood(food) {
   }
 
   items.forEach((item) => {
-    const card = document.createElement("article");
-    card.className = "problem-card";
-
-    const content = document.createElement("div");
-    content.className = "problem-content";
-
-    const name = document.createElement("p");
-    name.className = "problem-text";
-    name.textContent = `식당이름: ${item.name || "추천 식당"}`;
-
-    const menu = document.createElement("p");
-    menu.className = "problem-text";
-    menu.textContent = `메뉴: ${item.menu || "메뉴 정보 준비 중"}`;
-
-    content.appendChild(name);
-    content.appendChild(menu);
-    card.appendChild(content);
-    list.appendChild(card);
+    list.appendChild(createRestaurantCard(item));
   });
+}
+
+function parseRestaurantText(text) {
+  // 빈 줄 기준으로 식당 정보를 묶어, 이름/분류/링크를 카드 데이터로 변환한다.
+  const blocks = String(text || "")
+    .split(/\r?\n\s*\r?\n/)
+    .map((block) =>
+      block
+        .split(/\r?\n/)
+        .map((line) => line.trim())
+        .filter(Boolean)
+    )
+    .filter((lines) => lines.length > 0);
+
+  const items = blocks
+    .map((lines, index) => {
+      const titleLine = lines[0] || "";
+      const urlLine = lines.find((line) => /^https?:\/\//i.test(line)) || "";
+      const [namePart, categoryPart] = titleLine
+        .split("/")
+        .map((part) => part.trim());
+
+      return {
+        id: index + 1,
+        name: namePart || `추천 식당 ${index + 1}`,
+        menu: categoryPart || "메뉴 정보 준비 중",
+        url: urlLine,
+      };
+    })
+    .filter((item) => item.name);
+
+  return {
+    emptyMessage: "맛집 데이터가 준비 중입니다.",
+    items,
+  };
+}
+
+function createRestaurantCard(item) {
+  const card = document.createElement("article");
+  card.className = "food-card";
+
+  const header = document.createElement("div");
+  header.className = "food-card-header";
+
+  const titleGroup = document.createElement("div");
+  titleGroup.className = "food-card-title-group";
+
+  const title = document.createElement("h3");
+  title.className = "food-card-title";
+  title.textContent = item.name || "추천 식당";
+
+  const category = document.createElement("span");
+  category.className = "food-card-category";
+  category.textContent = item.menu || "메뉴 정보 준비 중";
+
+  titleGroup.appendChild(title);
+  titleGroup.appendChild(category);
+  header.appendChild(titleGroup);
+  card.appendChild(header);
+
+  const description = document.createElement("p");
+  description.className = "food-card-description";
+  description.textContent =
+    "네이버 지도에서 매장 페이지를 열고 길찾기를 이어서 확인할 수 있습니다.";
+  card.appendChild(description);
+
+  if (item.url) {
+    const actions = document.createElement("div");
+    actions.className = "food-card-actions";
+
+    const link = document.createElement("a");
+    link.className = "button button-primary food-card-link";
+    link.href = item.url;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = getRestaurantLinkLabel(item.url);
+    link.setAttribute("aria-label", `${item.name || "식당"} 네이버 지도 열기`);
+
+    actions.appendChild(link);
+    card.appendChild(actions);
+  }
+
+  return card;
+}
+
+function getRestaurantLinkLabel(url) {
+  const value = String(url || "").toLowerCase();
+  if (value.includes("/directions") || value.includes("route/")) {
+    return "길찾기 열기";
+  }
+  return "네이버 지도 열기";
 }
 
 function renderMovie(movie) {

@@ -1,0 +1,14 @@
+홍대족발 / 족발
+https://map.naver.com/p/entry/place/555809213?c=15.00,0,0,2,dh&placePath=/home?from=map&fromPanelNum=1&additionalHeight=76&timestamp=202603151754&locale=ko&svcName=map_pcv5
+
+정통집 / 돼지고기구이
+https://map.naver.com/p/search/%EC%A0%95%ED%86%B5%EC%A7%91/place/1497981923?c=15.00,0,0,2,dh&placePath=/home?entry=bmp&from=map&fromPanelNum=2&timestamp=202603151755&locale=ko&svcName=map_pcv5&searchText=%EC%A0%95%ED%86%B5%EC%A7%91
+
+주섬주섬 / 요리주점
+https://map.naver.com/p/search/%EC%A3%BC%EC%84%AC%EC%A3%BC%EC%84%AC/place/1768254146?c=15.00,0,0,2,dh&placePath=%3Fbk_query%253D%2525EC%2525A3%2525BC%2525EC%252584%2525AC%2525EC%2525A3%2525BC%2525EC%252584%2525AC%2526entry%253Dbmp
+
+일체마부시 / 일식당
+https://map.naver.com/p/search/%EC%9D%BC%EC%B2%B4%EB%A7%88%EB%B6%80%EC%8B%9C/place/1296202702?c=15.00,0,0,2,dh&isCorrectAnswer=true&placePath=/home?from=map&fromPanelNum=1&additionalHeight=76&timestamp=202603151756&locale=ko&svcName=map_pcv5&searchText=%EC%9D%BC%EC%B2%B4%EB%A7%88%EB%B6%80%EC%8B%9C
+
+물고기초밥 / 초밥
+https://map.naver.com/p/entry/place/34780088?c=15.00,0,0,2,dh&placePath=/home?from=map&fromPanelNum=1&additionalHeight=76&timestamp=202603151757&locale=ko&svcName=map_pcv5
