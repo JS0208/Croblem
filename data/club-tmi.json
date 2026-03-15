@@ -26,7 +26,7 @@
     },
     {
       "key": "intro",
-      "label": "한 줄 자기소개"
+      "label": "타인이 지어주는 특징"
     }
   ],
   "emptyMessage": "동아리 TMI 데이터가 준비 중입니다.",
@@ -38,7 +38,7 @@
       "department": "건축학과",
       "mbti": "ESTJ",
       "otherHobbies": "밤새기",
-      "intro": "피곤한 사람"
+      "intro": "단군왕건"
     },
     {
       "name": "이채현",
@@ -56,7 +56,7 @@
       "department": "AI소프트웨어학부&금융학부",
       "mbti": "ENTJ",
       "otherHobbies": "블로그 쓰기",
-      "intro": "정상인 담당"
+      "intro": "정상인 담당, 맥시멀리스트"
     },
     {
       "name": "한유신",
@@ -64,8 +64,8 @@
       "age": "00",
       "department": "전자공학과",
       "mbti": "INTP",
-      "otherHobbies": "개발새발",
-      "intro": "원할머니"
+      "otherHobbies": "개발",
+      "intro": "썩은물, 개국공신, 크로아톤의 낡은 잔해"
     },
     {
       "name": "이서연",
@@ -101,13 +101,13 @@
       "department": "게임학과",
       "mbti": "ISTP",
       "otherHobbies": "컴퓨터게임",
-      "intro": "됐어요"
+      "intro": "대대대, 소소소, 회장(독재)"
     },
     {
       "name": "김가은",
       "generation": "3기",
       "age": "03",
-      "department": "보안학과",
+      "department": "산업보안학과",
       "mbti": "INTP",
       "otherHobbies": "",
       "intro": ""
@@ -125,7 +125,7 @@
       "name": "박민지",
       "generation": "3기",
       "age": "03",
-      "department": "화학공학과&컴퓨터공학과",
+      "department": "화학과&컴퓨터공학과",
       "mbti": "ISTP",
       "otherHobbies": "",
       "intro": ""
@@ -172,8 +172,8 @@
       "age": "01",
       "department": "대외비밀",
       "mbti": "INTP",
-      "otherHobbies": "",
-      "intro": ""
+      "otherHobbies": "비트코인 채굴",
+      "intro": "디지털 휴먼(가상세계에만 존재함)"
     },
     {
       "name": "조준",

@@ -857,9 +857,21 @@ body.theme-bg-legend::after {
 
 .glossary-filters {
   display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.glossary-filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.glossary-filter-chips {
+  display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: 20px;
 }
 
 .glossary-filter-button {

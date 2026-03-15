@@ -246,43 +246,18 @@ function renderBoardGameTerms(boardGameTerms) {
     return;
   }
 
-  // 태그 필터 UI를 만들고, 선택된 태그(AND)로 용어를 필터링한다.
-  const selectedTags = new Set();
-  const allTags = collectGlossaryTags(items);
-  if (filters && allTags.length > 0) {
-    const allButton = createGlossaryFilterButton("전체", true);
-    filters.appendChild(allButton);
+  const state = {
+    query: "",
+    selectedTags: new Set(),
+  };
 
-    allTags.forEach((tag) => {
-      const button = createGlossaryFilterButton(tag, false);
-      filters.appendChild(button);
-    });
-
-    filters.addEventListener("click", (event) => {
-      const target = event.target;
-      if (!(target instanceof HTMLButtonElement)) {
-        return;
-      }
-      const tag = target.dataset.tag || "";
-      if (!tag) {
-        return;
-      }
-
-      if (tag === "전체") {
-        selectedTags.clear();
-      } else if (selectedTags.has(tag)) {
-        selectedTags.delete(tag);
-      } else {
-        selectedTags.add(tag);
-      }
-
-      // 선택된 태그가 없으면 전체가 활성화되도록 동기화한다.
-      updateGlossaryFilterButtons(filters, selectedTags);
-      renderGlossaryItems(list, items, selectedTags, boardGameTerms);
+  if (filters) {
+    createGlossaryFilters(filters, state, boardGameTerms, items, () => {
+      renderGlossaryItems(list, items, state, boardGameTerms);
     });
   }
 
-  renderGlossaryItems(list, items, selectedTags, boardGameTerms);
+  renderGlossaryItems(list, items, state, boardGameTerms);
 }
 
 function renderFood(food) {
@@ -1889,6 +1864,81 @@ function createGlossaryFilterButton(tag, isActive) {
   return button;
 }
 
+function createGlossaryFilters(container, state, boardGameTerms, items, onChange) {
+  const searchWrap = document.createElement("section");
+  searchWrap.className = "glossary-filter-group";
+
+  const searchTitle = document.createElement("h3");
+  searchTitle.className = "boardgame-filter-title";
+  searchTitle.textContent = "이름 검색";
+
+  const searchInput = document.createElement("input");
+  searchInput.type = "search";
+  searchInput.className = "boardgame-search-input";
+  searchInput.placeholder =
+    boardGameTerms?.searchPlaceholder || "보드게임 용어 이름으로 검색";
+  searchInput.setAttribute("aria-label", "보드게임 용어 이름 검색");
+  searchInput.autocomplete = "off";
+  searchInput.addEventListener("input", () => {
+    state.query = searchInput.value.trim();
+    onChange();
+  });
+
+  searchWrap.appendChild(searchTitle);
+  searchWrap.appendChild(searchInput);
+  container.appendChild(searchWrap);
+
+  const allTags = collectGlossaryTags(items);
+  if (allTags.length === 0) {
+    return;
+  }
+
+  const tagWrap = document.createElement("section");
+  tagWrap.className = "glossary-filter-group";
+
+  const tagTitle = document.createElement("h3");
+  tagTitle.className = "boardgame-filter-title";
+  tagTitle.textContent = "태그 필터";
+
+  const chips = document.createElement("div");
+  chips.className = "glossary-filter-chips";
+
+  const allButton = createGlossaryFilterButton("전체", true);
+  chips.appendChild(allButton);
+
+  allTags.forEach((tag) => {
+    const button = createGlossaryFilterButton(tag, false);
+    chips.appendChild(button);
+  });
+
+  chips.addEventListener("click", (event) => {
+    const target = event.target;
+    if (!(target instanceof HTMLButtonElement)) {
+      return;
+    }
+    const tag = target.dataset.tag || "";
+    if (!tag) {
+      return;
+    }
+
+    if (tag === "전체") {
+      state.selectedTags.clear();
+    } else if (state.selectedTags.has(tag)) {
+      state.selectedTags.delete(tag);
+    } else {
+      state.selectedTags.add(tag);
+    }
+
+    // 선택된 태그가 없으면 전체가 활성화되도록 동기화한다.
+    updateGlossaryFilterButtons(chips, state.selectedTags);
+    onChange();
+  });
+
+  tagWrap.appendChild(tagTitle);
+  tagWrap.appendChild(chips);
+  container.appendChild(tagWrap);
+}
+
 function updateGlossaryFilterButtons(container, selectedTags) {
   const buttons = Array.from(
     container.querySelectorAll(".glossary-filter-button")
@@ -1903,18 +1953,22 @@ function updateGlossaryFilterButtons(container, selectedTags) {
   });
 }
 
-function renderGlossaryItems(list, items, selectedTags, boardGameTerms) {
+function renderGlossaryItems(list, items, state, boardGameTerms) {
   list.innerHTML = "";
 
-  // 선택된 태그를 모두 포함하는(AND) 용어만 노출한다.
+  // 이름 검색과 태그 조건을 모두 만족하는 용어만 노출한다.
   const filtered = items.filter((item) => {
-    if (selectedTags.size === 0) {
+    if (!matchesGlossaryQuery(item, state.query)) {
+      return false;
+    }
+
+    if (state.selectedTags.size === 0) {
       return true;
     }
     if (!Array.isArray(item.tags)) {
       return false;
     }
-    return Array.from(selectedTags).every((tag) => item.tags.includes(tag));
+    return Array.from(state.selectedTags).every((tag) => item.tags.includes(tag));
   });
 
   if (filtered.length === 0) {
@@ -1922,7 +1976,7 @@ function renderGlossaryItems(list, items, selectedTags, boardGameTerms) {
     empty.className = "problem-text";
     empty.textContent =
       boardGameTerms?.filterEmptyMessage ||
-      "해당 태그에 해당하는 용어가 없습니다.";
+      "검색어나 태그에 해당하는 용어가 없습니다.";
     list.appendChild(empty);
     return;
   }
@@ -1931,6 +1985,15 @@ function renderGlossaryItems(list, items, selectedTags, boardGameTerms) {
     const card = createBoardGameTermCard(item);
     list.appendChild(card);
   });
+}
+
+function matchesGlossaryQuery(item, query) {
+  const normalizedQuery = String(query || "").trim().toLowerCase();
+  if (!normalizedQuery) {
+    return true;
+  }
+
+  return String(item?.term || "").toLowerCase().includes(normalizedQuery);
 }
 
 function normalizeProblems(data) {
