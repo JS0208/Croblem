@@ -1490,13 +1490,19 @@ function getSolverCount(problem) {
 
 function getDifficultyInfo(solverCount) {
   // 풀이자 수를 기준으로 난이도 라벨과 표시 강도를 결정한다.
-  if (solverCount <= 1) {
-    return { label: "상", filled: 3 };
+  if (solverCount === 0) {
+    return { label: "최상", filled: 5 };
   }
-  if (solverCount <= 3) {
-    return { label: "중", filled: 2 };
+  if (solverCount === 1) {
+    return { label: "상", filled: 4 };
   }
-  return { label: "하", filled: 1 };
+  if (solverCount === 2) {
+    return { label: "중", filled: 3 };
+  }
+  if (solverCount === 3) {
+    return { label: "하", filled: 2 };
+  }
+  return { label: "최하", filled: 1 };
 }
 
 function createDifficultyBadge(info) {
@@ -1511,7 +1517,7 @@ function createDifficultyBadge(info) {
   meter.className = "difficulty-meter";
   meter.setAttribute("aria-hidden", "true");
 
-  for (let i = 0; i < 3; i += 1) {
+  for (let i = 0; i < 5; i += 1) {
     const dot = document.createElement("span");
     dot.className = "difficulty-dot";
     if (i < info.filled) {
@@ -1528,13 +1534,19 @@ function createDifficultyBadge(info) {
 
 function getDifficultyClass(solverCount) {
   // 정답자 수가 적을수록 난도가 높아 보이도록 시각적 강도를 조정한다.
-  if (solverCount <= 1) {
+  if (solverCount === 0) {
+    return "is-very-hard";
+  }
+  if (solverCount === 1) {
     return "is-hard";
   }
-  if (solverCount <= 3) {
+  if (solverCount === 2) {
     return "is-medium";
   }
-  return "is-easy";
+  if (solverCount === 3) {
+    return "is-easy";
+  }
+  return "is-very-easy";
 }
 
 function createBoardGameFilters(container, state, boardGame, games, onChange) {
