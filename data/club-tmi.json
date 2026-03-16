@@ -43,11 +43,11 @@
     {
       "name": "이채현",
       "generation": "1기",
-      "age": "04",
+      "age": "03",
       "department": "경영학과",
       "mbti": "ENFP",
       "otherHobbies": "교통정리",
-      "intro": ""
+      "intro": "보드게임 동아리는 영어로 보드게임 클럽"
     },
     {
       "name": "권지성",
@@ -55,7 +55,7 @@
       "age": "02",
       "department": "AI소프트웨어학부&금융학부",
       "mbti": "ENTJ",
-      "otherHobbies": "블로그 쓰기",
+      "otherHobbies": "블로그 쓰기, AI와 토론",
       "intro": "정상인 담당, 맥시멀리스트"
     },
     {
@@ -73,8 +73,8 @@
       "age": "05",
       "department": "경제학과",
       "mbti": "ENTP",
-      "otherHobbies": "",
-      "intro": ""
+      "otherHobbies": "문학 독서, 기타",
+      "intro": "도파민 추구."
     },
     {
       "name": "이해연",
@@ -82,8 +82,8 @@
       "age": "05",
       "department": "간호학과",
       "mbti": "ENTP",
-      "otherHobbies": "",
-      "intro": "진짜 위험한 사람"
+      "otherHobbies": "세계정복",
+      "intro": "진짜 위험한 사람. 리버스 나이팅게일"
     },
     {
       "name": "최지은",
@@ -110,7 +110,7 @@
       "department": "산업보안학과",
       "mbti": "INTP",
       "otherHobbies": "",
-      "intro": ""
+      "intro": "연하 킬러(진짜 죽임)"
     },
     {
       "name": "김민준",
@@ -118,8 +118,8 @@
       "age": "06",
       "department": "경제학과",
       "mbti": "INTJ",
-      "otherHobbies": "",
-      "intro": ""
+      "otherHobbies": "으히히",
+      "intro": "으히히히"
     },
     {
       "name": "박민지",
@@ -127,8 +127,8 @@
       "age": "03",
       "department": "화학과&컴퓨터공학과",
       "mbti": "ISTP",
-      "otherHobbies": "",
-      "intro": ""
+      "otherHobbies": "방탈출",
+      "intro": "교수님 노예"
     },
     {
       "name": "안상욱",
@@ -136,8 +136,8 @@
       "age": "04",
       "department": "미디어학과",
       "mbti": "ISFJ",
-      "otherHobbies": "",
-      "intro": ""
+      "otherHobbies": "억울하기",
+      "intro": "크로아톤의 딜러, 총무."
     },
     {
       "name": "이서진",
@@ -172,8 +172,8 @@
       "age": "01",
       "department": "대외비밀",
       "mbti": "INTP",
-      "otherHobbies": "비트코인 채굴",
-      "intro": "디지털 휴먼(가상세계에만 존재함)"
+      "otherHobbies": "비트코인 채굴, 지니어스 열기",
+      "intro": "멘사 중 멘사, 디지털 휴먼(가상세계에만 존재함)"
     },
     {
       "name": "조준",
@@ -181,8 +181,8 @@
       "age": "03",
       "department": "건축학과",
       "mbti": "ENFP",
-      "otherHobbies": "광기들리기",
-      "intro": ""
+      "otherHobbies": "위스키, 전시회 가기",
+      "intro": "광기들린 사람"
     },
     {
       "name": "강현비",
