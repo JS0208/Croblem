@@ -198,41 +198,46 @@
             조건을 고르면 지금 모임에 맞는 게임만 빠르게 추려볼 수 있습니다.
           </p>
         </div>
-        <article class="boardgame-weight-guide" aria-label="보드게임 웨이트 설명">
-          <h3 class="boardgame-weight-guide-title">웨이트(Weight)란?</h3>
-          <p class="boardgame-weight-guide-text">
-            웨이트는 <strong>게임의 무게</strong>를 뜻하는 점수예요. 실제 상자 무게가 아니라,
-            <strong>규칙을 이해하는 난이도 + 선택할 때 고민해야 하는 정도</strong>를 1.0~5.0으로
-            나타낸 값입니다.
-          </p>
-          <ul class="boardgame-weight-guide-list">
-            <li>
-              <strong>1.0~1.9</strong>: 설명을 듣고 바로 시작하기 쉬운 편이에요. 입문자, 가볍게 한 판 하고
-              싶은 모임, 대화하면서 즐기기 좋은 게임이 많아요.
-            </li>
-            <li>
-              <strong>2.0~2.9</strong>: 기본 규칙은 어렵지 않지만, 몇 판 해볼수록 재미가 살아나는 구간이에요.
-              입문을 막 넘긴 사람이나 여러 번 돌려 보기 좋은 게임이 많아요.
-            </li>
-            <li>
-              <strong>3.0~3.9</strong>: 규칙 설명이 조금 길어지고, 선택 하나하나의 의미가 커지는 편이에요.
-              전략게임을 좋아하는 사람들에게 가장 무난한 중심 구간입니다.
-            </li>
-            <li>
-              <strong>4.0~5.0</strong>: 룰 숙지, 장기 계획, 자원 관리, 예외 규칙 이해가 중요해요. 한 판에
-              집중력이 많이 필요해서 숙련자나 헤비 게임을 좋아하는 사람에게 잘 맞습니다.
-            </li>
-          </ul>
-          <p class="boardgame-weight-guide-text">
-            쉽게 말해 <strong>"얼마나 머리를 써야 하는 게임인지"</strong>를 숫자로 보여준 지표라고
-            생각하면 됩니다.
-          </p>
-          <p class="boardgame-weight-guide-text">
-            그리고 <strong>자기한테 맞는 웨이트를 대충이라도 알고 있으면</strong> 게임 고를 때 훨씬 편해요.
-            예를 들어 “나는 2점대는 편하고 4점대는 버겁다”처럼 감을 잡아두면, 실패 확률을 크게 줄일 수
-            있습니다.
-          </p>
-        </article>
+        <details class="boardgame-weight-guide" aria-label="보드게임 웨이트 참고용">
+          <summary class="boardgame-weight-guide-summary">웨이트 참고용</summary>
+          <div class="boardgame-weight-guide-content">
+            <h3 class="boardgame-weight-guide-title">웨이트(Weight)란?</h3>
+            <p class="boardgame-weight-guide-text">
+              웨이트는 <strong>상자 무게</strong>가 아니라 <strong>규칙을 익히는 난이도와 플레이 중 고민의
+              깊이</strong>를 1.0~5.0으로 표현한 값입니다.
+            </p>
+            <ul class="boardgame-weight-guide-list">
+              <li><strong>1점대</strong>: 설명을 듣고 비교적 바로 시작하기 쉬운 편입니다.</li>
+              <li><strong>2점대</strong>: 기본 규칙은 어렵지 않지만 선택의 재미가 점점 살아납니다.</li>
+              <li><strong>3점대</strong>: 규칙 설명이 조금 길어지고 전략적 판단의 비중이 커집니다.</li>
+              <li><strong>4점대 이상</strong>: 룰 숙지와 장기 계획이 중요해서 집중력이 많이 필요합니다.</li>
+            </ul>
+            <p class="boardgame-weight-guide-text">
+              대략 <strong>"내가 이 게임에서 얼마나 머리를 써야 하는가"</strong>를 보여주는 지표라고 보면
+              됩니다.
+            </p>
+            <details class="boardgame-weight-reference" aria-label="익숙한 게임 웨이트 예시">
+              <summary class="boardgame-weight-reference-summary">익숙한 게임 웨이트 예시 보기</summary>
+              <div class="boardgame-weight-reference-content">
+                <p class="boardgame-weight-guide-text">
+                  이미 알고 있는 게임을 기준으로 보면 웨이트 감을 더 쉽게 잡을 수 있습니다.
+                </p>
+                <ul class="boardgame-weight-guide-list boardgame-weight-reference-list">
+                  <li><strong>젠가</strong>: 1.10</li>
+                  <li><strong>인생게임</strong>: 1.17</li>
+                  <li><strong>야찌</strong>: 1.17</li>
+                  <li><strong>모노폴리</strong>: 1.62</li>
+                  <li><strong>클루</strong>: 1.64</li>
+                  <li><strong>체커</strong>: 1.71</li>
+                  <li><strong>루미큐브</strong>: 1.71</li>
+                  <li><strong>오셀로</strong>: 2.07</li>
+                  <li><strong>카탄</strong>: 2.28</li>
+                  <li><strong>체스</strong>: 3.64</li>
+                </ul>
+              </div>
+            </details>
+          </div>
+        </details>
         <div id="boardgame-filters" class="boardgame-filters" aria-label="추천 보드게임 필터"></div>
         <section
           id="boardgame-list"
@@ -294,7 +299,10 @@
         aria-hidden="true"
       >
         <div class="section-header">
-          <h2 class="section-title">영화 뭐보지?</h2>
+          <h2 class="section-title">영화 뭐 보지?</h2>
+          <p class="section-subtitle">
+            개봉 예정작을 상세 날짜 기준으로 정리했습니다.
+          </p>
         </div>
         <section
           id="movie-list"

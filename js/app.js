@@ -424,32 +424,43 @@ function renderMovie(movie) {
     return;
   }
 
-  const card = document.createElement("article");
-  card.className = "problem-card";
+  const section = document.createElement("section");
+  section.className = "movie-grid";
+  section.setAttribute("aria-label", "개봉 예정 영화 목록");
 
-  const table = document.createElement("table");
-  table.className = "movie-table";
-  table.setAttribute("aria-label", "개봉 예정 영화 목록");
-
-  const thead = document.createElement("thead");
-  thead.innerHTML = "<tr><th scope=\"col\">월</th><th scope=\"col\">영화</th></tr>";
-
-  const tbody = document.createElement("tbody");
+  // 영화 데이터는 JSON 기준으로 카드 UI를 만들고, 날짜 정보가 가장 먼저 보이도록 배치한다.
   items.forEach((item) => {
-    const row = document.createElement("tr");
-    const monthCell = document.createElement("td");
-    monthCell.textContent = item.month || "?월";
-    const titleCell = document.createElement("td");
-    titleCell.textContent = item.title || "미정";
-    row.appendChild(monthCell);
-    row.appendChild(titleCell);
-    tbody.appendChild(row);
+    const card = document.createElement("article");
+    card.className = "movie-card";
+
+    const header = document.createElement("div");
+    header.className = "movie-card-header";
+
+    const titleGroup = document.createElement("div");
+    titleGroup.className = "movie-card-title-group";
+
+    const status = document.createElement("span");
+    status.className = "movie-card-status";
+    status.textContent = item.status || "개봉 예정";
+
+    const title = document.createElement("h3");
+    title.className = "movie-card-title";
+    title.textContent = item.title || "제목 미정";
+
+    titleGroup.appendChild(status);
+    titleGroup.appendChild(title);
+
+    const date = document.createElement("p");
+    date.className = "movie-card-date";
+    date.textContent = item.releaseDate || "개봉일 미정";
+
+    header.appendChild(titleGroup);
+    header.appendChild(date);
+    card.appendChild(header);
+    section.appendChild(card);
   });
 
-  table.appendChild(thead);
-  table.appendChild(tbody);
-  card.appendChild(table);
-  list.appendChild(card);
+  list.appendChild(section);
 }
 
 function renderClubTmi(clubTmi) {

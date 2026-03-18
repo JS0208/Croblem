@@ -1,11 +1,40 @@
 {
   "emptyMessage": "영화 데이터가 준비 중입니다.",
   "items": [
-    { "month": "3월", "title": "프로젝트 헤일메리" },
-    { "month": "4월", "title": "프라다2" },
-    { "month": "6월", "title": "디스클로저 데이" },
-    { "month": "7월", "title": "스파이더맨" },
-    { "month": "12월", "title": "어벤져스, 듄 3" },
-    { "month": "?월", "title": "타짜 4부(완결)" }
+    {
+      "title": "프로젝트 헤일에리",
+      "releaseDate": "2026년 3월 18일",
+      "status": "개봉"
+    },
+    {
+      "title": "악마는 프라다를 입는다 2",
+      "releaseDate": "2026년 4월 29일",
+      "status": "개봉 예정"
+    },
+    {
+      "title": "디스클로저 데이",
+      "releaseDate": "2026년 6월 10일",
+      "status": "개봉 예정"
+    },
+    {
+      "title": "스파이더맨: 브랜드 뉴 데이",
+      "releaseDate": "2026년 7월 31일",
+      "status": "개봉 예정"
+    },
+    {
+      "title": "어벤져스: 둠스데이",
+      "releaseDate": "2026년 12월 18일",
+      "status": "개봉 예정"
+    },
+    {
+      "title": "듄: 파트 3",
+      "releaseDate": "2026년 12월 18일",
+      "status": "개봉 예정"
+    },
+    {
+      "title": "타짜: 벨제붑의 노래",
+      "releaseDate": "2026년 ?월 ?일",
+      "status": "개봉일 미정"
+    }
   ]
 }

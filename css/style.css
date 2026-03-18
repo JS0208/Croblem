@@ -722,8 +722,43 @@ body.theme-bg-legend::after {
   background: var(--card);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  padding: 20px;
   margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.boardgame-weight-guide-summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 18px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.boardgame-weight-guide-summary::-webkit-details-marker {
+  display: none;
+}
+
+.boardgame-weight-guide-summary::after {
+  content: "열기";
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.boardgame-weight-guide[open] .boardgame-weight-guide-summary {
+  border-bottom: 1px solid var(--surface-border);
+}
+
+.boardgame-weight-guide[open] .boardgame-weight-guide-summary::after {
+  content: "닫기";
+}
+
+.boardgame-weight-guide-content {
+  padding: 20px;
 }
 
 .boardgame-weight-guide-title {
@@ -744,6 +779,53 @@ body.theme-bg-legend::after {
   flex-direction: column;
   gap: 6px;
   font-size: 14px;
+}
+
+.boardgame-weight-reference {
+  margin-top: 16px;
+  background: var(--panel);
+  border: 1px solid var(--surface-border);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.boardgame-weight-reference-summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.boardgame-weight-reference-summary::-webkit-details-marker {
+  display: none;
+}
+
+.boardgame-weight-reference-summary::after {
+  content: "열기";
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.boardgame-weight-reference[open] .boardgame-weight-reference-summary {
+  border-bottom: 1px solid var(--surface-border);
+}
+
+.boardgame-weight-reference[open] .boardgame-weight-reference-summary::after {
+  content: "닫기";
+}
+
+.boardgame-weight-reference-content {
+  padding: 16px;
+}
+
+.boardgame-weight-reference-list {
+  margin-bottom: 0;
 }
 
 .boardgame-filters {
@@ -1074,22 +1156,61 @@ body.theme-bg-legend::after {
 }
 
 
-.movie-table {
-  width: 100%;
-  border-collapse: collapse;
+.movie-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.movie-card {
+  background: linear-gradient(180deg, var(--card) 0%, var(--panel) 100%);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 22px 24px;
+}
+
+.movie-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.movie-card-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+.movie-card-status {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.movie-card-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.movie-card-date {
+  margin: 0;
+  min-width: 148px;
+  text-align: right;
   font-size: 15px;
-}
-
-.movie-table th,
-.movie-table td {
-  border-bottom: 1px solid var(--surface-border);
-  padding: 10px 8px;
-  text-align: left;
-}
-
-.movie-table thead th {
-  font-size: 13px;
-  color: var(--muted);
+  font-weight: 600;
+  color: var(--accent-strong);
+  line-height: 1.5;
 }
 
 .problem-text {
@@ -1331,6 +1452,24 @@ body.theme-bg-legend::after {
 
   .food-card-title {
     font-size: 20px;
+  }
+
+  .movie-card {
+    padding: 20px;
+  }
+
+  .movie-card-header {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .movie-card-title {
+    font-size: 20px;
+  }
+
+  .movie-card-date {
+    min-width: 0;
+    text-align: left;
   }
 
   .problem-card {
