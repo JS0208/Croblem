@@ -1364,6 +1364,12 @@ body.theme-bg-legend::after {
   color: var(--muted);
 }
 
+.glossary-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
 .glossary-tags {
   list-style: none;
   padding: 0;

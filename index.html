@@ -56,6 +56,17 @@
           보드게임 용어
         </button>
         <button
+          id="tab-boardgame-cafe-button"
+          class="tab-button"
+          type="button"
+          role="tab"
+          aria-selected="false"
+          aria-controls="tab-boardgame-cafe"
+          data-tab-target="tab-boardgame-cafe"
+        >
+          추천 보드게임 카페
+        </button>
+        <button
           id="tab-club-tmi-button"
           class="tab-button"
           type="button"
@@ -266,6 +277,26 @@
         ></div>
         <section
           id="boardgame-terms-list"
+          class="glossary-list"
+          aria-live="polite"
+        ></section>
+      </section>
+      <section
+        id="tab-boardgame-cafe"
+        class="tab-panel"
+        role="tabpanel"
+        aria-labelledby="tab-boardgame-cafe-button"
+        hidden
+        aria-hidden="true"
+      >
+        <div class="section-header">
+          <h2 class="section-title">추천 보드게임 카페</h2>
+          <p class="section-subtitle">
+            텍스트 파일 기준으로 정리한 보드게임 카페 목록입니다.
+          </p>
+        </div>
+        <section
+          id="boardgame-cafe-list"
           class="glossary-list"
           aria-live="polite"
         ></section>

@@ -2,6 +2,7 @@ const PROBLEMS_URL = "data/problems.json";
 const TURTLE_SOUP_URL = "data/turtle-soup.json";
 const BOARDGAME_URL = "data/boardgame.json";
 const BOARDGAME_TERMS_URL = "data/boardgame-terms.json";
+const BOARDGAME_CAFE_URL = "data/boardgame-cafe.json";
 const FOOD_URL = "data/restaurant.txt";
 const MOVIE_URL = "data/movie.json";
 const CLUB_TMI_URL = "data/club-tmi.json";
@@ -22,6 +23,7 @@ async function loadProblems() {
     fetchJson(TURTLE_SOUP_URL),
     fetchJson(BOARDGAME_URL),
     fetchJson(BOARDGAME_TERMS_URL),
+    fetchJson(BOARDGAME_CAFE_URL),
     fetchText(FOOD_URL),
     fetchJson(MOVIE_URL),
     fetchJson(CLUB_TMI_URL),
@@ -32,6 +34,7 @@ async function loadProblems() {
     soupResult,
     boardGameResult,
     termsResult,
+    boardGameCafeResult,
     foodResult,
     movieResult,
     clubTmiResult,
@@ -80,6 +83,20 @@ async function loadProblems() {
       "boardgame-terms-list",
       termsResult.reason,
       "보드게임 용어 데이터를 불러오지 못했습니다."
+    );
+  }
+
+  if (boardGameCafeResult.status === "fulfilled") {
+    const boardGameCafe = normalizeSectionData(
+      boardGameCafeResult.value,
+      "boardGameCafe"
+    );
+    renderBoardGameCafe(boardGameCafe);
+  } else {
+    renderSectionError(
+      "boardgame-cafe-list",
+      boardGameCafeResult.reason,
+      "추천 보드게임 카페 데이터를 불러오지 못했습니다."
     );
   }
 
@@ -315,6 +332,74 @@ function renderFood(food) {
   items.forEach((item) => {
     list.appendChild(createRestaurantCard(item));
   });
+}
+
+function renderBoardGameCafe(boardGameCafe) {
+  const list = document.getElementById("boardgame-cafe-list");
+  if (!list) {
+    return;
+  }
+  list.innerHTML = "";
+
+  const items = Array.isArray(boardGameCafe?.items) ? boardGameCafe.items : [];
+  if (items.length === 0) {
+    const empty = document.createElement("p");
+    empty.className = "problem-text";
+    empty.textContent =
+      boardGameCafe?.emptyMessage || "추천 보드게임 카페 데이터가 준비 중입니다.";
+    list.appendChild(empty);
+    return;
+  }
+
+  items.forEach((item) => {
+    list.appendChild(createBoardGameCafeCard(item));
+  });
+}
+
+function createBoardGameCafeCard(item) {
+  const card = document.createElement("article");
+  card.className = "glossary-card";
+
+  const title = document.createElement("h3");
+  title.className = "glossary-term";
+  title.textContent = item.name || "추천 보드게임 카페";
+
+  card.appendChild(title);
+
+  if (Array.isArray(item.tags) && item.tags.length > 0) {
+    const tagList = document.createElement("ul");
+    tagList.className = "glossary-tags";
+    item.tags.forEach((tag) => {
+      const tagItem = document.createElement("li");
+      tagItem.className = "glossary-tag";
+      tagItem.textContent = tag;
+      tagList.appendChild(tagItem);
+    });
+    card.appendChild(tagList);
+  }
+
+  const actions = document.createElement("div");
+  actions.className = "glossary-card-actions";
+
+  if (item.url) {
+    const link = document.createElement("a");
+    link.className = "button button-primary";
+    link.href = item.url;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = "링크 열기";
+    link.setAttribute(
+      "aria-label",
+      `${item.name || "보드게임 카페"} 링크 새 탭에서 열기`
+    );
+    actions.appendChild(link);
+  }
+
+  if (actions.childElementCount > 0) {
+    card.appendChild(actions);
+  }
+
+  return card;
 }
 
 function parseRestaurantText(text) {

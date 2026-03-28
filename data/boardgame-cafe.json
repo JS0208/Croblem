@@ -1,0 +1,65 @@
+{
+  "emptyMessage": "추천 보드게임 카페 데이터가 준비 중입니다.",
+  "items": [
+    {
+      "name": "홍대 플레이보드",
+      "url": "https://naver.me/xCB73vte",
+      "tags": ["밤샘"]
+    },
+    {
+      "name": "홍대 더조커",
+      "url": "https://naver.me/FEUpuHQi",
+      "tags": ["밤샘"]
+    },
+    {
+      "name": "홍대 노리터",
+      "url": "https://naver.me/5yPnobzZ",
+      "tags": []
+    },
+    {
+      "name": "노량진 보드게임하자",
+      "url": "https://naver.me/GvcE5wxn",
+      "tags": []
+    },
+    {
+      "name": "사당 스몰월드",
+      "url": "https://naver.me/5jJTgzIA",
+      "tags": ["밤샘"]
+    },
+    {
+      "name": "강남 다이스타운",
+      "url": "https://naver.me/xwmqcACC",
+      "tags": []
+    },
+    {
+      "name": "건대 키랩 본점",
+      "url": "https://naver.me/5PVaJIOW",
+      "tags": []
+    },
+    {
+      "name": "건대 키랩 프리미엄점",
+      "url": "https://naver.me/5CW7wY4t",
+      "tags": []
+    },
+    {
+      "name": "안암 로직",
+      "url": "https://naver.me/xTT6x3Ft",
+      "tags": ["밤샘"]
+    },
+    {
+      "name": "회기 미플",
+      "url": "https://naver.me/Gip4uZx2",
+      "tags": []
+    },
+    {
+      "name": "화곡 위플미플",
+      "url": "https://naver.me/54LbFzY2",
+      "tags": []
+    },
+    {
+      "name": "미아 보드막",
+      "url": "https://naver.me/FJbWWCPr",
+      "tags": []
+    }
+  ]
+}
