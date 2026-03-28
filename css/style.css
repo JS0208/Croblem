@@ -907,7 +907,8 @@ body.theme-bg-legend::after {
 }
 
 .club-tmi-table-wrap {
-  background: var(--card);
+  background: linear-gradient(180deg, var(--card) 0%, var(--panel) 100%);
+  border: 1px solid var(--surface-border);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   overflow-x: auto;
@@ -1045,7 +1046,8 @@ body.theme-bg-legend::after {
 }
 
 .problem-card {
-  background: var(--card);
+  background: linear-gradient(180deg, var(--card) 0%, var(--panel) 100%);
+  border: 1px solid var(--surface-border);
   border-radius: var(--radius);
   box-shadow: var(--card-shadow, var(--shadow));
   padding: 28px 28px 24px;
@@ -1322,7 +1324,8 @@ body.theme-bg-legend::after {
 }
 
 .boardgame-card {
-  background: var(--card);
+  background: linear-gradient(180deg, var(--card) 0%, var(--panel) 100%);
+  border: 1px solid var(--surface-border);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   padding: 24px;
@@ -1332,13 +1335,29 @@ body.theme-bg-legend::after {
 }
 
 .glossary-card {
-  background: var(--card);
+  background: linear-gradient(180deg, var(--card) 0%, var(--panel) 100%);
+  border: 1px solid var(--surface-border);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   padding: 24px;
   display: flex;
   flex-direction: column;
   gap: 12px;
+}
+
+.boardgame-cafe-card-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 12px;
+}
+
+.boardgame-cafe-card-actions {
+  justify-content: flex-end;
+}
+
+.boardgame-cafe-card-actions .button {
+  white-space: nowrap;
 }
 
 .glossary-term {

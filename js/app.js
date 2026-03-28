@@ -358,30 +358,21 @@ function renderBoardGameCafe(boardGameCafe) {
 
 function createBoardGameCafeCard(item) {
   const card = document.createElement("article");
-  card.className = "glossary-card";
+  card.className = "glossary-card boardgame-cafe-card";
+
+  const header = document.createElement("div");
+  header.className = "boardgame-cafe-card-header";
 
   const title = document.createElement("h3");
   title.className = "glossary-term";
   title.textContent = item.name || "추천 보드게임 카페";
 
-  card.appendChild(title);
-
-  if (Array.isArray(item.tags) && item.tags.length > 0) {
-    const tagList = document.createElement("ul");
-    tagList.className = "glossary-tags";
-    item.tags.forEach((tag) => {
-      const tagItem = document.createElement("li");
-      tagItem.className = "glossary-tag";
-      tagItem.textContent = tag;
-      tagList.appendChild(tagItem);
-    });
-    card.appendChild(tagList);
-  }
-
-  const actions = document.createElement("div");
-  actions.className = "glossary-card-actions";
+  header.appendChild(title);
 
   if (item.url) {
+    const actions = document.createElement("div");
+    actions.className = "glossary-card-actions boardgame-cafe-card-actions";
+
     const link = document.createElement("a");
     link.className = "button button-primary";
     link.href = item.url;
@@ -393,10 +384,21 @@ function createBoardGameCafeCard(item) {
       `${item.name || "보드게임 카페"} 링크 새 탭에서 열기`
     );
     actions.appendChild(link);
+    header.appendChild(actions);
   }
 
-  if (actions.childElementCount > 0) {
-    card.appendChild(actions);
+  card.appendChild(header);
+
+  if (Array.isArray(item.tags) && item.tags.length > 0) {
+    const tagList = document.createElement("ul");
+    tagList.className = "glossary-tags";
+    item.tags.forEach((tag) => {
+      const tagItem = document.createElement("li");
+      tagItem.className = "glossary-tag";
+      tagItem.textContent = tag;
+      tagList.appendChild(tagItem);
+    });
+    card.appendChild(tagList);
   }
 
   return card;
@@ -459,12 +461,6 @@ function createRestaurantCard(item) {
   titleGroup.appendChild(category);
   header.appendChild(titleGroup);
   card.appendChild(header);
-
-  const description = document.createElement("p");
-  description.className = "food-card-description";
-  description.textContent =
-    "네이버 지도에서 매장 페이지를 열고 길찾기를 이어서 확인할 수 있습니다.";
-  card.appendChild(description);
 
   if (item.url) {
     const actions = document.createElement("div");
